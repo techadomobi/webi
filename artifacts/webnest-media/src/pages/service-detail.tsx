@@ -24,6 +24,88 @@ type ServiceDetail = {
   faqs: Array<{ q: string; a: string }>;
 };
 
+const roadmapPhases = [
+  {
+    phase: 'Days 1-15: Foundation',
+    summary: 'Audit, baseline tracking, and strategic setup.',
+    items: ['Measurement stack alignment', 'Channel and funnel diagnostics', 'Priority experiment backlog'],
+  },
+  {
+    phase: 'Days 16-45: Launch & Learn',
+    summary: 'Deploy initial campaigns and validate hypotheses quickly.',
+    items: ['Creative and message variants live', 'Audience and intent testing', 'Weekly learning cycles'],
+  },
+  {
+    phase: 'Days 46-75: Optimization',
+    summary: 'Double down on winners and remove waste systematically.',
+    items: ['Budget reallocation to high-yield segments', 'Conversion journey refinements', 'Performance velocity dashboard'],
+  },
+  {
+    phase: 'Days 76-90: Scale',
+    summary: 'Expand capacity while protecting efficiency and quality.',
+    items: ['Scalable operating cadence', 'Cross-channel amplification', 'Next-quarter growth roadmap'],
+  },
+];
+
+const kpiFramework = [
+  {
+    pillar: 'Visibility',
+    metric: 'Qualified impressions and reach quality',
+    whyItMatters: 'Ensures spend is creating attention in the right market segments.',
+  },
+  {
+    pillar: 'Engagement',
+    metric: 'High-intent actions and content depth',
+    whyItMatters: 'Signals whether messaging resonates enough to move prospects forward.',
+  },
+  {
+    pillar: 'Conversion',
+    metric: 'Lead quality, win-rate contribution, and CPA',
+    whyItMatters: 'Keeps the program tied to revenue, not vanity metrics.',
+  },
+  {
+    pillar: 'Retention',
+    metric: 'Repeat behavior and lifecycle value',
+    whyItMatters: 'Builds compounding growth and protects long-term margin.',
+  },
+];
+
+const scenarios = [
+  {
+    title: 'Growth-Stage Brands',
+    detail:
+      'Ideal for companies scaling from founder-led marketing to a repeatable acquisition engine with clear weekly reporting and tighter execution systems.',
+  },
+  {
+    title: 'Established Teams Needing Lift',
+    detail:
+      'Best for in-house teams that want specialist execution support, strategic challenge, and faster experiment velocity across channels.',
+  },
+  {
+    title: 'Multi-Market Expansion',
+    detail:
+      'Designed for brands entering new geographies or segments where message-market fit and channel prioritization must be validated fast.',
+  },
+];
+
+const engagementTiers = [
+  {
+    tier: 'Sprint',
+    fit: 'Focused, high-priority execution for one channel or one growth objective.',
+    includes: ['Weekly strategy sync', 'Bi-weekly performance reviews', 'Experiment pipeline'],
+  },
+  {
+    tier: 'Growth',
+    fit: 'Multi-channel system for sustained demand generation and conversion growth.',
+    includes: ['Cross-channel orchestration', 'Creative and messaging testing', 'Monthly executive dashboard'],
+  },
+  {
+    tier: 'Scale',
+    fit: 'Full-funnel operating model for larger brands with aggressive growth targets.',
+    includes: ['Advanced attribution design', 'Quarterly strategic planning', 'Dedicated senior advisory'],
+  },
+];
+
 const serviceDetails: Record<string, ServiceDetail> = {
   seo: {
     title: 'Search Engine Optimization',
@@ -403,6 +485,144 @@ export default function ServiceDetail() {
               >
                 <p className="font-display text-xl font-bold mb-2">{faq.q}</p>
                 <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-secondary/20 border-y">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">90-Day Plan</p>
+            <h2 className="font-display text-4xl font-bold">Execution Roadmap</h2>
+            <p className="text-muted-foreground mt-4">
+              Every engagement follows a structured cadence built for rapid learning, controlled scaling, and measurable business outcomes.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {roadmapPhases.map((phase, idx) => (
+              <motion.div
+                key={phase.phase}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.07 }}
+                className="rounded-2xl bg-white border border-gray-100 p-6 shadow-sm"
+              >
+                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Phase {idx + 1}</p>
+                <h3 className="font-display text-2xl font-bold mb-2">{phase.phase}</h3>
+                <p className="text-muted-foreground mb-4">{phase.summary}</p>
+                <ul className="space-y-2">
+                  {phase.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-foreground/85">
+                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+            <motion.div initial={{ opacity: 0, x: -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Measurement</p>
+              <h2 className="font-display text-4xl font-bold mb-4">KPI Framework</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                For {service.title}, we report at multiple layers so you can see early indicators and business-level outcomes in one coherent narrative.
+              </p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl bg-foreground text-white p-7">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Reporting Cadence</p>
+              <p className="text-gray-300 leading-relaxed">
+                Weekly execution updates, monthly performance reviews, and quarterly strategic realignment sessions to keep growth compounding.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5">
+            {kpiFramework.map((kpi, idx) => (
+              <motion.div
+                key={kpi.pillar}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.06 }}
+                className="rounded-2xl border border-gray-100 p-6 bg-white shadow-sm"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                  <p className="font-display text-xl font-bold">{kpi.pillar}</p>
+                </div>
+                <p className="text-sm font-semibold text-foreground mb-2">{kpi.metric}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{kpi.whyItMatters}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-secondary/20 border-y">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Fit Scenarios</p>
+            <h2 className="font-display text-4xl font-bold">Where This Service Performs Best</h2>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {scenarios.map((scenario, idx) => (
+              <motion.div
+                key={scenario.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="rounded-2xl bg-white border border-gray-100 p-7 shadow-sm"
+              >
+                <p className="font-display text-2xl font-bold mb-3">{scenario.title}</p>
+                <p className="text-muted-foreground leading-relaxed">{scenario.detail}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Engagement Models</p>
+            <h2 className="font-display text-4xl font-bold">Choose Your Growth Pace</h2>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {engagementTiers.map((tier, idx) => (
+              <motion.div
+                key={tier.tier}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="rounded-3xl border border-gray-100 p-7 bg-white shadow-sm"
+              >
+                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">{tier.tier}</p>
+                <p className="font-display text-3xl font-bold mb-3">{tier.tier} Plan</p>
+                <p className="text-muted-foreground mb-5 leading-relaxed">{tier.fit}</p>
+                <ul className="space-y-2 mb-6">
+                  {tier.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-foreground/85">
+                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/contact">
+                  <GlowButton variant="outline" size="sm" className="w-full justify-center">
+                    Talk to Strategy Team <ArrowRight className="h-4 w-4" />
+                  </GlowButton>
+                </Link>
               </motion.div>
             ))}
           </div>
