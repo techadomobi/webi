@@ -209,9 +209,9 @@ function ServiceCard({ service, idx }: { service: typeof digitalMarketing[0], id
               </motion.li>
             ))}
           </ul>
-          <Link href="/contact">
+          <Link href={`/services/${service.slug}`}>
             <GlowButton variant="outline" size="sm" className="w-full justify-center">
-              Discuss this service <ArrowRight className="h-4 w-4" />
+              View service page <ArrowRight className="h-4 w-4" />
             </GlowButton>
           </Link>
         </div>
@@ -285,9 +285,9 @@ export default function Services() {
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative rounded-3xl overflow-hidden aspect-[21/9] max-h-[500px] shadow-2xl"
+            className="relative rounded-3xl overflow-hidden aspect-21/9 max-h-125 shadow-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent z-10" />
             <img src={servicesImg} alt="Digital Marketing Services" className="w-full h-full object-cover" />
             <div className="absolute bottom-0 left-0 z-20 p-10">
               <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">Full-Service Digital Growth</h2>
@@ -392,7 +392,7 @@ export default function Services() {
 
       {/* Process Section */}
       <section className="py-28 bg-foreground text-background relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-brand rounded-full blur-[150px] opacity-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-gradient-brand rounded-full blur-[150px] opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3">How We Work</p>
@@ -468,9 +468,9 @@ export default function Services() {
       {/* Bottom CTA */}
       <section className="py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-foreground">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-brand rounded-full blur-[130px] opacity-20" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-100 bg-gradient-brand rounded-full blur-[130px] opacity-20" />
         </div>
-        <div className="container relative z-10 mx-auto px-4 text-center max-w-2xl mx-auto">
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-2xl">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Not sure where to start?</h2>
           <p className="text-gray-300 text-lg mb-10">Every engagement starts with a free strategy consultation. We'll audit your current state and show you exactly where the biggest wins are.</p>
           <Link href="/contact">

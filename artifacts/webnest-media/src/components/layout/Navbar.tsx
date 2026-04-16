@@ -6,29 +6,29 @@ import { Button } from '@/components/ui/button';
 const brandLogo = '/logo.png';
 
 const digitalMarketing = [
-  { label: 'Search Engine Optimization', href: '/services', icon: Search, desc: 'Rank higher, get found faster' },
-  { label: 'Search Engine Marketing', href: '/services', icon: TrendingUp, desc: 'Paid search that delivers ROI' },
-  { label: 'Social Media Marketing', href: '/services', icon: Share2, desc: 'Build and engage your audience' },
-  { label: 'Web Development', href: '/services', icon: Globe, desc: 'Fast, converting websites' },
-  { label: 'Content Marketing', href: '/services', icon: PenTool, desc: 'Stories that build authority' },
-  { label: 'Affiliate Marketing', href: '/services', icon: Users, desc: 'Scale through partnerships' },
+  { label: 'Search Engine Optimization', href: '/services/seo', icon: Search, desc: 'Rank higher, get found faster' },
+  { label: 'Search Engine Marketing', href: '/services/sem', icon: TrendingUp, desc: 'Paid search that delivers ROI' },
+  { label: 'Social Media Marketing', href: '/services/smm', icon: Share2, desc: 'Build and engage your audience' },
+  { label: 'Web Development', href: '/services/web', icon: Globe, desc: 'Fast, converting websites' },
+  { label: 'Content Marketing', href: '/services/content', icon: PenTool, desc: 'Stories that build authority' },
+  { label: 'Affiliate Marketing', href: '/services/affiliate', icon: Users, desc: 'Scale through partnerships' },
 ];
 
 const promotions = [
-  { label: 'Mobile Marketing', href: '/services', icon: Megaphone, desc: 'Reach users on every device' },
-  { label: 'Influencer Marketing', href: '/services', icon: Users, desc: 'Leverage authentic voices' },
-  { label: 'SMS Marketing', href: '/services', icon: MessageSquare, desc: 'Direct, high-open-rate channel' },
-  { label: 'Email Marketing', href: '/services', icon: Mail, desc: 'Nurture leads at every stage' },
-  { label: 'CRM', href: '/services', icon: Database, desc: 'Manage and grow relationships' },
+  { label: 'Mobile Marketing', href: '/services/mobile', icon: Megaphone, desc: 'Reach users on every device' },
+  { label: 'Influencer Marketing', href: '/services/influencer', icon: Users, desc: 'Leverage authentic voices' },
+  { label: 'SMS Marketing', href: '/services/sms', icon: MessageSquare, desc: 'Direct, high-open-rate channel' },
+  { label: 'Email Marketing', href: '/services/email', icon: Mail, desc: 'Nurture leads at every stage' },
+  { label: 'CRM', href: '/services/crm', icon: Database, desc: 'Manage and grow relationships' },
 ];
 
 const solutions = [
-  { label: 'Online Reputation Management', href: '/services', icon: Shield, desc: 'Protect your brand image' },
-  { label: 'Brand Strategy', href: '/services', icon: Target, desc: 'Define your market position' },
-  { label: 'Lead Generation', href: '/services', icon: ArrowRight, desc: 'Fill your pipeline constantly' },
-  { label: 'Customer Retention', href: '/services', icon: Repeat, desc: 'Turn buyers into loyalists' },
-  { label: 'Digital Transformation', href: '/services', icon: Cpu, desc: 'Modernize your business' },
-  { label: 'Market Research & Insights', href: '/services', icon: BarChart2, desc: 'Data-driven decisions' },
+  { label: 'Online Reputation Management', href: '/services/orm', icon: Shield, desc: 'Protect your brand image' },
+  { label: 'Brand Strategy', href: '/services/brand', icon: Target, desc: 'Define your market position' },
+  { label: 'Lead Generation', href: '/services/leads', icon: ArrowRight, desc: 'Fill your pipeline constantly' },
+  { label: 'Customer Retention', href: '/services/retention', icon: Repeat, desc: 'Turn buyers into loyalists' },
+  { label: 'Digital Transformation', href: '/services/transformation', icon: Cpu, desc: 'Modernize your business' },
+  { label: 'Market Research & Insights', href: '/services/research', icon: BarChart2, desc: 'Data-driven decisions' },
 ];
 
 export default function Navbar() {

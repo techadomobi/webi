@@ -10,6 +10,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
+import ServiceDetail from "@/pages/service-detail";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Blogs from "@/pages/blogs";
@@ -38,6 +39,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
+        <Route path="/services/:slug" component={ServiceDetail} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/blogs" component={Blogs} />
