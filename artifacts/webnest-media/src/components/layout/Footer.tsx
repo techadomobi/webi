@@ -26,7 +26,7 @@ export default function Footer() {
                 { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/weeomedia/' },
                 { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/weeomedia/' },
                 { icon: Youtube, label: 'YouTube', href: 'https://www.youtube.com/@WeeoMedia' },
-                { icon: Facebook, label: 'Website', href: 'https://www.weeomedia.com' },
+                { icon: Facebook, label: 'Website', href: 'https://www.facebook.com/share/18KaT7U8mu/' },
               ].map(({ icon: Icon, label, href }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="h-9 w-9 flex items-center justify-center rounded-full bg-white/10 text-gray-300 hover:bg-gradient-brand hover:text-white transition-all duration-300">
                   <Icon className="h-4 w-4" />

@@ -124,7 +124,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">support@adomobi.com</p>
+                    <p className="text-muted-foreground">support@vivomedia.com</p>
                   </div>
                 </div>
 
@@ -134,8 +134,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Headquarters</h3>
-                    <p className="text-muted-foreground">3rd Floor, K - 318, Nai Basti, Saket</p>
-                    <p className="text-muted-foreground">New Delhi, 110030</p>
+                    <p className="text-muted-foreground">5th Floor, DLF Two Horizon Centre, DLF Phase 5</p>
+                    <p className="text-muted-foreground">Gurugram, 122002</p>
                   </div>
                 </div>
 
