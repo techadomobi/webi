@@ -1,0 +1,54 @@
+WebNest Media - Digital Marketing Agency Website Redesign
+This is a comprehensive plan to build a visually stunning, highly animated, and modern front-end for a Digital Marketing Agency, inspired by WebNest Media.
+
+User Review Required
+IMPORTANT
+
+Please review the design choices below, particularly the color palette and page structure, before I proceed with the actual implementation. Once approved, I will begin generating the images and writing the code.
+
+Proposed Changes
+We will build a React multi-page application using Vite, Framer Motion, and React Router.
+
+Design System & Layout
+Theme: Light theme base to keep it clean and spacious.
+Color Palette:
+Backgrounds: White and very light gray/blue off-whites #F8FAFC, #EEF2FF.
+Text Colors: An Analogous Gradient Palette of Purple and Blue. We will achieve this using CSS background-clip techniques for headings, e.g., linear-gradient(to right, #6366f1, #a855f7, #ec4899).
+Typography: Modern Sans Serif (e.g., Inter or Outfit) from Google Fonts for a premium look.
+Animations (Framer Motion)
+Page Transitions: Smooth fade and slide transitions between the Home, Services, About, and Contact pages.
+Scroll Animations: Elements fading in, sliding up, and scaling as the user scrolls down the long pages.
+Hover Micro-interactions: Buttons that scale up and glowing borders on cards when hovered.
+Page Structure
+1. Home Page (/)
+Hero Section: Huge dynamic heading with the Purple-Blue gradient, a subheadline, a strong CTA, and a generated abstract image representing growth.
+Services Preview: Animated cards showing key services (SEO, PPC, SMM).
+Stats/Impact: Animated counting numbers.
+Testimonials: A scrolling carousel of glowing client reviews.
+2. Services Page (/services)
+A long scrolling page diving deep into each service (SEO, Social Media Marketing, PPC, Web Development, etc.).
+Alternating zig-zag sections with rich imagery (generated using DALL-E) and text, triggered by scroll.
+3. About Us Page (/about)
+Company mission and vision.
+A "Meet the Team" interactive grid.
+Beautiful, long layouts with floating gradient blobs in the background.
+4. Contact Us Page (/contact)
+A sleek, floating contact form.
+Social links with pop-up animations.
+Dependencies
+react, react-dom
+vite
+react-router-dom
+framer-motion (for animations)
+lucide-react (for beautiful SVG icons)
+Open Questions
+WARNING
+
+Do you have any specific text content or copy you want me to use for the pages, or should I use high-quality placeholder text tailored for a digital marketing agency?
+
+Verification Plan
+Automated Tests
+Build verification: Run npm run build to ensure the project bundles successfully without errors.
+Run npm run dev and navigate through pages using the browser tool to confirm that all assets load properly and animations work.
+Manual Verification
+I will render some examples of the pages via embedded screenshots and walkthrough documentation for you to see.

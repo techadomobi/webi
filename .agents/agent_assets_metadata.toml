@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "dPGo3tCPm-wGmqXreLmQ8"
+uri = "file://artifacts/webnest-media/src/assets/images/hero.png"
+type = "image"
+title = "Hero abstract digital growth"
+
+[[generated]]
+id = "bkctZBCtEYzSzhM1DDbCK"
+uri = "file://artifacts/webnest-media/src/assets/images/services.png"
+type = "image"
+title = "Services abstract illustration"
+
+[[generated]]
+id = "MEAt_b7QxMzhRXuzERmU3"
+uri = "file://artifacts/webnest-media/src/assets/images/team.png"
+type = "image"
+title = "Modern agency team workspace"
