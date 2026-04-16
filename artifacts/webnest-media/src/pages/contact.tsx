@@ -124,8 +124,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">hello@weeomedia.com</p>
-                    <p className="text-muted-foreground">careers@weeomedia.com</p>
+                    <p className="text-muted-foreground">support@adomobi.com</p>
                   </div>
                 </div>
 
@@ -135,8 +134,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Headquarters</h3>
-                    <p className="text-muted-foreground">100 Innovation Drive</p>
-                    <p className="text-muted-foreground">San Francisco, CA 94103</p>
+                    <p className="text-muted-foreground">3rd Floor, K - 318, Nai Basti, Saket</p>
+                    <p className="text-muted-foreground">New Delhi, 110030</p>
                   </div>
                 </div>
 
@@ -146,7 +145,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Call Us</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+91 63666666760 </p>
                   </div>
                 </div>
               </div>
