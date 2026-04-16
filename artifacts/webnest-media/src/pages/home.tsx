@@ -16,7 +16,7 @@ import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { Button } from '@/components/ui/button';
 import { useRef, useEffect, useState } from 'react';
 
-import heroImg from '@/assets/images/hero.png';
+import heroImg from '@/assets/images/hero-digital.svg';
 
 const services = [
   { icon: Search, title: 'Search Engine Optimization', desc: 'Dominate search rankings with precision keyword strategy, technical excellence, and high-authority link building.' },

@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
-import servicesImg from '@/assets/images/services.png';
+import servicesImg from '@/assets/images/services-digital.svg';
 
 const digitalMarketing = [
   {
