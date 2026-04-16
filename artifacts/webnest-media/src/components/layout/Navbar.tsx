@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Search, Share2, Globe, PenTool, Users, TrendingUp, Megaphone, MessageSquare, Mail, Database, Shield, Target, Repeat, Cpu, BarChart2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-const brandLogo = '/logo.svg';
+const brandLogo = '/logo.png';
 
 const digitalMarketing = [
   { label: 'Search Engine Optimization', href: '/services', icon: Search, desc: 'Rank higher, get found faster' },

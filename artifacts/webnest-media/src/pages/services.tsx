@@ -434,8 +434,8 @@ export default function Services() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { quote: 'Their SEO work tripled our organic traffic in 8 months. The team is meticulous, transparent, and genuinely invested in our success.', name: 'James Okoye', company: 'BuildStack Inc.', service: 'SEO' },
-              { quote: 'The email campaigns WebNest built for us consistently outperform industry benchmarks. 45% open rates are our new normal.', name: 'Amanda Wright', company: 'Venture Partners', service: 'Email Marketing' },
-              { quote: 'Our web rebuild by WebNest converted at 3.2x our previous site. It was the best investment we\'ve made this year.', name: 'Elena Rodriguez', company: 'FinTech Innovations', service: 'Web Dev' },
+              { quote: 'The email campaigns WeeoMedia built for us consistently outperform industry benchmarks. 45% open rates are our new normal.', name: 'Amanda Wright', company: 'Venture Partners', service: 'Email Marketing' },
+              { quote: 'Our web rebuild by WeeoMedia converted at 3.2x our previous site. It was the best investment we\'ve made this year.', name: 'Elena Rodriguez', company: 'FinTech Innovations', service: 'Web Dev' },
             ].map((t, i) => (
               <motion.div
                 key={i}

@@ -87,8 +87,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">hello@webnestmedia.com</p>
-                    <p className="text-muted-foreground">careers@webnestmedia.com</p>
+                    <p className="text-muted-foreground">hello@weeomedia.com</p>
+                    <p className="text-muted-foreground">careers@weeomedia.com</p>
                   </div>
                 </div>
 
@@ -120,9 +120,9 @@ export default function Contact() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-gray-100 relative"
+              className="bg-white p-8 md:p-10 rounded-4xl shadow-xl border border-gray-100 relative"
             >
-              <div className="absolute inset-0 bg-gradient-brand opacity-[0.03] rounded-[2rem] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-brand opacity-[0.03] rounded-4xl pointer-events-none" />
               
               <h3 className="font-display text-2xl font-bold mb-8">Send us a message</h3>
               
@@ -207,7 +207,7 @@ export default function Contact() {
                         <FormControl>
                           <Textarea 
                             placeholder="Tell us about your project goals..." 
-                            className="min-h-[120px] resize-none bg-secondary/50" 
+                            className="min-h-30 resize-none bg-secondary/50"
                             {...field} 
                           />
                         </FormControl>
