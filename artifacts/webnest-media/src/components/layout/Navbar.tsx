@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Search, Share2, Globe, PenTool, Users, TrendingUp, Megaphone, MessageSquare, Mail, Database, Shield, Target, Repeat, Cpu, BarChart2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import brandLogo from '@assets/image_1776316808587.png';
+const brandLogo = '/logo.svg';
 
 const digitalMarketing = [
   { label: 'Search Engine Optimization', href: '/services', icon: Search, desc: 'Rank higher, get found faster' },
@@ -55,7 +55,7 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WebNest Media"
-            className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-14"
           />
         </Link>
 

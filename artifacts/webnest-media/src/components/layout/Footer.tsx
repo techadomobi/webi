@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { Twitter, Linkedin, Instagram, Facebook, Youtube, ArrowRight } from 'lucide-react';
-import brandLogo from '@assets/image_1776316808587.png';
+const brandLogo = '/logo.svg';
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
               <img
                 src={brandLogo}
                 alt="WebNest Media"
-                className="h-10 w-auto object-contain"
+                className="h-11 w-auto object-contain md:h-12"
               />
             </Link>
             <p className="text-gray-400 mb-2 text-sm leading-relaxed font-semibold italic">Nest. Nurture. Ascend.</p>
