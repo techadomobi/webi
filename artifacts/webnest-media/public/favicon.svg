@@ -1,3 +1,19 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+	<defs>
+		<linearGradient id="brandGradient" x1="18" y1="18" x2="162" y2="162" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#A855F7"/>
+			<stop offset="0.5" stop-color="#7C3AED"/>
+			<stop offset="1" stop-color="#22D3EE"/>
+		</linearGradient>
+		<linearGradient id="brandAccent" x1="70" y1="48" x2="150" y2="132" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#1D4ED8"/>
+			<stop offset="1" stop-color="#0EA5E9"/>
+		</linearGradient>
+	</defs>
+	<rect width="180" height="180" rx="36" fill="#050816"/>
+	<path d="M34 54L62 126H80L58 54H34Z" fill="url(#brandGradient)"/>
+	<path d="M62 54L88 126H106L80 54H62Z" fill="url(#brandGradient)"/>
+	<path d="M74 54L102 126H121L93 54H74Z" fill="url(#brandAccent)"/>
+	<path d="M95 54L123 126H142L116 54H95Z" fill="url(#brandAccent)"/>
+	<path d="M118 89L143 103L118 117V89Z" fill="#7DD3FC"/>
 </svg>

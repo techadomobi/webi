@@ -1,5 +1,6 @@
 import { Link } from 'wouter';
-import { Zap, Twitter, Linkedin, Instagram, Facebook, Youtube, ArrowRight } from 'lucide-react';
+import { Twitter, Linkedin, Instagram, Facebook, Youtube, ArrowRight } from 'lucide-react';
+import brandLogo from '@assets/image_1776316808587.png';
 
 export default function Footer() {
   return (
@@ -9,12 +10,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-5 group">
-              <div className="h-9 w-9 rounded-xl bg-gradient-brand flex items-center justify-center text-white">
-                <Zap className="h-5 w-5" />
-              </div>
-              <span className="font-display text-xl font-bold tracking-tight text-white">
-                WebNest<span className="text-gradient">Media</span>
-              </span>
+              <img
+                src={brandLogo}
+                alt="WebNest Media"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <p className="text-gray-400 mb-2 text-sm leading-relaxed font-semibold italic">Nest. Nurture. Ascend.</p>
             <p className="text-gray-400 mb-6 text-sm leading-relaxed max-w-sm">

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Zap, ChevronDown, Search, Share2, Globe, PenTool, Users, TrendingUp, Megaphone, MessageSquare, Mail, Database, Shield, Target, Repeat, Cpu, BarChart2, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Search, Share2, Globe, PenTool, Users, TrendingUp, Megaphone, MessageSquare, Mail, Database, Shield, Target, Repeat, Cpu, BarChart2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import brandLogo from '@assets/image_1776316808587.png';
 
 const digitalMarketing = [
   { label: 'Search Engine Optimization', href: '/services', icon: Search, desc: 'Rank higher, get found faster' },
@@ -48,15 +49,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-background/90 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand text-white shadow-lg group-hover:glow-hover transition-all duration-300">
-            <Zap className="h-6 w-6" />
-          </div>
-          <span className="font-display text-2xl font-bold tracking-tight">
-            WebNest<span className="text-gradient">Media</span>
-          </span>
+          <img
+            src={brandLogo}
+            alt="WebNest Media"
+            className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -90,7 +90,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[820px] rounded-2xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-205 rounded-2xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
                   style={{ left: '-200px', transform: 'none' }}
                 >
                   <div className="grid grid-cols-3 gap-0 divide-x divide-gray-100">
