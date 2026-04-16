@@ -13,7 +13,7 @@ export default function Footer() {
               <img
                 src={brandLogo}
                 alt="WeeoMedia"
-                className="h-11 w-auto object-contain md:h-12"
+                className="h-12 w-auto object-contain md:h-14"
               />
             </Link>
             <p className="text-gray-400 mb-2 text-sm leading-relaxed font-semibold italic">Nest. Nurture. Ascend.</p>
