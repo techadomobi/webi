@@ -10,7 +10,7 @@ import TiltCard from '@/components/ui/TiltCard';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { Button } from '@/components/ui/button';
 
-import teamImg from '@/assets/images/team-digital.svg';
+import teamImg from '@/assets/images/team.png';
 
 const team = [
   { name: 'Alex Vance', title: 'Chief Executive Officer', bio: 'Former tech founder with 15 years scaling digital native brands. Alex brings ruthless focus and clear strategic vision to everything WeeoMedia builds.', initials: 'AV' },
@@ -124,9 +124,9 @@ export default function About() {
             <img
               src={teamImg}
               alt="WeeoMedia Team Workspace"
-              className="w-full h-full object-cover aspect-21/9"
+              className="w-full h-full object-cover aspect-[21/9]"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-foreground/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-8 md:p-12 text-white">
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Our San Francisco Headquarters</h2>
               <p className="text-white/80 text-lg">Where data meets creativity, and strategy becomes reality.</p>
@@ -248,7 +248,7 @@ export default function About() {
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-linear-to-b from-primary/50 via-pink-500/30 to-transparent" />
+              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-pink-500/30 to-transparent" />
               {milestones.map((m, idx) => (
                 <motion.div
                   key={idx}
@@ -342,7 +342,7 @@ export default function About() {
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-foreground">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-20" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-brand rounded-full blur-[120px] opacity-20" />
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center max-w-2xl">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Ready to build something remarkable?</h2>
