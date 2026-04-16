@@ -31,11 +31,11 @@ const services = [
 ];
 
 const testimonials = [
-  { quote: "WebNest completely transformed our digital presence. Our inbound leads increased by 300% in just six months.", name: "Sarah Jenkins", company: "TechFlow Solutions", role: "CEO" },
+  { quote: "WeeoMedia completely transformed our digital presence. Our inbound leads increased by 300% in just six months.", name: "Sarah Jenkins", company: "TechFlow Solutions", role: "CEO" },
   { quote: "The only agency I've worked with that actually drives measurable revenue, not vanity metrics.", name: "Marcus Thorne", company: "Elevate E-Commerce", role: "Founder" },
   { quote: "Their web design team is world-class. Our site converts at double our previous rate.", name: "Elena Rodriguez", company: "FinTech Innovations", role: "CMO" },
   { quote: "A true partner in growth. They help us shape overall business strategy, not just execute tactics.", name: "David Chen", company: "Lumiere Health", role: "Co-Founder" },
-  { quote: "The paid ads ROI we've seen since switching to WebNest has been spectacular.", name: "Amanda Wright", company: "Venture Capital Partners", role: "Director" },
+  { quote: "The paid ads ROI we've seen since switching to WeeoMedia has been spectacular.", name: "Amanda Wright", company: "Venture Capital Partners", role: "Director" },
   { quote: "Their content strategy established us as thought leaders. Pipeline grew by $2M in year one.", name: "James Okoye", company: "BuildStack Inc.", role: "Head of Growth" },
 ];
 
@@ -455,7 +455,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <RevealSection variant="fadeLeft">
-                <p className="text-sm font-bold uppercase tracking-widest text-primary mb-4">Why WebNest</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-primary mb-4">Why WeeoMedia</p>
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                   We don't just run campaigns.<br />
                   <span className="text-gradient">We engineer growth.</span>
@@ -608,7 +608,7 @@ export default function Home() {
                 Real results from <span className="text-gradient">real brands.</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-                Don't take our word for it. Here's what the brands we work with have to say about working with WebNest Media.
+                Don't take our word for it. Here's what the brands we work with have to say about working with WeeoMedia.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {[
@@ -719,7 +719,7 @@ export default function Home() {
               <AnimatedWords text="Let's build something remarkable together." />
             </h2>
             <p className="text-gray-300 text-xl mb-12 leading-relaxed">
-              Join 500+ brands that trust WebNest Media to dominate their markets. Start with a free strategy consultation.
+              Join 500+ brands that trust WeeoMedia to dominate their markets. Start with a free strategy consultation.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact">

@@ -54,7 +54,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <img
             src={brandLogo}
-            alt="WebNest Media"
+            alt="WeeoMedia"
             className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-14"
           />
         </Link>

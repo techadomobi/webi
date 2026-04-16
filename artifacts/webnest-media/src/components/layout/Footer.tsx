@@ -12,7 +12,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-5 group">
               <img
                 src={brandLogo}
-                alt="WebNest Media"
+                alt="WeeoMedia"
                 className="h-11 w-auto object-contain md:h-12"
               />
             </Link>
@@ -120,7 +120,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-500">© {new Date().getFullYear()} WebNest Media. All rights reserved.</p>
+          <p className="text-sm text-gray-500">© {new Date().getFullYear()} WeeoMedia. All rights reserved.</p>
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
             <p className="text-sm text-gray-500">All systems operational</p>

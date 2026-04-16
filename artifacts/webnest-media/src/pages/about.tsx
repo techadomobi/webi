@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import teamImg from '@/assets/images/team.png';
 
 const team = [
-  { name: 'Alex Vance', title: 'Chief Executive Officer', bio: 'Former tech founder with 15 years scaling digital native brands. Alex brings ruthless focus and clear strategic vision to everything WebNest builds.', initials: 'AV' },
+  { name: 'Alex Vance', title: 'Chief Executive Officer', bio: 'Former tech founder with 15 years scaling digital native brands. Alex brings ruthless focus and clear strategic vision to everything WeeoMedia builds.', initials: 'AV' },
   { name: 'Sarah Jenkins', title: 'Head of Strategy', bio: 'Data obsessed and creatively driven. Sarah has orchestrated campaigns generating over $30M in direct revenue across e-commerce, SaaS, and fintech.', initials: 'SJ' },
   { name: 'Marcus Chen', title: 'Creative Director', bio: 'Award-winning designer who believes aesthetics must always serve function. Marcus makes brands unforgettable without ever sacrificing conversion.', initials: 'MC' },
   { name: 'Elena Rodriguez', title: 'Lead Developer', bio: 'Performance fanatic. Elena builds the lightning-fast digital infrastructure that powers all of our campaign landing pages and client web experiences.', initials: 'ER' },
@@ -33,7 +33,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2014', title: 'Founded in San Francisco', desc: 'Alex Vance and Sarah Jenkins launched WebNest Media with three clients and a mission to make enterprise-grade digital marketing accessible to ambitious growth brands.' },
+  { year: '2014', title: 'Founded in San Francisco', desc: 'Alex Vance and Sarah Jenkins launched WeeoMedia with three clients and a mission to make enterprise-grade digital marketing accessible to ambitious growth brands.' },
   { year: '2016', title: 'First $1M Revenue Client', desc: 'Delivered $1M in attributed revenue for an e-commerce client through a combined SEO and email marketing program — proving our full-funnel methodology works.' },
   { year: '2018', title: 'Team Grows to 25', desc: 'Opened our London office and expanded into European markets. Added specialized teams for paid media, content, and technical SEO.' },
   { year: '2020', title: 'Served 200+ Brands', desc: 'Crossed the 200-client milestone during a challenging year for businesses everywhere. Our remote-first model proved resilient and our team thrived.' },
@@ -123,7 +123,7 @@ export default function About() {
           >
             <img
               src={teamImg}
-              alt="WebNest Media Team Workspace"
+              alt="WeeoMedia Team Workspace"
               className="w-full h-full object-cover aspect-[21/9]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent" />
@@ -173,7 +173,7 @@ export default function About() {
                 To give every ambitious brand access to <span className="text-gradient">enterprise-grade growth.</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                When we started, the best marketing expertise was locked inside expensive retainers and inaccessible to everyone except Fortune 500 companies. We built WebNest to change that.
+                When we started, the best marketing expertise was locked inside expensive retainers and inaccessible to everyone except Fortune 500 companies. We built WeeoMedia to change that.
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed mb-10">
                 Today, we bring the same caliber of strategic thinking, creative execution, and technical precision to scaling startups, ambitious SMBs, and established brands alike — with full transparency and a singular focus on measurable results.
@@ -200,7 +200,7 @@ export default function About() {
                 <div className="h-14 w-14 rounded-full bg-gradient-brand flex items-center justify-center text-white font-bold text-lg">AV</div>
                 <div>
                   <p className="font-bold text-foreground">Alex Vance</p>
-                  <p className="text-sm text-muted-foreground">Founder & CEO, WebNest Media</p>
+                  <p className="text-sm text-muted-foreground">Founder & CEO, WeeoMedia</p>
                 </div>
               </div>
             </div>
@@ -346,7 +346,7 @@ export default function About() {
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center max-w-2xl">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Ready to build something remarkable?</h2>
-          <p className="text-gray-300 text-lg mb-10">Join 500+ brands that trust WebNest Media to drive their digital growth.</p>
+          <p className="text-gray-300 text-lg mb-10">Join 500+ brands that trust WeeoMedia to drive their digital growth.</p>
           <Link href="/contact">
             <Button size="lg" className="bg-white text-foreground hover:bg-gray-100 shadow-xl hover:scale-105 transition-all duration-300 text-lg h-14 px-10 rounded-full">
               Start the Conversation <ArrowRight className="ml-2 h-5 w-5" />
