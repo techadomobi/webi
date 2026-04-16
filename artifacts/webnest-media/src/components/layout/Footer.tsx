@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { Twitter, Linkedin, Instagram, Facebook, Youtube, ArrowRight } from 'lucide-react';
-const brandLogo = '/logo.png';
+const brandLogo = '/logo_white.png';
 
 export default function Footer() {
   return (
