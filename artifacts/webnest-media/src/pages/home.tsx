@@ -122,7 +122,7 @@ function TestimonialsCarousel() {
               <p className="text-sm text-muted-foreground">{t.role}, {t.company}</p>
             </div>
             <div className="ml-auto flex gap-0.5">
-              {[1,2,3,4,5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
+              {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
             </div>
           </div>
         </motion.div>
@@ -156,7 +156,7 @@ export default function Home() {
         {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
 
         {/* Animated mesh grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(99,102,241,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.04)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(99,102,241,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.04)_1px,transparent_1px)] bg-size-[60px_60px]" />
 
         {/* Animated morphing blob */}
         <motion.div
@@ -179,23 +179,23 @@ export default function Home() {
                   animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                Award-Winning Digital Agency
+                A 360° Digital Marketing Agency
                 <Sparkles className="h-3.5 w-3.5" />
               </motion.div>
 
               {/* Animated word-by-word headline */}
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
-                <AnimatedWords text="We build brands that" className="text-foreground" delay={0.2} />
-                {' '}
-                <span className="text-gradient-animated block">
-                  <AnimatedWords text="dominate the internet." delay={0.55} />
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 max-w-4xl">
+                <span className="block">
+                  <AnimatedWords text="We don’t just market." className="text-foreground" delay={0.2} />
+                </span>
+                <span className="text-gradient-animated block mt-2">
+                  <AnimatedWords text="We scale brands." delay={0.55} />
                 </span>
               </h1>
 
               <RevealSection variant="fadeUp" delay={0.7}>
                 <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
-                  Powerful, creative, and strictly results-driven. We merge breathtaking design with ruthless marketing strategy to accelerate your growth.
-                </p>
+                  We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.                </p>
               </RevealSection>
 
               <RevealSection variant="fadeUp" delay={0.85}>
@@ -216,7 +216,7 @@ export default function Home() {
               <RevealSection variant="fadeUp" delay={1}>
                 <div className="flex items-center gap-6">
                   <div className="flex -space-x-3">
-                    {['AV','SJ','MC','ER'].map((init, idx) => (
+                    {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
                       <motion.div
                         key={idx}
                         initial={{ opacity: 0, x: -20 }}
@@ -230,7 +230,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="flex gap-0.5">
-                      {[1,2,3,4,5].map(s => (
+                      {[1, 2, 3, 4, 5].map(s => (
                         <motion.div
                           key={s}
                           initial={{ opacity: 0, scale: 0 }}
@@ -257,14 +257,14 @@ export default function Home() {
             >
               {/* Glow aura */}
               <motion.div
-                className="absolute -inset-6 rounded-[2rem] bg-gradient-brand opacity-25 blur-3xl"
+                className="absolute -inset-6 rounded-4xl bg-gradient-brand opacity-25 blur-3xl"
                 animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.04, 1] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               />
               <img
                 src={heroImg}
                 alt="Abstract digital growth"
-                className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3] z-10"
+                className="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
               />
 
               {/* Floating stat card 1 */}
@@ -313,7 +313,7 @@ export default function Home() {
                   <p className="text-xs font-bold text-foreground">Client Score</p>
                 </div>
                 <div className="flex gap-0.5">
-                  {[1,2,3,4,5].map(s => <Star key={s} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />)}
                 </div>
                 <p className="text-lg font-display font-black mt-0.5">4.9 / 5.0</p>
               </motion.div>
@@ -349,13 +349,13 @@ export default function Home() {
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Trusted by industry leaders</p>
         </div>
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-linear-to-r from-white to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-linear-to-l from-white to-transparent pointer-events-none" />
           <InfiniteMarquee items={logos} speed={25} direction="left" itemClassName="text-gray-400 hover:text-primary transition-colors" />
         </div>
         <div className="relative mt-3">
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-linear-to-r from-white to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-linear-to-l from-white to-transparent pointer-events-none" />
           <InfiniteMarquee items={[...logos].reverse()} speed={32} direction="right" itemClassName="text-gray-300 hover:text-primary transition-colors" />
         </div>
       </section>
@@ -450,7 +450,7 @@ export default function Home() {
       {/* ── WHY CHOOSE US ── */}
       <section className="py-28 bg-foreground text-background relative overflow-hidden">
         <FloatingOrbs className="opacity-30" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[60px_60px]" />
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -533,7 +533,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-4 gap-8 relative">
             {/* Animated connecting line */}
-            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-30" />
+            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-linear-to-r from-primary via-purple-500 to-pink-500 opacity-30" />
             {[
               { num: '01', title: 'Discover', icon: Search, desc: 'Deep audit of your current state, competitors, and untapped opportunities.' },
               { num: '02', title: 'Strategize', icon: Target, desc: 'Custom growth roadmap with clear KPIs, timelines, and budget allocation.' },
@@ -693,7 +693,7 @@ export default function Home() {
       <section className="py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-foreground">
           <FloatingOrbs className="opacity-30" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[60px_60px]" />
           {/* Animated gradient rings */}
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-primary/20"

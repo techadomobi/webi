@@ -9,11 +9,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-5 group">
+            <Link href="/" className="flex items-center gap-2 mb-5 group shrink-0 overflow-hidden">
               <img
                 src={brandLogo}
                 alt="WeeoMedia"
-                className="h-16 w-auto object-contain md:h-20"
+                className="block h-16 w-[320px] max-w-none object-cover object-center md:h-20 md:w-105"
               />
             </Link>
             <p className="text-gray-400 mb-2 text-sm leading-relaxed font-semibold italic">Nest. Nurture. Ascend.</p>
@@ -22,13 +22,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Twitter, label: 'Twitter' },
-                { icon: Linkedin, label: 'LinkedIn' },
-                { icon: Instagram, label: 'Instagram' },
-                { icon: Facebook, label: 'Facebook' },
-                { icon: Youtube, label: 'YouTube' },
-              ].map(({ icon: Icon, label }) => (
-                <a key={label} href="#" aria-label={label} className="h-9 w-9 flex items-center justify-center rounded-full bg-white/10 text-gray-300 hover:bg-gradient-brand hover:text-white transition-all duration-300">
+                { icon: Twitter, label: 'X', href: 'https://x.com/weeomedia' },
+                { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/weeomedia/' },
+                { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/weeomedia/' },
+                { icon: Youtube, label: 'YouTube', href: 'https://www.youtube.com/@WeeoMedia' },
+                { icon: Facebook, label: 'Website', href: 'https://www.weeomedia.com' },
+              ].map(({ icon: Icon, label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="h-9 w-9 flex items-center justify-center rounded-full bg-white/10 text-gray-300 hover:bg-gradient-brand hover:text-white transition-all duration-300">
                   <Icon className="h-4 w-4" />
                 </a>
               ))}

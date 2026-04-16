@@ -51,11 +51,11 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group shrink-0 overflow-hidden">
           <img
             src={brandLogo}
             alt="WeeoMedia"
-            className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-20"
+            className="block h-16 w-[300px] max-w-none object-cover object-center transition-transform duration-300 group-hover:scale-[1.02] md:h-20 md:w-[360px]"
           />
         </Link>
 
