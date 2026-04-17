@@ -186,7 +186,7 @@ function ServiceCard({ service, idx }: { service: typeof digitalMarketing[0], id
         <div className="p-8 flex flex-col flex-1">
           <motion.div
             className="h-14 w-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6"
-            whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15, backgroundColor: '#7c3aed', color: '#fff' }}
+            whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15, backgroundColor: '#8b5cf6', color: '#fff' }}
             transition={{ duration: 0.4 }}
           >
             <service.icon className="h-7 w-7" />

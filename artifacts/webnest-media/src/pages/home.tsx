@@ -417,7 +417,7 @@ export default function Home() {
                 >
                   <motion.div
                     className="h-14 w-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5"
-                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15, backgroundColor: '#7c3aed', color: '#fff' }}
+                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.15, backgroundColor: '#8b5cf6', color: '#fff' }}
                     transition={{ duration: 0.4 }}
                   >
                     <svc.icon className="h-7 w-7" />

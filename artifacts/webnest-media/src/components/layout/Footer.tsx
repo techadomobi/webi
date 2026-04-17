@@ -51,8 +51,8 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative overflow-hidden border-t border-primary/30 bg-[#f2f6f2] text-foreground">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_0%,rgba(240,179,52,0.18),transparent_34%),radial-gradient(circle_at_92%_18%,rgba(68,182,85,0.2),transparent_38%)]" />
+      <footer className="relative overflow-hidden border-t border-primary/30 bg-[#f3f2ff] text-foreground">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_0%,rgba(79,70,229,0.2),transparent_34%),radial-gradient(circle_at_92%_18%,rgba(236,72,153,0.18),transparent_38%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
@@ -150,14 +150,14 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
           aria-label="Chat on WhatsApp"
-          className="flex h-13 w-13 items-center justify-center rounded-full bg-primary text-white shadow-[0_10px_20px_rgba(68,182,85,0.35)] transition-transform duration-200 hover:scale-105"
+          className="flex h-13 w-13 items-center justify-center rounded-full bg-primary text-white shadow-[0_10px_20px_rgba(124,58,237,0.35)] transition-transform duration-200 hover:scale-105"
         >
           <MessageCircle className="h-6 w-6" />
         </a>
         <a
           href="tel:+919696964606"
           aria-label="Call now"
-          className="flex h-13 w-13 items-center justify-center rounded-full bg-[#f0b334] text-foreground shadow-[0_10px_20px_rgba(240,179,52,0.35)] transition-transform duration-200 hover:scale-105"
+          className="flex h-13 w-13 items-center justify-center rounded-full bg-[#ec4899] text-white shadow-[0_10px_20px_rgba(236,72,153,0.35)] transition-transform duration-200 hover:scale-105"
         >
           <PhoneCall className="h-6 w-6" />
         </a>
