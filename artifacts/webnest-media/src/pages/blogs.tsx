@@ -118,9 +118,9 @@ export default function Blogs() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden bg-[#060b17] text-white">
-        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/35 to-[#060b17]" />
+      <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden bg-secondary/30 text-foreground">
+        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-45" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/70 via-white/60 to-secondary/20" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <motion.p
             initial={{ opacity: 0 }}
@@ -140,7 +140,7 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-white/75 max-w-2xl mx-auto mb-10"
+            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
             Cutting-edge strategies, case studies, and playbooks from the team that has generated over $50M in revenue for our clients.
           </motion.p>
@@ -175,12 +175,12 @@ export default function Blogs() {
             transition={{ delay: 0.15 }}
             className="group grid lg:grid-cols-2 gap-8 bg-white rounded-3xl overflow-hidden border border-gray-100/80 hover:shadow-2xl transition-all duration-300 cursor-pointer"
           >
-            <div className="h-64 lg:h-auto bg-[#091326] flex items-center justify-center relative overflow-hidden">
-              <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-              <div className="absolute inset-0 bg-black/40" />
+            <div className="h-64 lg:h-auto bg-secondary/60 flex items-center justify-center relative overflow-hidden">
+              <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+              <div className="absolute inset-0 bg-white/45" />
               <div className="relative z-10 text-center p-8">
                 <span className="text-xs font-bold uppercase tracking-widest text-white bg-primary px-3 py-1 rounded-full">{featured.category}</span>
-                <p className="text-white/80 text-5xl font-display font-black mt-6 opacity-20">SEO</p>
+                <p className="text-foreground/20 text-5xl font-display font-black mt-6">SEO</p>
               </div>
             </div>
             <div className="p-8 lg:p-12 flex flex-col justify-center">
@@ -247,9 +247,9 @@ export default function Blogs() {
                   variants={item}
                   className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col"
                 >
-                  <div className="h-48 bg-[#0d1629] flex items-center justify-center relative overflow-hidden">
-                    <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-70" />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors duration-500" />
+                  <div className="h-48 bg-secondary/40 flex items-center justify-center relative overflow-hidden">
+                    <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+                    <div className="absolute inset-0 bg-white/45 group-hover:bg-white/20 transition-colors duration-500" />
                     <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-primary bg-white px-3 py-1 rounded-full shadow-sm">{post.category}</span>
                   </div>
                   <div className="p-6 flex flex-col flex-1">
@@ -304,15 +304,15 @@ export default function Blogs() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-foreground">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-20" />
+      <section className="py-20 relative overflow-hidden bg-secondary/25 border-t border-primary/20">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-15" />
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Ready to apply these strategies?</h2>
-          <p className="text-gray-300 mb-8 text-lg">Let our team build a custom plan tailored specifically to your business.</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to apply these strategies?</h2>
+          <p className="text-muted-foreground mb-8 text-lg">Let our team build a custom plan tailored specifically to your business.</p>
           <Link href="/contact">
-            <Button size="lg" className="bg-white text-foreground hover:bg-gray-100 shadow-xl hover:scale-105 transition-all duration-300 h-14 px-10 rounded-full text-base">
+            <Button size="lg" className="bg-gradient-brand text-white hover:opacity-95 shadow-xl hover:scale-105 transition-all duration-300 h-14 px-10 rounded-full text-base">
               Get a Free Consultation
             </Button>
           </Link>

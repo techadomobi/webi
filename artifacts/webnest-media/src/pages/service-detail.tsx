@@ -370,9 +370,9 @@ export default function ServiceDetail() {
 
   return (
     <PageTransition>
-      <section className="pt-24 pb-18 lg:pt-32 lg:pb-24 bg-[#060b17] text-white relative overflow-hidden">
-        <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-85" />
-        <div className="absolute inset-0 bg-linear-to-b from-[#060b17]/55 via-[#060b17]/65 to-[#060b17]/85" />
+      <section className="pt-24 pb-18 lg:pt-32 lg:pb-24 bg-secondary/30 text-foreground relative overflow-hidden">
+        <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-42" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/72 via-white/62 to-secondary/22" />
         <div className="container relative z-10 mx-auto px-4">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
             {service.category}
@@ -380,7 +380,7 @@ export default function ServiceDetail() {
           <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl md:text-6xl font-extrabold mb-4 max-w-4xl leading-tight">
             {service.title}
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-white/75 max-w-3xl">
+          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-muted-foreground max-w-3xl">
             {service.tagline}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-8 flex flex-wrap gap-3">
@@ -630,22 +630,22 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="py-24 bg-foreground text-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-brand opacity-[0.08]" />
+      <section className="py-24 bg-secondary/25 text-foreground relative overflow-hidden border-y border-primary/20">
+        <div className="absolute inset-0 bg-gradient-brand opacity-[0.06]" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <Sparkles className="h-8 w-8 text-primary mx-auto mb-4" />
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-5">Ready to Launch This Service?</h2>
-          <p className="text-gray-300 text-lg mb-9">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-5">Ready to Launch This Service?</h2>
+          <p className="text-muted-foreground text-lg mb-9">
             Tell us your business goals and we will prepare a focused execution roadmap tailored to your market and growth stage.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/contact">
-              <GlowButton variant="white" size="lg">
+              <GlowButton variant="primary" size="lg">
                 Get Free Consultation <ArrowRight className="h-5 w-5" />
               </GlowButton>
             </Link>
             <Link href="/services">
-              <GlowButton variant="outline" size="lg" className="border-white/30 text-white hover:border-white">
+              <GlowButton variant="outline" size="lg" className="border-primary/35 text-primary hover:border-primary">
                 Back to Services
               </GlowButton>
             </Link>

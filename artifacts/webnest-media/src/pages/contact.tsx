@@ -100,9 +100,9 @@ export default function Contact() {
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32 bg-[#060b17] text-white">
-        <img src="/decor/contact-grid.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-75" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,11,23,0.6),rgba(6,11,23,0.7),rgb(6,11,23))]" />
+      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32 bg-secondary/30 text-foreground">
+        <img src="/decor/contact-grid.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.7),rgba(255,255,255,0.62),rgba(243,248,243,0.9))]" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
@@ -116,7 +116,7 @@ export default function Contact() {
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
                 Let's build something <span className="text-gradient">epic</span>.
               </h1>
-              <p className="text-xl text-white/80 mb-12">
+              <p className="text-xl text-muted-foreground mb-12">
                 Whether you need a complete digital overhaul or a targeted campaign, our team is ready to accelerate your growth.
               </p>
 
@@ -127,7 +127,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-white/75">info@webnestmedia.in</p>
+                    <p className="text-muted-foreground">info@webnestmedia.in</p>
                   </div>
                 </div>
 
@@ -137,8 +137,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Headquarters</h3>
-                    <p className="text-white/75">1st Floor Orchid Business Park, Near Subhash Chowk, Sector 48</p>
-                    <p className="text-white/75">Gurugram, Haryana 122004</p>
+                    <p className="text-muted-foreground">1st Floor Orchid Business Park, Near Subhash Chowk, Sector 48</p>
+                    <p className="text-muted-foreground">Gurugram, Haryana 122004</p>
                   </div>
                 </div>
 
@@ -148,7 +148,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Call Us</h3>
-                    <p className="text-white/75">+91 9696964606</p>
+                    <p className="text-muted-foreground">+91 9696964606</p>
                   </div>
                 </div>
               </div>
