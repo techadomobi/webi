@@ -127,7 +127,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">info@webnestmedia.in</p>
+                    <p className="text-muted-foreground">support@weeomedia.com</p>
                   </div>
                 </div>
 
@@ -137,8 +137,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Headquarters</h3>
-                    <p className="text-muted-foreground">1st Floor Orchid Business Park, Near Subhash Chowk, Sector 48</p>
-                    <p className="text-muted-foreground">Gurugram, Haryana 122004</p>
+                    <p className="text-muted-foreground">5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002</p>
                   </div>
                 </div>
 
@@ -148,7 +147,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Call Us</h3>
-                    <p className="text-muted-foreground">+91 9696964606</p>
+                    <p className="text-muted-foreground">+91 63666666760</p>
                   </div>
                 </div>
               </div>

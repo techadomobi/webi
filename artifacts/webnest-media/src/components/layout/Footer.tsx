@@ -85,13 +85,13 @@ export default function Footer() {
             <div>
               <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Our Address</h3>
               <p className="max-w-xs text-base leading-7 text-muted-foreground">
-                1st Floor Orchid Business Park Near Subhash Chowk, Sector 48, Gurugram, Haryana 122004
+                5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
               </p>
             </div>
 
             <div className="flex items-end">
               <p className="max-w-xs text-base leading-7 text-muted-foreground">
-                Office No :- 12A, 1st Floor Kataria Market, Sector 37 C, Gurgaon - 122001
+                5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
               </p>
             </div>
 
@@ -99,16 +99,15 @@ export default function Footer() {
               <p className="text-xs font-semibold tracking-[0.25em] text-muted-foreground">UDYAM REGISTRATION</p>
               <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground">MSME</p>
               <p className="mt-1 text-xs font-medium text-muted-foreground">Ministry of MSME, Govt. of India</p>
-              <p className="mt-4 text-sm text-foreground/80">GST No:- 06DKNPK2512K2Z1</p>
             </div>
 
             <div>
               <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Contact US</h3>
               <a href="mailto:info@webnestmedia.in" className="block text-lg text-primary hover:text-foreground">
-                info@webnestmedia.in
+                support@weeomedia.com
               </a>
-              <a href="tel:+919696964606" className="mt-1 block text-lg text-primary hover:text-foreground">
-                +91-9696964606
+              <a href="tel:+916366666667" className="mt-1 block text-lg text-primary hover:text-foreground">
+                +91-636666666760
               </a>
               <Link href="/" className="mt-6 inline-block text-base text-muted-foreground hover:text-primary">
                 Privacy Policy
@@ -146,7 +145,7 @@ export default function Footer() {
 
       <div className="fixed bottom-5 right-4 z-50 flex flex-col gap-3">
         <a
-          href="https://wa.me/919696964606"
+          href="https://wa.me/916366666667"
           target="_blank"
           rel="noreferrer"
           aria-label="Chat on WhatsApp"
@@ -155,7 +154,7 @@ export default function Footer() {
           <MessageCircle className="h-6 w-6" />
         </a>
         <a
-          href="tel:+919696964606"
+          href="tel:+916366666667"
           aria-label="Call now"
           className="flex h-13 w-13 items-center justify-center rounded-full bg-[#ec4899] text-white shadow-[0_10px_20px_rgba(236,72,153,0.35)] transition-transform duration-200 hover:scale-105"
         >
