@@ -61,7 +61,7 @@ export default function Footer() {
                 <img
                   src={brandLogo}
                   alt="WebNest Media"
-                  className="block h-16 w-75 object-contain object-left md:h-20 md:w-90"
+                  className="block h-16 w-75 max-w-none object-cover object-center transition-transform duration-300 group-hover:scale-[1.02] md:h-20 md:w-90"
                 />
               </Link>
               <p className="text-[18px] font-semibold text-foreground">Connect on Social Media</p>
