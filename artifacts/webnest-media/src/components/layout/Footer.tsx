@@ -55,13 +55,13 @@ export default function Footer() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_0%,rgba(79,70,229,0.2),transparent_34%),radial-gradient(circle_at_92%_18%,rgba(236,72,153,0.18),transparent_38%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-            <div className="space-y-6">
+          <div className="grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(260px,1.2fr)_minmax(240px,0.95fr)_minmax(240px,0.9fr)_minmax(220px,0.9fr)]">
+            <div className="space-y-6 self-start pt-2">
               <Link href="/" className="inline-flex w-fit items-center justify-start">
                 <img
                   src={brandLogo}
                   alt="WebNest Media"
-                  className="block h-16 w-75 max-w-none object-cover object-center transition-transform duration-300 group-hover:scale-[1.02] md:h-20 md:w-90"
+                  className="block h-12 w-auto max-w-57.5 object-contain object-left transition-transform duration-300 hover:scale-[1.01] md:h-14 md:max-w-65"
                 />
               </Link>
               <p className="text-[18px] font-semibold text-foreground">Connect on Social Media</p>
@@ -86,26 +86,20 @@ export default function Footer() {
               </div>
             </div>
 
-            <div>
+            <div className="self-start pt-1">
               <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Our Address</h3>
               <p className="max-w-xs text-base leading-7 text-muted-foreground">
                 5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
               </p>
             </div>
 
-            <div className="flex items-end">
-              <p className="max-w-xs text-base leading-7 text-muted-foreground">
-                5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
-              </p>
-            </div>
-
-            <div className="rounded-md border border-primary/25 bg-white/70 p-4 shadow-sm">
+            <div className="self-start rounded-md border border-primary/25 bg-white/70 p-4 shadow-sm">
               <p className="text-xs font-semibold tracking-[0.25em] text-muted-foreground">UDYAM REGISTRATION</p>
               <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground">MSME</p>
               <p className="mt-1 text-xs font-medium text-muted-foreground">Ministry of MSME, Govt. of India</p>
             </div>
 
-            <div>
+            <div className="self-start pt-1">
               <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Contact US</h3>
               <a href="mailto:info@webnestmedia.in" className="block text-lg text-primary hover:text-foreground">
                 support@weeomedia.com
