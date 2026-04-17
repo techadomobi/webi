@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { ArrowRight, Filter, Search, Sparkles, Star, Users } from 'lucide-react';
+import { ArrowRight, Filter, Search, Sparkles, Star, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { CMS_WEBSITE_NAME, fetchCmsList, type CmsEntry } from '@/lib/cms-api';
 
 const cardVariants = {
@@ -39,46 +41,78 @@ function ServiceCard({ item }: { item: CmsEntry }) {
     <Link href={`/services/${item.slug}`}>
       <motion.article
         variants={cardVariants}
-        whileHover={{ y: -4 }}
-        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-2xl"
+        whileHover={{ y: -6, rotateX: 1.2 }}
+        className="group relative h-full"
       >
-        <div className="relative h-52 overflow-hidden">
-          <img src={image} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top right, rgba(8, 21, 38, 0.85), rgba(21, 51, 91, 0.45) 55%, transparent 100%)' }}
-          />
-          <div className="absolute left-0 top-0 m-5 inline-flex rounded-full border border-white/15 bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-            {item.category || 'CMS Service'}
+        <Card className="gradient-border-animated card-hover-glow flex h-full flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white/95 shadow-sm backdrop-blur-sm">
+          <div className="relative h-52 overflow-hidden">
+            <img src={image} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top right, rgba(8, 21, 38, 0.85), rgba(21, 51, 91, 0.45) 55%, transparent 100%)' }}
+            />
+            <div className="absolute left-0 top-0 m-5 inline-flex rounded-full border border-white/15 bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+              {item.category || 'CMS Service'}
+            </div>
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+              <h3 className="font-display text-2xl font-bold leading-tight">{item.title}</h3>
+            </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-            <h3 className="font-display text-2xl font-bold leading-tight">{item.title}</h3>
-          </div>
-        </div>
+          <CardContent className="flex flex-1 flex-col p-6">
+            <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-medium text-foreground">
+                <Users className="h-3.5 w-3.5" />
+                {item.writerName || CMS_WEBSITE_NAME}
+              </Badge>
+              <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-medium text-foreground">
+                <Sparkles className="h-3.5 w-3.5" />
+                {item.tags?.[0] || 'Growth service'}
+              </Badge>
+            </div>
 
-        <div className="flex flex-1 flex-col p-6">
-          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
-              <Users className="h-3.5 w-3.5" />
-              {item.writerName || CMS_WEBSITE_NAME}
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
-              <Sparkles className="h-3.5 w-3.5" />
-              {item.tags?.[0] || 'Growth service'}
-            </span>
-          </div>
+            <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+              {item.excerpt || 'Open the service page to read the full CMS description and content blocks.'}
+            </p>
 
-          <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            {item.excerpt || 'Open the service page to read the full CMS description and content blocks.'}
-          </p>
-
-          <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">
-            <div className="text-xs font-medium uppercase tracking-[0.2em] text-primary">View details</div>
-            <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
-          </div>
-        </div>
+            <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">
+              <div className="text-xs font-medium uppercase tracking-[0.2em] text-primary">View details</div>
+              <ArrowRight className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+            </div>
+          </CardContent>
+        </Card>
+        <div className="pointer-events-none absolute -right-7 -top-7 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute -bottom-7 -left-7 h-20 w-20 rounded-full bg-pink-400/10 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="sr-only">Open {item.title}</div>
       </motion.article>
     </Link>
+  );
+}
+
+function HighlightsStrip() {
+  const highlights = [
+    'Conversion-first funnels',
+    'Performance reporting cadence',
+    'Creative + channel execution',
+    'Growth experiments every sprint',
+    'CMS-powered service publishing',
+    'Transparent optimization process',
+  ];
+
+  return (
+    <section className="border-y border-primary/15 bg-white/80 py-4 backdrop-blur">
+      <div className="container mx-auto px-4">
+        <div className="overflow-hidden">
+          <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
+            {[...highlights, ...highlights].map((text, index) => (
+              <div key={`${text}-${index}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                <Star className="h-3.5 w-3.5 text-primary" />
+                <span>{text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -194,6 +228,8 @@ export default function Services() {
         </div>
       </section>
 
+      <HighlightsStrip />
+
       <section className="bg-white py-12">
         <div className="container mx-auto px-4">
           {isLoading ? (
@@ -228,8 +264,8 @@ export default function Services() {
                   </div>
                   <div className="flex flex-col justify-center p-8 md:p-12">
                     <div className="mb-4 flex flex-wrap gap-2 text-xs font-medium text-muted-foreground">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 text-foreground">{featured.category || 'CMS Service'}</span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 text-foreground">{featured.writerName || CMS_WEBSITE_NAME}</span>
+                      <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-foreground">{featured.category || 'CMS Service'}</Badge>
+                      <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-foreground">{featured.writerName || CMS_WEBSITE_NAME}</Badge>
                     </div>
                     <p className="text-muted-foreground leading-relaxed md:text-lg">{featured.excerpt}</p>
                     <div className="mt-6 flex flex-wrap gap-3">
@@ -247,6 +283,35 @@ export default function Services() {
                   </div>
                 </div>
               ) : null}
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-gradient-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
+              >
+                <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                  <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                    <TrendingUp className="h-4 w-4" />
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">Performance-Driven Services</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Every service maps to measurable growth outcomes.</p>
+                </div>
+                <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                  <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                    <Users className="h-4 w-4" />
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">Senior Specialists</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Execution by focused teams, not generic templates.</p>
+                </div>
+                <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                  <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                    <Sparkles className="h-4 w-4" />
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">Rapid Iteration Rhythm</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Weekly experiments and optimization loops built in.</p>
+                </div>
+              </motion.div>
 
               {rest.length > 0 ? (
                 <motion.div variants={{ show: { transition: { staggerChildren: 0.08 } } }} initial="hidden" animate="show" className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">

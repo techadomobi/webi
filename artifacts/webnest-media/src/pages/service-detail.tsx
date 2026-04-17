@@ -10,9 +10,13 @@ import {
   Compass,
   Sparkles,
   Target,
+  Zap,
 } from 'lucide-react';
 import PageTransition from '@/components/layout/PageTransition';
 import GlowButton from '@/components/ui/GlowButton';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { CMS_WEBSITE_NAME, fetchCmsEntry, type CmsContentBlock } from '@/lib/cms-api';
 
 type ServiceDetail = {
@@ -429,9 +433,9 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
 
               <div className="mt-8 flex flex-wrap gap-2">
                 {service.tags?.slice(0, 8).map(tag => (
-                  <span key={tag} className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                  <Badge key={tag} variant="secondary" className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
                     {tag}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -448,6 +452,35 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
                 </div>
               )}
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-primary/15 bg-white/85 py-4 backdrop-blur">
+        <div className="container mx-auto px-4">
+          <div className="overflow-hidden">
+            <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
+              {[
+                'Strategy-led execution',
+                'Transparent delivery cadence',
+                'Channel and conversion optimization',
+                'Measurable business outcomes',
+                'CMS-backed service pages',
+                'Weekly learning loops',
+              ].concat([
+                'Strategy-led execution',
+                'Transparent delivery cadence',
+                'Channel and conversion optimization',
+                'Measurable business outcomes',
+                'CMS-backed service pages',
+                'Weekly learning loops',
+              ]).map((item, idx) => (
+                <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                  <Zap className="h-3.5 w-3.5 text-primary" />
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -602,10 +635,14 @@ export default function ServiceDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-lg transition-shadow"
+                className="h-full"
               >
-                <BarChart3 className="h-6 w-6 text-primary mb-3" />
-                <p className="font-semibold text-foreground">{outcome}</p>
+                <Card className="gradient-border-animated h-full rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg">
+                  <CardContent className="p-6">
+                    <BarChart3 className="mb-3 h-6 w-6 text-primary" />
+                    <p className="font-semibold text-foreground">{outcome}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -670,21 +707,25 @@ export default function ServiceDetail() {
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">FAQ</p>
             <h2 className="font-display text-4xl font-bold">Common Questions</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-5">
-            {service.faqs.map((faq, idx) => (
-              <motion.div
-                key={faq.q}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-                className="rounded-2xl border border-gray-100 p-6 bg-white shadow-sm hover:shadow-md transition-shadow"
-              >
-                <p className="font-display text-xl font-bold mb-2">{faq.q}</p>
-                <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-4xl rounded-3xl border border-gray-100 bg-white p-3 shadow-sm md:p-5"
+          >
+            <Accordion type="single" collapsible className="w-full">
+              {service.faqs.map((faq, idx) => (
+                <AccordionItem key={faq.q} value={`faq-${idx}`} className="border-b border-gray-100 last:border-none">
+                  <AccordionTrigger className="px-3 py-5 text-left font-display text-lg font-bold text-foreground hover:no-underline md:px-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-3 pb-5 text-base leading-relaxed text-muted-foreground md:px-4">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
         </div>
       </section>
 
