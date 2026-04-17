@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { ArrowLeft, CalendarDays, Clock, Tag, UserRound, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock, Sparkles, Tag, UserRound, Image as ImageIcon, Zap } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { CMS_WEBSITE_NAME, fetchCmsEntry, fetchCmsList, type CmsContentBlock } from '@/lib/cms-api';
 
 function formatDate(value?: string) {
@@ -37,7 +39,7 @@ function ContentBlockView({ block, image, index }: { block: CmsContentBlock; ima
     const resolvedImage = image;
 
     return (
-      <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+      <Card className="gradient-border-animated overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
         {resolvedImage ? (
           <img src={resolvedImage} alt="CMS content block" className="h-72 w-full object-cover" />
         ) : (
@@ -48,7 +50,7 @@ function ContentBlockView({ block, image, index }: { block: CmsContentBlock; ima
             </div>
           </div>
         )}
-      </div>
+      </Card>
     );
   }
 
@@ -226,9 +228,9 @@ export default function BlogDetail() {
               {post.tags?.length ? (
                 <div className="mt-8 flex flex-wrap gap-2">
                   {post.tags.slice(0, 8).map(tag => (
-                    <span key={tag} className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                    <Badge key={tag} variant="secondary" className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
                       {tag}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               ) : null}
@@ -250,8 +252,66 @@ export default function BlogDetail() {
         </div>
       </section>
 
+      <section className="border-b border-primary/15 bg-white/85 py-4 backdrop-blur">
+        <div className="container mx-auto px-4">
+          <div className="overflow-hidden">
+            <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
+              {[
+                'Story-first content structure',
+                'SEO intent and readability aligned',
+                'CMS-driven publishing speed',
+                'Design-led editorial experience',
+                'Stronger conversion pathways',
+                'Share-worthy content architecture',
+              ].concat([
+                'Story-first content structure',
+                'SEO intent and readability aligned',
+                'CMS-driven publishing speed',
+                'Design-led editorial experience',
+                'Stronger conversion pathways',
+                'Share-worthy content architecture',
+              ]).map((item, idx) => (
+                <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                  <Zap className="h-3.5 w-3.5 text-primary" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white py-16 md:py-20">
         <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
+          >
+            <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+              <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">Editorial Design Quality</p>
+              <p className="mt-1 text-xs text-muted-foreground">Every block is structured for readability and depth.</p>
+            </div>
+            <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+              <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                <Clock className="h-4 w-4" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">Fast Publishing Operations</p>
+              <p className="mt-1 text-xs text-muted-foreground">Content updates flow directly from your CMS backend.</p>
+            </div>
+            <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+              <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                <Tag className="h-4 w-4" />
+              </div>
+              <p className="text-sm font-semibold text-foreground">SEO-Ready Metadata</p>
+              <p className="mt-1 text-xs text-muted-foreground">Category, keyword, and meta data stay visible and useful.</p>
+            </div>
+          </motion.div>
+
           <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-start">
             <div className="space-y-6">
               {blocks.length > 0 ? (
@@ -266,7 +326,8 @@ export default function BlogDetail() {
             </div>
 
             <aside className="space-y-6 lg:sticky lg:top-28">
-              <div className="rounded-3xl border border-gray-100 bg-secondary/30 p-6 shadow-sm">
+              <Card className="rounded-3xl border border-gray-100 bg-secondary/30 shadow-sm">
+                <CardContent className="p-6">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Article Details</p>
                 <div className="mt-5 space-y-4 text-sm text-muted-foreground">
                   <div>
@@ -286,18 +347,21 @@ export default function BlogDetail() {
                     <p>{post.metaDescription || 'Not provided'}</p>
                   </div>
                 </div>
-              </div>
+                </CardContent>
+              </Card>
 
-              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+              <Card className="rounded-3xl border border-gray-100 bg-white shadow-sm">
+                <CardContent className="p-6">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">SEO Keywords</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {(post.seoKeywords || []).slice(0, 12).map(keyword => (
-                    <span key={keyword} className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-foreground">
+                    <Badge key={keyword} variant="secondary" className="rounded-full px-3 py-1 text-xs font-medium text-foreground">
                       {keyword}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
-              </div>
+                </CardContent>
+              </Card>
 
               <div className="rounded-3xl border border-primary/15 bg-[#081526] p-6 text-white shadow-xl">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">Need this on your site?</p>

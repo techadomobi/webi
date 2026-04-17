@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock, Search, Tag, UserRound } from 'lucide-react';
+import { ArrowRight, Clock, Search, Sparkles, Tag, TrendingUp, UserRound } from 'lucide-react';
 import { Link } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { CMS_WEBSITE_NAME, fetchCmsList, type CmsEntry } from '@/lib/cms-api';
 
 const cardVariants = {
@@ -64,59 +66,90 @@ function BlogCard({ post, featured = false }: { post: CmsEntry; featured?: boole
     <Link href={`/blogs/${encodeURIComponent(post.slug)}`} className={featured ? 'block h-full' : 'block h-full'}>
       <motion.article
         variants={cardVariants}
-        whileHover={{ y: -4 }}
-        className={`group h-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-2xl ${featured ? 'grid lg:grid-cols-[1.15fr_0.85fr]' : 'flex flex-col'}`}
+        whileHover={{ y: -6, rotateX: 1.2 }}
+        className="group relative h-full"
       >
-        <div
-          className="relative overflow-hidden"
-          style={featured ? { minHeight: 320 } : undefined}
-        >
-          <img src={image} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <Card className={`gradient-border-animated card-hover-glow h-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm ${featured ? 'grid lg:grid-cols-[1.15fr_0.85fr]' : 'flex flex-col'}`}>
           <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top right, rgba(8, 21, 38, 0.85), rgba(14, 36, 67, 0.45) 55%, transparent 100%)' }}
-          />
-          <div className="absolute left-0 top-0 m-5 inline-flex rounded-full border border-white/15 bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-            {post.category || 'CMS Blog'}
-          </div>
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-            <p className="mb-2 text-sm text-white/70">{formatDate(post.date)}</p>
-            <h3 className={`font-display font-bold leading-tight ${featured ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
-              {post.title}
-            </h3>
-          </div>
-        </div>
-
-        <div className="flex flex-1 flex-col p-6 md:p-7">
-          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
-              <Clock className="h-3.5 w-3.5" />
-              CMS article
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
-              <Tag className="h-3.5 w-3.5" />
-              {post.tags?.[0] || post.category || 'Marketing'}
-            </span>
-          </div>
-          <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-            {post.excerpt || 'Open the article to read the full CMS content and image blocks.'}
-          </p>
-          <div className="mt-auto flex items-center gap-3 border-t border-gray-100 pt-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-xs font-bold text-white">
-              {initialsFromName(post.writerName)}
+            className="relative overflow-hidden"
+            style={featured ? { minHeight: 320 } : undefined}
+          >
+            <img src={image} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top right, rgba(8, 21, 38, 0.85), rgba(14, 36, 67, 0.45) 55%, transparent 100%)' }}
+            />
+            <div className="absolute left-0 top-0 m-5 inline-flex rounded-full border border-white/15 bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+              {post.category || 'CMS Blog'}
             </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-foreground">{post.writerName || 'CMS Editor'}</p>
-              <p className="truncate text-xs text-muted-foreground">{post.websiteName || CMS_WEBSITE_NAME}</p>
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p className="mb-2 text-sm text-white/70">{formatDate(post.date)}</p>
+              <h3 className={`font-display font-bold leading-tight ${featured ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
+                {post.title}
+              </h3>
             </div>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1">
-              Read
-              <ArrowRight className="h-4 w-4" />
-            </span>
           </div>
-        </div>
+          <CardContent className="flex flex-1 flex-col p-6 md:p-7">
+            <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+              <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-medium text-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                CMS article
+              </Badge>
+              <Badge variant="secondary" className="inline-flex items-center gap-1 rounded-full px-3 py-1 font-medium text-foreground">
+                <Tag className="h-3.5 w-3.5" />
+                {post.tags?.[0] || post.category || 'Marketing'}
+              </Badge>
+            </div>
+            <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+              {post.excerpt || 'Open the article to read the full CMS content and image blocks.'}
+            </p>
+            <div className="mt-auto flex items-center gap-3 border-t border-gray-100 pt-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-xs font-bold text-white">
+                {initialsFromName(post.writerName)}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-foreground">{post.writerName || 'CMS Editor'}</p>
+                <p className="truncate text-xs text-muted-foreground">{post.websiteName || CMS_WEBSITE_NAME}</p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1">
+                Read
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+        <div className="pointer-events-none absolute -right-7 -top-7 h-20 w-20 rounded-full bg-primary/10 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute -bottom-7 -left-7 h-20 w-20 rounded-full bg-pink-400/10 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </motion.article>
     </Link>
+  );
+}
+
+function BlogHighlightsStrip() {
+  const items = [
+    'Editorial strategy from real data',
+    'SEO-informed content architecture',
+    'High-intent storytelling formats',
+    'Distribution-ready publishing flow',
+    'CMS-powered growth content',
+    'Performance feedback loops',
+  ];
+
+  return (
+    <section className="border-b border-primary/15 bg-white/80 py-4 backdrop-blur">
+      <div className="container mx-auto px-4">
+        <div className="overflow-hidden">
+          <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
+            {[...items, ...items].map((item, idx) => (
+              <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -207,6 +240,8 @@ export default function Blogs() {
         </div>
       </section>
 
+      <BlogHighlightsStrip />
+
       <section className="bg-secondary/15 py-16">
         <div className="container mx-auto px-4">
           {isLoading ? (
@@ -236,11 +271,42 @@ export default function Blogs() {
               ) : null}
 
               {rest.length > 0 ? (
-                <motion.div variants={{ show: { transition: { staggerChildren: 0.08 } } }} initial="hidden" animate="show" className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-                  {rest.map(post => (
-                    <BlogCard key={post._id} post={post} />
-                  ))}
-                </motion.div>
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
+                  >
+                    <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                      <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                        <TrendingUp className="h-4 w-4" />
+                      </div>
+                      <p className="text-sm font-semibold text-foreground">Traffic-Ready Content</p>
+                      <p className="mt-1 text-xs text-muted-foreground">Articles designed for discoverability and engagement.</p>
+                    </div>
+                    <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                      <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                        <UserRound className="h-4 w-4" />
+                      </div>
+                      <p className="text-sm font-semibold text-foreground">Credible Brand Voice</p>
+                      <p className="mt-1 text-xs text-muted-foreground">Human tone and clear narrative structure in every post.</p>
+                    </div>
+                    <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                      <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                        <Sparkles className="h-4 w-4" />
+                      </div>
+                      <p className="text-sm font-semibold text-foreground">Fast Publishing Rhythm</p>
+                      <p className="mt-1 text-xs text-muted-foreground">Launch new content through CMS without frontend edits.</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div variants={{ show: { transition: { staggerChildren: 0.08 } } }} initial="hidden" animate="show" className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+                    {rest.map(post => (
+                      <BlogCard key={post._id} post={post} />
+                    ))}
+                  </motion.div>
+                </>
               ) : null}
             </>
           )}

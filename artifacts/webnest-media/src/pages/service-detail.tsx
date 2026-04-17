@@ -625,6 +625,35 @@ export default function ServiceDetail() {
         </div>
       </section>
 
+      <section className="border-b border-primary/15 bg-white/85 py-4 backdrop-blur">
+        <div className="container mx-auto px-4">
+          <div className="overflow-hidden">
+            <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
+              {[
+                'Strategy-led execution',
+                'Transparent delivery cadence',
+                'Channel and conversion optimization',
+                'Measurable business outcomes',
+                'High-velocity iteration loops',
+                'Cross-channel growth systems',
+              ].concat([
+                'Strategy-led execution',
+                'Transparent delivery cadence',
+                'Channel and conversion optimization',
+                'Measurable business outcomes',
+                'High-velocity iteration loops',
+                'Cross-channel growth systems',
+              ]).map((item, idx) => (
+                <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                  <Zap className="h-3.5 w-3.5 text-primary" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-7 mb-14">
