@@ -55,16 +55,16 @@ export default function Footer() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_0%,rgba(79,70,229,0.2),transparent_34%),radial-gradient(circle_at_92%_18%,rgba(236,72,153,0.18),transparent_38%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
-          <div className="grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(260px,1.2fr)_minmax(240px,0.95fr)_minmax(240px,0.9fr)_minmax(220px,0.9fr)]">
-            <div className="space-y-6 self-start pt-2">
+          <div className="grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(280px,1.25fr)_minmax(240px,0.95fr)_minmax(240px,0.9fr)_minmax(220px,0.9fr)]">
+            <div className="space-y-5 self-start pt-1">
               <Link href="/" className="inline-flex w-fit items-center justify-start">
                 <img
                   src={brandLogo}
                   alt="WebNest Media"
-                  className="block h-12 w-auto max-w-57.5 object-contain object-left transition-transform duration-300 hover:scale-[1.01] md:h-14 md:max-w-65"
+                  className="block h-14 w-48 max-w-none object-contain object-left transition-transform duration-300 hover:scale-[1.01] md:h-16 md:w-56"
                 />
               </Link>
-              <p className="text-[18px] font-semibold text-foreground">Connect on Social Media</p>
+              <p className="text-[18px] font-semibold leading-none text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">
                 {[
                   { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/share/18KaT7U8mu/' },
@@ -87,7 +87,7 @@ export default function Footer() {
             </div>
 
             <div className="self-start pt-1">
-              <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Our Address</h3>
+              <h3 className="mb-4 text-3xl font-semibold leading-none text-foreground">Our Address</h3>
               <p className="max-w-xs text-base leading-7 text-muted-foreground">
                 5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
               </p>
@@ -100,7 +100,7 @@ export default function Footer() {
             </div>
 
             <div className="self-start pt-1">
-              <h3 className="mb-3 text-3xl font-semibold leading-none text-foreground">Contact US</h3>
+              <h3 className="mb-4 text-3xl font-semibold leading-none text-foreground">Contact US</h3>
               <a href="mailto:info@webnestmedia.in" className="block text-lg text-primary hover:text-foreground">
                 support@weeomedia.com
               </a>
