@@ -304,13 +304,13 @@ export default function Blogs() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20 relative overflow-hidden bg-secondary/25 border-t border-primary/20">
+      <section className="py-20 relative overflow-hidden bg-[#081526] border-t border-primary/20 text-white">
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-15" />
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to apply these strategies?</h2>
-          <p className="text-muted-foreground mb-8 text-lg">Let our team build a custom plan tailored specifically to your business.</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Ready to apply these strategies?</h2>
+          <p className="text-white/75 mb-8 text-lg">Let our team build a custom plan tailored specifically to your business.</p>
           <Link href="/contact">
             <Button size="lg" className="bg-gradient-brand text-white hover:opacity-95 shadow-xl hover:scale-105 transition-all duration-300 h-14 px-10 rounded-full text-base">
               Get a Free Consultation
