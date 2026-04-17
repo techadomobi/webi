@@ -44,7 +44,9 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/blogs" component={Blogs} />
+        <Route path="/blog/:slug" component={BlogDetail} />
         <Route path="/blogs/:slug" component={BlogDetail} />
+        <Route path="/blogs/:slug/" component={BlogDetail} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>

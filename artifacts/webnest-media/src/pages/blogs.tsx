@@ -61,7 +61,7 @@ function BlogCard({ post, featured = false }: { post: CmsEntry; featured?: boole
   const image = post.coverImage || '/decor/blog-orbit.svg';
 
   return (
-    <Link href={`/blogs/${post.slug}`} className={featured ? 'block h-full' : 'block h-full'}>
+    <Link href={`/blogs/${encodeURIComponent(post.slug)}`} className={featured ? 'block h-full' : 'block h-full'}>
       <motion.article
         variants={cardVariants}
         whileHover={{ y: -4 }}

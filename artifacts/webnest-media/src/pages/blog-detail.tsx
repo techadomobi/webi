@@ -6,7 +6,7 @@ import { Link, useLocation } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
 import { Button } from '@/components/ui/button';
-import { CMS_WEBSITE_NAME, fetchCmsEntry, type CmsContentBlock } from '@/lib/cms-api';
+import { CMS_WEBSITE_NAME, fetchCmsEntry, fetchCmsList, type CmsContentBlock } from '@/lib/cms-api';
 
 function formatDate(value?: string) {
   if (!value) return 'Recently published';
@@ -69,14 +69,46 @@ function ContentBlockView({ block, image, index }: { block: CmsContentBlock; ima
 
 export default function BlogDetail() {
   const [location] = useLocation();
-  const slug = useMemo(() => location.split('/')[2] ?? '', [location]);
+  const slug = useMemo(() => {
+    const cleanPath = location.split('?')[0].split('#')[0].replace(/\/+$/, '');
+    const raw = cleanPath.split('/')[2] ?? '';
 
-  const { data: post, isLoading, error, refetch } = useQuery({
+    try {
+      return decodeURIComponent(raw).trim();
+    } catch {
+      return raw.trim();
+    }
+  }, [location]);
+
+  const { data: directPost, isLoading: directLoading, error, refetch } = useQuery({
     queryKey: ['cms', 'blog', slug],
     queryFn: () => fetchCmsEntry('blogs', slug),
     enabled: Boolean(slug),
     staleTime: 5 * 60 * 1000,
   });
+
+  const { data: fallbackPosts, isLoading: fallbackLoading } = useQuery({
+    queryKey: ['cms', 'blogs', 'fallback-list'],
+    queryFn: () => fetchCmsList('blogs'),
+    enabled: Boolean(slug) && !directPost,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const fallbackPost = useMemo(() => {
+    if (!slug || !fallbackPosts?.length) {
+      return null;
+    }
+
+    const normalizedSlug = slug.toLowerCase();
+
+    return (
+      fallbackPosts.find(item => item.slug.toLowerCase() === normalizedSlug) ??
+      fallbackPosts.find(item => encodeURIComponent(item.slug).toLowerCase() === normalizedSlug)
+    );
+  }, [fallbackPosts, slug]);
+
+  const post = directPost ?? fallbackPost ?? null;
+  const isLoading = directLoading || (!directPost && fallbackLoading);
 
   if (!slug) {
     return (
