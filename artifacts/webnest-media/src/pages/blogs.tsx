@@ -118,14 +118,14 @@ export default function Blogs() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden bg-secondary/20">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+      <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden bg-[#060b17] text-white">
+        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/35 to-[#060b17]" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-sm font-bold uppercase tracking-widest text-primary mb-4"
+            className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-4"
           >
             Knowledge Hub
           </motion.p>
@@ -140,7 +140,7 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="text-xl text-white/75 max-w-2xl mx-auto mb-10"
           >
             Cutting-edge strategies, case studies, and playbooks from the team that has generated over $50M in revenue for our clients.
           </motion.p>
@@ -157,14 +157,14 @@ export default function Blogs() {
               placeholder="Search articles..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 rounded-full border border-input bg-white shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full h-14 pl-12 pr-4 rounded-full border border-white/15 bg-white/95 shadow-sm text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
             />
           </motion.div>
         </div>
       </section>
 
       {/* Featured Post */}
-      <section className="py-16 border-b bg-white">
+      <section className="py-16 border-b border-border/70 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <p className="text-sm font-bold uppercase tracking-widest text-primary mb-8 flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Featured Article
@@ -173,10 +173,11 @@ export default function Blogs() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="group grid lg:grid-cols-2 gap-8 bg-secondary/30 rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer"
+            className="group grid lg:grid-cols-2 gap-8 bg-white rounded-3xl overflow-hidden border border-gray-100/80 hover:shadow-2xl transition-all duration-300 cursor-pointer"
           >
-            <div className="h-64 lg:h-auto bg-gradient-to-br from-primary/30 to-pink-500/20 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-brand opacity-15" />
+            <div className="h-64 lg:h-auto bg-[#091326] flex items-center justify-center relative overflow-hidden">
+              <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+              <div className="absolute inset-0 bg-black/40" />
               <div className="relative z-10 text-center p-8">
                 <span className="text-xs font-bold uppercase tracking-widest text-white bg-primary px-3 py-1 rounded-full">{featured.category}</span>
                 <p className="text-white/80 text-5xl font-display font-black mt-6 opacity-20">SEO</p>
@@ -226,7 +227,7 @@ export default function Blogs() {
       </section>
 
       {/* Blog Grid */}
-      <section className="py-20 bg-secondary/10">
+      <section className="py-20 bg-secondary/15">
         <div className="container mx-auto px-4">
           {filtered.length === 0 ? (
             <div className="text-center py-24">
@@ -246,8 +247,9 @@ export default function Blogs() {
                   variants={item}
                   className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col"
                 >
-                  <div className="h-48 bg-gradient-to-br from-primary/15 to-pink-500/10 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-brand opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
+                  <div className="h-48 bg-[#0d1629] flex items-center justify-center relative overflow-hidden">
+                    <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors duration-500" />
                     <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-primary bg-white px-3 py-1 rounded-full shadow-sm">{post.category}</span>
                   </div>
                   <div className="p-6 flex flex-col flex-1">
@@ -304,7 +306,7 @@ export default function Blogs() {
       {/* Bottom CTA */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-foreground">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-brand rounded-full blur-[120px] opacity-20" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-20" />
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Ready to apply these strategies?</h2>

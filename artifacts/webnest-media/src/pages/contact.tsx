@@ -100,63 +100,66 @@ export default function Contact() {
 
   return (
     <PageTransition>
-      <section className="pt-24 pb-20 lg:pt-32 lg:pb-32">
+      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32 bg-[#060b17] text-white">
+        <img src="/decor/contact-grid.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-75" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,11,23,0.6),rgba(6,11,23,0.7),rgb(6,11,23))]" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
             {/* Contact Info */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
+              className="relative z-10"
             >
               <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
                 Let's build something <span className="text-gradient">epic</span>.
               </h1>
-              <p className="text-xl text-muted-foreground mb-12">
+              <p className="text-xl text-white/80 mb-12">
                 Whether you need a complete digital overhaul or a targeted campaign, our team is ready to accelerate your growth.
               </p>
 
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <div className="h-12 w-12 rounded-full bg-white/10 text-primary flex items-center justify-center shrink-0">
                     <Mail className="h-6 w-6" />
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Email Us</h3>
-                    <p className="text-muted-foreground">support@vivomedia.com</p>
+                    <p className="text-white/75">info@webnestmedia.in</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <div className="h-12 w-12 rounded-full bg-white/10 text-primary flex items-center justify-center shrink-0">
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Headquarters</h3>
-                    <p className="text-muted-foreground">5th Floor, DLF Two Horizon Centre, DLF Phase 5</p>
-                    <p className="text-muted-foreground">Gurugram, 122002</p>
+                    <p className="text-white/75">1st Floor Orchid Business Park, Near Subhash Chowk, Sector 48</p>
+                    <p className="text-white/75">Gurugram, Haryana 122004</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <div className="h-12 w-12 rounded-full bg-white/10 text-primary flex items-center justify-center shrink-0">
                     <Phone className="h-6 w-6" />
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold mb-1">Call Us</h3>
-                    <p className="text-muted-foreground">+91 63666666760 </p>
+                    <p className="text-white/75">+91 9696964606</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
             {/* Contact Form */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white p-8 md:p-10 rounded-4xl shadow-xl border border-gray-100 relative"
+              className="relative z-10 bg-white p-8 md:p-10 rounded-4xl shadow-xl border border-gray-100"
             >
               <div className="absolute inset-0 bg-gradient-brand opacity-[0.03] rounded-4xl pointer-events-none" />
               
@@ -267,7 +270,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="pb-20 lg:pb-28">
+      <section className="pb-20 lg:pb-28 pt-2 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-6 mb-16">
             {processSteps.map((step, idx) => (

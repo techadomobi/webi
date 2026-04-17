@@ -370,8 +370,9 @@ export default function ServiceDetail() {
 
   return (
     <PageTransition>
-      <section className="pt-24 pb-18 lg:pt-32 lg:pb-24 bg-secondary/20 relative overflow-hidden">
-        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+      <section className="pt-24 pb-18 lg:pt-32 lg:pb-24 bg-[#060b17] text-white relative overflow-hidden">
+        <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-85" />
+        <div className="absolute inset-0 bg-linear-to-b from-[#060b17]/55 via-[#060b17]/65 to-[#060b17]/85" />
         <div className="container relative z-10 mx-auto px-4">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
             {service.category}
@@ -379,7 +380,7 @@ export default function ServiceDetail() {
           <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl md:text-6xl font-extrabold mb-4 max-w-4xl leading-tight">
             {service.title}
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-muted-foreground max-w-3xl">
+          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-white/75 max-w-3xl">
             {service.tagline}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mt-8 flex flex-wrap gap-3">
@@ -395,7 +396,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-7 mb-14">
             {service.outcomes.map((outcome, idx) => (
@@ -405,7 +406,7 @@ export default function ServiceDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm"
+                className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-lg transition-shadow"
               >
                 <BarChart3 className="h-6 w-6 text-primary mb-3" />
                 <p className="font-semibold text-foreground">{outcome}</p>
@@ -425,7 +426,7 @@ export default function ServiceDetail() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl bg-foreground text-white p-8">
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl bg-foreground text-white p-8 shadow-xl">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">Deliverables</p>
               <ul className="space-y-3">
                 {service.deliverables.map((item) => (
@@ -440,7 +441,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="py-22 bg-secondary/20 border-y">
+      <section className="py-22 bg-secondary/25 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Execution Model</p>
@@ -454,7 +455,7 @@ export default function ServiceDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.08 }}
-                className="rounded-2xl bg-white border border-gray-100 p-6 shadow-sm"
+                className="rounded-2xl bg-white border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3">
                   {idx === 0 ? <Compass className="h-5 w-5" /> : idx === 1 ? <Target className="h-5 w-5" /> : idx === 2 ? <CalendarDays className="h-5 w-5" /> : <Clock3 className="h-5 w-5" />}
@@ -467,7 +468,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="py-22 bg-white">
+      <section className="py-22 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">FAQ</p>
@@ -481,7 +482,7 @@ export default function ServiceDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.08 }}
-                className="rounded-2xl border border-gray-100 p-6 bg-white shadow-sm"
+                className="rounded-2xl border border-gray-100 p-6 bg-white shadow-sm hover:shadow-md transition-shadow"
               >
                 <p className="font-display text-xl font-bold mb-2">{faq.q}</p>
                 <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
