@@ -57,8 +57,12 @@ export default function Footer() {
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
             <div className="space-y-6">
-              <Link href="/" className="inline-flex items-center">
-                <img src={brandLogo} alt="WebNest Media" className="h-28 w-105 max-w-none object-contain md:h-32 md:w-130" />
+              <Link href="/" className="inline-flex w-fit items-center justify-start">
+                <img
+                  src={brandLogo}
+                  alt="WebNest Media"
+                  className="block h-16 w-75 object-contain object-left md:h-20 md:w-90"
+                />
               </Link>
               <p className="text-[18px] font-semibold text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">
