@@ -58,7 +58,7 @@ export default function Footer() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
             <div className="space-y-6">
               <Link href="/" className="inline-flex items-center">
-                <img src={brandLogo} alt="WebNest Media" className="h-20 w-auto max-w-65 object-contain md:h-24" />
+                <img src={brandLogo} alt="WebNest Media" className="h-24 w-auto max-w-80 object-contain md:h-28" />
               </Link>
               <p className="text-[18px] font-semibold text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">
