@@ -1,318 +1,285 @@
+import { useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { ArrowRight, Clock, Search, Tag, UserRound } from 'lucide-react';
 import { Link } from 'wouter';
-import { ArrowRight, Clock, Search, Tag } from 'lucide-react';
+
 import PageTransition from '@/components/layout/PageTransition';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { CMS_WEBSITE_NAME, fetchCmsList, type CmsEntry } from '@/lib/cms-api';
 
-const categories = ['All', 'SEO', 'Social Media', 'PPC', 'Content Marketing', 'Email Marketing', 'Analytics', 'Brand Strategy', 'Digital Transformation'];
-
-const posts = [
-  {
-    title: 'How AI is Reshaping SEO in 2025 and Beyond',
-    category: 'SEO',
-    date: 'April 10, 2025',
-    read: '5 min read',
-    excerpt: 'Generative AI is rewriting how search engines index and rank content. From AI Overviews to ChatGPT search integrations, we break down what you must do now to stay ahead of the curve and protect your organic traffic.',
-    featured: true,
-    author: 'Sarah Jenkins',
-    authorRole: 'Head of Strategy',
-  },
-  {
-    title: 'The Rise of Zero-Click Searches: What It Means for Your Traffic',
-    category: 'SEO',
-    date: 'April 2, 2025',
-    read: '4 min read',
-    excerpt: 'More than 65% of searches now end without a click. Learn how to capture attention, build brand authority, and drive conversions even when users never visit your site.',
-    author: 'Marcus Chen',
-    authorRole: 'Creative Director',
-  },
-  {
-    title: 'Building a $1M Email List from Scratch: Our Exact Playbook',
-    category: 'Email Marketing',
-    date: 'March 24, 2025',
-    read: '7 min read',
-    excerpt: 'A step-by-step breakdown of the exact email growth strategy we used to generate $1M in attributed revenue for a B2B SaaS client in under 18 months.',
-    author: 'Elena Rodriguez',
-    authorRole: 'Lead Developer',
-  },
-  {
-    title: 'Why Your PPC Campaigns Are Burning Budget (And How to Fix It)',
-    category: 'PPC',
-    date: 'March 15, 2025',
-    read: '6 min read',
-    excerpt: 'Most businesses waste 40-60% of their paid search budget on irrelevant clicks. We reveal the 7 most common PPC mistakes and the frameworks to eliminate them for good.',
-    author: 'Alex Vance',
-    authorRole: 'CEO',
-  },
-  {
-    title: 'The Content Velocity Framework: Publish More Without Sacrificing Quality',
-    category: 'Content Marketing',
-    date: 'March 5, 2025',
-    read: '5 min read',
-    excerpt: 'Most content teams are stuck in a slow publish-and-pray cycle. Our Content Velocity Framework helps you produce 3x more content without compromising quality or brand voice.',
-    author: 'Sarah Jenkins',
-    authorRole: 'Head of Strategy',
-  },
-  {
-    title: 'Instagram Reels vs TikTok: Where Should Your Brand Be in 2025?',
-    category: 'Social Media',
-    date: 'February 22, 2025',
-    read: '4 min read',
-    excerpt: 'Short-form video dominates, but the platforms serve very different audiences and algorithm behaviors. Here\'s our data-backed breakdown of where to invest your video content budget.',
-    author: 'Marcus Chen',
-    authorRole: 'Creative Director',
-  },
-  {
-    title: 'First-Party Data Strategy: Preparing for a Cookie-Free World',
-    category: 'Analytics',
-    date: 'February 14, 2025',
-    read: '6 min read',
-    excerpt: 'Third-party cookies are finally going away. Here\'s how to build a robust first-party data infrastructure that powers personalization, retargeting, and attribution in 2025.',
-    author: 'Elena Rodriguez',
-    authorRole: 'Lead Developer',
-  },
-  {
-    title: 'How to Build a Brand That Commands Premium Pricing',
-    category: 'Brand Strategy',
-    date: 'February 3, 2025',
-    read: '5 min read',
-    excerpt: 'Competing on price is a race to the bottom. We break down the branding frameworks used by Apple, Patagonia, and Notion to build perceived value that justifies premium positioning.',
-    author: 'Alex Vance',
-    authorRole: 'CEO',
-  },
-  {
-    title: 'Influencer Marketing in 2025: Micro vs Macro — Which Wins?',
-    category: 'Social Media',
-    date: 'January 28, 2025',
-    read: '4 min read',
-    excerpt: 'Mega influencers get the headlines, but micro-influencers are quietly delivering 3-6x better engagement rates. We analyze 200 campaigns to reveal when each type actually wins.',
-    author: 'Sarah Jenkins',
-    authorRole: 'Head of Strategy',
-  },
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.07 } }
+const cardVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 24 } },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 280, damping: 24 } }
-};
+function formatDate(value?: string) {
+  if (!value) return 'Recently published';
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date);
+}
+
+function initialsFromName(name?: string) {
+  if (!name) return 'CM';
+
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase();
+}
+
+function getCategoryList(posts: CmsEntry[]) {
+  return ['All', ...Array.from(new Set(posts.map(post => post.category?.trim()).filter(Boolean) as string[]))];
+}
+
+function filterPosts(posts: CmsEntry[], search: string, category: string) {
+  const searchTerm = search.trim().toLowerCase();
+
+  return posts.filter(post => {
+    const matchCategory = category === 'All' || post.category?.trim() === category;
+    const haystack = [post.title, post.excerpt, post.category, post.tags?.join(' '), post.writerName, post.seoTitle]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+    const matchSearch = searchTerm === '' || haystack.includes(searchTerm);
+
+    return matchCategory && matchSearch;
+  });
+}
+
+function BlogCard({ post, featured = false }: { post: CmsEntry; featured?: boolean }) {
+  const image = post.coverImage || '/decor/blog-orbit.svg';
+
+  return (
+    <Link href={`/blogs/${post.slug}`} className={featured ? 'block h-full' : 'block h-full'}>
+      <motion.article
+        variants={cardVariants}
+        whileHover={{ y: -4 }}
+        className={`group h-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-2xl ${featured ? 'grid lg:grid-cols-[1.15fr_0.85fr]' : 'flex flex-col'}`}
+      >
+        <div
+          className="relative overflow-hidden"
+          style={featured ? { minHeight: 320 } : undefined}
+        >
+          <img src={image} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top right, rgba(8, 21, 38, 0.85), rgba(14, 36, 67, 0.45) 55%, transparent 100%)' }}
+          />
+          <div className="absolute left-0 top-0 m-5 inline-flex rounded-full border border-white/15 bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+            {post.category || 'CMS Blog'}
+          </div>
+          <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+            <p className="mb-2 text-sm text-white/70">{formatDate(post.date)}</p>
+            <h3 className={`font-display font-bold leading-tight ${featured ? 'text-3xl md:text-4xl' : 'text-2xl'}`}>
+              {post.title}
+            </h3>
+          </div>
+        </div>
+
+        <div className="flex flex-1 flex-col p-6 md:p-7">
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
+              <Clock className="h-3.5 w-3.5" />
+              CMS article
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary/60 px-3 py-1 font-medium text-foreground">
+              <Tag className="h-3.5 w-3.5" />
+              {post.tags?.[0] || post.category || 'Marketing'}
+            </span>
+          </div>
+          <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+            {post.excerpt || 'Open the article to read the full CMS content and image blocks.'}
+          </p>
+          <div className="mt-auto flex items-center gap-3 border-t border-gray-100 pt-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-brand text-xs font-bold text-white">
+              {initialsFromName(post.writerName)}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-foreground">{post.writerName || 'CMS Editor'}</p>
+              <p className="truncate text-xs text-muted-foreground">{post.websiteName || CMS_WEBSITE_NAME}</p>
+            </div>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-transform duration-300 group-hover:translate-x-1">
+              Read
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </div>
+        </div>
+      </motion.article>
+    </Link>
+  );
+}
+
+function LoadingState() {
+  return (
+    <div className="grid gap-6 lg:grid-cols-3">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div key={index} className="animate-pulse overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+          <div className="h-52 bg-secondary/50" />
+          <div className="space-y-4 p-6">
+            <div className="h-3 w-24 rounded-full bg-secondary/70" />
+            <div className="h-8 w-4/5 rounded-full bg-secondary/70" />
+            <div className="space-y-2">
+              <div className="h-3 rounded-full bg-secondary/60" />
+              <div className="h-3 rounded-full bg-secondary/60" />
+              <div className="h-3 w-3/4 rounded-full bg-secondary/60" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Blogs() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [search, setSearch] = useState('');
 
-  const featured = posts[0];
-  const rest = posts.slice(1);
-
-  const filtered = rest.filter(p => {
-    const matchCat = activeCategory === 'All' || p.category === activeCategory;
-    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) || p.excerpt.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['cms', 'blogs'],
+    queryFn: () => fetchCmsList('blogs'),
+    staleTime: 5 * 60 * 1000,
   });
+
+  const posts = data ?? [];
+  const categories = useMemo(() => getCategoryList(posts), [posts]);
+  const filtered = useMemo(() => filterPosts(posts, search, activeCategory), [posts, search, activeCategory]);
+  const featured = filtered[0] ?? posts[0];
+  const rest = filtered.slice(featured ? 1 : 0);
 
   return (
     <PageTransition>
-      {/* Hero */}
-      <section className="pt-24 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden bg-secondary/30 text-foreground">
-        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-45" />
-        <div className="absolute inset-0 bg-linear-to-b from-white/70 via-white/60 to-secondary/20" />
+      <section className="relative overflow-hidden border-b border-border/70 pt-24 pb-16 lg:pt-32 lg:pb-24 bg-secondary/25 text-foreground">
+        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-secondary/20" />
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-4"
-          >
-            Knowledge Hub
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-primary">
+            CMS Blog Feed
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6"
-          >
-            Insights That <span className="text-gradient">Drive Growth</span>
+          <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
+            Live Articles With <span className="text-gradient">Rich Content Blocks</span>
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
-          >
-            Cutting-edge strategies, case studies, and playbooks from the team that has generated over $50M in revenue for our clients.
+          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mx-auto mt-6 max-w-3xl text-lg text-muted-foreground md:text-xl">
+            Articles are pulled directly from the CMS backend and rendered with search, category filters, featured coverage, and slug-based detail pages.
           </motion.p>
-          {/* Search */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="max-w-md mx-auto relative"
-          >
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 rounded-full border border-white/15 bg-white/95 shadow-sm text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-            />
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Featured Post */}
-      <section className="py-16 border-b border-border/70 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary mb-8 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> Featured Article
-          </p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="group grid lg:grid-cols-2 gap-8 bg-white rounded-3xl overflow-hidden border border-gray-100/80 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-          >
-            <div className="h-64 lg:h-auto bg-secondary/60 flex items-center justify-center relative overflow-hidden">
-              <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-              <div className="absolute inset-0 bg-white/45" />
-              <div className="relative z-10 text-center p-8">
-                <span className="text-xs font-bold uppercase tracking-widest text-white bg-primary px-3 py-1 rounded-full">{featured.category}</span>
-                <p className="text-foreground/20 text-5xl font-display font-black mt-6">SEO</p>
-              </div>
-            </div>
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full mb-4 w-fit">{featured.category}</span>
-              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">{featured.title}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">{featured.excerpt}</p>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-10 w-10 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold">
-                  {featured.author.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div>
-                  <p className="font-bold text-sm text-foreground">{featured.author}</p>
-                  <p className="text-xs text-muted-foreground">{featured.authorRole}</p>
-                </div>
-                <div className="ml-auto flex items-center gap-2 text-xs text-muted-foreground">
-                  <Clock className="h-3 w-3" />
-                  {featured.read}
-                </div>
-              </div>
-              <Button className="bg-gradient-brand text-white border-0 shadow-md rounded-full w-fit h-11 px-7 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                Read Article <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mx-auto mt-10 max-w-xl">
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={search}
+                onChange={event => setSearch(event.target.value)}
+                placeholder="Search CMS blog posts..."
+                className="h-14 w-full rounded-full border border-white/20 bg-white/95 pl-12 pr-4 text-base text-foreground shadow-sm outline-none transition focus:ring-2 focus:ring-primary/30"
+              />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Categories Filter */}
-      <section className="py-10 bg-white border-b sticky top-20 z-30 shadow-sm">
+      <section className="border-b border-border/70 bg-white/85 py-8 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
-            <Tag className="h-4 w-4 text-muted-foreground shrink-0" />
-            {categories.map(cat => (
+            <Tag className="h-4 w-4 shrink-0 text-muted-foreground" />
+            {categories.map(category => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${activeCategory === cat ? 'bg-gradient-brand text-white shadow-md' : 'bg-secondary/50 text-foreground hover:bg-secondary'}`}
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                  activeCategory === category ? 'bg-gradient-brand text-white shadow-md' : 'bg-secondary/50 text-foreground hover:bg-secondary'
+                }`}
               >
-                {cat}
+                {category}
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Blog Grid */}
-      <section className="py-20 bg-secondary/15">
+      <section className="bg-secondary/15 py-16">
         <div className="container mx-auto px-4">
-          {filtered.length === 0 ? (
-            <div className="text-center py-24">
-              <p className="text-2xl font-display font-bold mb-3">No articles found</p>
-              <p className="text-muted-foreground">Try a different search term or category.</p>
+          {isLoading ? (
+            <LoadingState />
+          ) : error ? (
+            <div className="rounded-3xl border border-red-200 bg-red-50 px-6 py-10 text-center text-red-900">
+              <p className="font-display text-3xl font-bold">Could not load CMS blogs</p>
+              <p className="mt-3 text-sm text-red-800">{error instanceof Error ? error.message : 'The backend request failed.'}</p>
+              <Button onClick={() => refetch()} className="mt-6 rounded-full bg-red-600 text-white hover:bg-red-700">
+                Try Again
+              </Button>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-border bg-white px-6 py-16 text-center">
+              <p className="font-display text-3xl font-bold">No matching posts</p>
+              <p className="mt-3 text-muted-foreground">Try a different search term or category.</p>
             </div>
           ) : (
-            <motion.div
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filtered.map((post, i) => (
-                <motion.article
-                  key={i}
-                  variants={item}
-                  className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col"
-                >
-                  <div className="h-48 bg-secondary/40 flex items-center justify-center relative overflow-hidden">
-                    <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-                    <div className="absolute inset-0 bg-white/45 group-hover:bg-white/20 transition-colors duration-500" />
-                    <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-primary bg-white px-3 py-1 rounded-full shadow-sm">{post.category}</span>
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
-                      <span>{post.date}</span>
-                      <span>·</span>
-                      <Clock className="h-3 w-3" />
-                      <span>{post.read}</span>
-                    </div>
-                    <h3 className="font-display font-bold text-xl mb-3 group-hover:text-primary transition-colors leading-tight flex-1">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 line-clamp-3">{post.excerpt}</p>
-                    <div className="flex items-center gap-3 border-t pt-4">
-                      <div className="h-8 w-8 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold shrink-0">
-                        {post.author.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-foreground truncate">{post.author}</p>
-                        <p className="text-xs text-muted-foreground truncate">{post.authorRole}</p>
-                      </div>
-                      <ArrowRight className="h-4 w-4 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 shrink-0" />
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </motion.div>
+            <>
+              {featured ? (
+                <div className="mb-12">
+                  <p className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-primary">
+                    <span className="h-2 w-2 rounded-full bg-primary" /> Featured article
+                  </p>
+                  <BlogCard post={featured} featured />
+                </div>
+              ) : null}
+
+              {rest.length > 0 ? (
+                <motion.div variants={{ show: { transition: { staggerChildren: 0.08 } } }} initial="hidden" animate="show" className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
+                  {rest.map(post => (
+                    <BlogCard key={post._id} post={post} />
+                  ))}
+                </motion.div>
+              ) : null}
+            </>
           )}
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="py-24 bg-white border-t">
+      <section className="border-t bg-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-sm font-bold uppercase tracking-widest text-primary mb-4">Stay Ahead</p>
-            <h2 className="font-display text-4xl font-bold mb-4">
-              Get the <span className="text-gradient">Latest Strategies</span> in Your Inbox
-            </h2>
-            <p className="text-muted-foreground mb-8">Join 10,000+ marketers who receive our weekly insights on what's actually working in digital marketing right now.</p>
-            <div className="flex gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 h-12 px-4 rounded-full border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-              <Button className="bg-gradient-brand text-white border-0 rounded-full h-12 px-6 hover:shadow-lg hover:scale-105 transition-all duration-300 shrink-0">
-                Subscribe
-              </Button>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-primary">Need more content?</p>
+            <h2 className="font-display text-4xl font-bold md:text-5xl">Build a CMS workflow around your marketing site.</h2>
+            <p className="mt-5 text-muted-foreground">
+              This blog view now reads directly from the backend at {CMS_WEBSITE_NAME}, so new articles appear here without touching the frontend.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/contact">
+                <Button className="h-12 rounded-full bg-gradient-brand px-7 text-white shadow-lg hover:shadow-xl">
+                  Talk to Us <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="outline" className="h-12 rounded-full border-2 border-primary/20 px-7 text-primary hover:border-primary hover:bg-primary hover:text-white">
+                  Explore Services
+                </Button>
+              </Link>
             </div>
-            <p className="text-xs text-muted-foreground mt-3">No spam, ever. Unsubscribe anytime.</p>
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-20 relative overflow-hidden bg-[#081526] border-t border-primary/20 text-white">
+      <section className="relative overflow-hidden border-t border-primary/20 bg-[#081526] py-20 text-white">
         <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-gradient-brand rounded-full blur-[120px] opacity-15" />
+          <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-brand opacity-15 blur-[120px]" />
         </div>
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Ready to apply these strategies?</h2>
-          <p className="text-white/75 mb-8 text-lg">Let our team build a custom plan tailored specifically to your business.</p>
+          <h2 className="font-display text-3xl font-bold md:text-4xl">Want the CMS to drive the rest of the site too?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/75">The same backend can power service detail pages, category pages, and future admin screens.</p>
           <Link href="/contact">
-            <Button size="lg" className="bg-gradient-brand text-white hover:opacity-95 shadow-xl hover:scale-105 transition-all duration-300 h-14 px-10 rounded-full text-base">
+            <Button size="lg" className="mt-8 h-14 rounded-full bg-gradient-brand px-10 text-base text-white shadow-xl hover:opacity-95">
               Get a Free Consultation
             </Button>
           </Link>

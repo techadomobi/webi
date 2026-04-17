@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation } from 'wouter';
 import {
   ArrowRight,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react';
 import PageTransition from '@/components/layout/PageTransition';
 import GlowButton from '@/components/ui/GlowButton';
+import { CMS_WEBSITE_NAME, fetchCmsEntry, type CmsContentBlock } from '@/lib/cms-api';
 
 type ServiceDetail = {
   title: string;
@@ -347,10 +349,204 @@ const serviceDetails: Record<string, ServiceDetail> = {
   },
 };
 
+function stripHtml(value: string) {
+  return value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function CmsContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
+  if (block.type === 'image') {
+    return (
+      <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+        {image ? (
+          <img src={image} alt="CMS content block" className="h-72 w-full object-cover" />
+        ) : (
+          <div className="flex h-72 items-center justify-center bg-secondary/40 text-muted-foreground">
+            <div className="text-center">
+              <p className="text-sm font-medium">Image block {index + 1}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const html = typeof block.text === 'string' ? block.text : '';
+  if (!stripHtml(html)) {
+    return null;
+  }
+
+  return (
+    <div
+      className="prose prose-slate max-w-none rounded-3xl border border-gray-100 bg-white p-6 shadow-sm md:p-8 prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<ReturnType<typeof fetchCmsEntry>>>; onBack: string }) {
+  const images = service.images?.length ? service.images : service.coverImage ? [service.coverImage] : [];
+  const blocks = service.content ?? [];
+
+  return (
+    <PageTransition>
+      <section className="relative overflow-hidden border-b border-border/70 bg-secondary/20 pt-24 pb-16 lg:pt-32 lg:pb-20">
+        <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
+        <div className="container relative z-10 mx-auto px-4">
+          <Link href={onBack} className="mb-6 inline-flex">
+            <GlowButton variant="outline" size="lg">Back to Services</GlowButton>
+          </Link>
+
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+                {service.category || 'CMS Service'}
+              </motion.p>
+              <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl md:text-6xl font-extrabold mb-4 max-w-4xl leading-tight">
+                {service.title}
+              </motion.h1>
+              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-muted-foreground max-w-3xl">
+                {service.excerpt || service.focusKeyphrase || 'CMS-backed service content.'}
+              </motion.p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact">
+                  <GlowButton variant="primary" size="lg">
+                    Book Strategy Call <ArrowRight className="h-5 w-5" />
+                  </GlowButton>
+                </Link>
+                <Link href="/services">
+                  <GlowButton variant="outline" size="lg">All Services</GlowButton>
+                </Link>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {service.tags?.slice(0, 8).map(tag => (
+                  <span key={tag} className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden rounded-4xl border border-white/60 bg-white shadow-2xl">
+              {service.coverImage ? (
+                <img src={service.coverImage} alt={service.title} className="h-full min-h-90 w-full object-cover" />
+              ) : (
+                <div className="flex min-h-90 items-center justify-center bg-gradient-brand p-10 text-center text-white">
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/80">CMS Service</p>
+                    <h2 className="mt-4 font-display text-3xl font-bold">{service.title}</h2>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-start">
+            <div className="space-y-6">
+              {blocks.length > 0 ? (
+                blocks.map((block, index) => (
+                  <CmsContentBlockView key={block._id || `${block.type}-${index}`} block={block} image={images[index]} index={index} />
+                ))
+              ) : (
+                <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
+                  <p className="text-lg text-muted-foreground">This service does not include CMS content blocks yet.</p>
+                </div>
+              )}
+            </div>
+
+            <aside className="space-y-6 lg:sticky lg:top-28">
+              <div className="rounded-3xl border border-gray-100 bg-secondary/30 p-6 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Article Details</p>
+                <div className="mt-5 space-y-4 text-sm text-muted-foreground">
+                  <div>
+                    <p className="font-semibold text-foreground">Website</p>
+                    <p>{service.websiteName || CMS_WEBSITE_NAME}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">Focus Keyphrase</p>
+                    <p>{service.focusKeyphrase || 'Not provided'}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">SEO Title</p>
+                    <p>{service.seoTitle || 'Not provided'}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">Meta Description</p>
+                    <p>{service.metaDescription || 'Not provided'}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">SEO Keywords</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {(service.seoKeywords || []).slice(0, 12).map(keyword => (
+                    <span key={keyword} className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-foreground">
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-primary/15 bg-[#081526] p-6 text-white shadow-xl">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">Want this on your site?</p>
+                <p className="mt-4 text-lg leading-relaxed text-white/80">
+                  The CMS service content can be edited in one place and rendered across the public site automatically.
+                </p>
+                <Link href="/contact">
+                  <GlowButton variant="primary" size="lg" className="mt-6 w-full justify-center">
+                    Request Implementation
+                  </GlowButton>
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </PageTransition>
+  );
+}
+
 export default function ServiceDetail() {
   const [location] = useLocation();
   const slug = location.split('/')[2] ?? '';
   const service = serviceDetails[slug];
+  const { data: cmsService, isLoading: cmsLoading } = useQuery({
+    queryKey: ['cms', 'service', slug],
+    queryFn: () => fetchCmsEntry('services', slug),
+    enabled: Boolean(slug),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  if (cmsService) {
+    return <CmsServiceView service={cmsService} onBack="/services" />;
+  }
+
+  if (!service && cmsLoading) {
+    return (
+      <PageTransition>
+        <section className="pt-28 pb-24">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="font-display text-4xl font-bold mb-4">Loading Service</h1>
+            <p className="text-muted-foreground mb-8">Fetching the CMS entry for this service.</p>
+          </div>
+        </section>
+      </PageTransition>
+    );
+  }
 
   if (!service) {
     return (

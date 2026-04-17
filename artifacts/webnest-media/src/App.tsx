@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
 import ServiceDetail from "@/pages/service-detail";
+import BlogDetail from "@/pages/blog-detail";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Blogs from "@/pages/blogs";
@@ -43,6 +44,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/blogs" component={Blogs} />
+        <Route path="/blogs/:slug" component={BlogDetail} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>

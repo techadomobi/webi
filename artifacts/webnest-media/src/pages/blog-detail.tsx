@@ -1,0 +1,287 @@
+import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { motion } from 'framer-motion';
+import { ArrowLeft, CalendarDays, Clock, Tag, UserRound, Image as ImageIcon } from 'lucide-react';
+import { Link, useLocation } from 'wouter';
+
+import PageTransition from '@/components/layout/PageTransition';
+import { Button } from '@/components/ui/button';
+import { CMS_WEBSITE_NAME, fetchCmsEntry, type CmsContentBlock } from '@/lib/cms-api';
+
+function formatDate(value?: string) {
+  if (!value) return 'Recently published';
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date);
+}
+
+function stripHtml(value: string) {
+  return value
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function ContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
+  if (block.type === 'image') {
+    const resolvedImage = image;
+
+    return (
+      <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
+        {resolvedImage ? (
+          <img src={resolvedImage} alt="CMS content block" className="h-72 w-full object-cover" />
+        ) : (
+          <div className="flex h-72 items-center justify-center bg-secondary/40 text-muted-foreground">
+            <div className="text-center">
+              <ImageIcon className="mx-auto mb-3 h-8 w-8" />
+              <p className="text-sm font-medium">Image block {index + 1}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const html = typeof block.text === 'string' ? block.text : '';
+  const plainText = stripHtml(html);
+
+  if (!plainText) {
+    return null;
+  }
+
+  return (
+    <div
+      className="prose prose-slate max-w-none rounded-3xl border border-gray-100 bg-white p-6 shadow-sm md:p-8 prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+export default function BlogDetail() {
+  const [location] = useLocation();
+  const slug = useMemo(() => location.split('/')[2] ?? '', [location]);
+
+  const { data: post, isLoading, error, refetch } = useQuery({
+    queryKey: ['cms', 'blog', slug],
+    queryFn: () => fetchCmsEntry('blogs', slug),
+    enabled: Boolean(slug),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  if (!slug) {
+    return (
+      <PageTransition>
+        <section className="pt-28 pb-24">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="font-display text-4xl font-bold">Blog Not Found</h1>
+            <p className="mt-4 text-muted-foreground">The requested article URL is missing a slug.</p>
+            <Link href="/blogs">
+              <Button className="mt-8 rounded-full bg-gradient-brand text-white">Back to Blogs</Button>
+            </Link>
+          </div>
+        </section>
+      </PageTransition>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <PageTransition>
+        <section className="pt-28 pb-24">
+          <div className="container mx-auto px-4">
+            <div className="animate-pulse overflow-hidden border border-gray-100 bg-white shadow-sm" style={{ borderRadius: '2rem' }}>
+              <div className="grid gap-0 lg:grid-cols-2">
+                <div className="h-80 bg-secondary/50 lg:h-full" />
+                <div className="space-y-4 p-8 md:p-12">
+                  <div className="h-3 w-28 rounded-full bg-secondary/70" />
+                  <div className="h-10 w-4/5 rounded-full bg-secondary/70" />
+                  <div className="h-4 w-full rounded-full bg-secondary/60" />
+                  <div className="h-4 w-5/6 rounded-full bg-secondary/60" />
+                  <div className="h-4 w-2/3 rounded-full bg-secondary/60" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </PageTransition>
+    );
+  }
+
+  if (error || !post) {
+    return (
+      <PageTransition>
+        <section className="pt-28 pb-24">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="font-display text-4xl font-bold">Blog Not Found</h1>
+            <p className="mt-4 text-muted-foreground">
+              {error instanceof Error ? error.message : 'The CMS did not return a matching article.'}
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button onClick={() => refetch()} className="rounded-full bg-gradient-brand text-white">
+                Retry
+              </Button>
+              <Link href="/blogs">
+                <Button variant="outline" className="rounded-full border-2 border-primary/20 text-primary hover:bg-primary hover:text-white">
+                  Back to Blogs
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </PageTransition>
+    );
+  }
+
+  const images = post.images?.length ? post.images : post.coverImage ? [post.coverImage] : [];
+  const blocks = post.content ?? [];
+
+  return (
+    <PageTransition>
+      <section className="relative overflow-hidden border-b border-border/70 bg-secondary/20 pt-24 pb-16 lg:pt-32 lg:pb-20">
+        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
+        <div className="container relative z-10 mx-auto px-4">
+          <Link href="/blogs" className="mb-6 inline-flex">
+            <Button variant="outline" className="rounded-full border-2 border-primary/20 bg-white/90 text-primary hover:border-primary hover:bg-primary hover:text-white">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blogs
+            </Button>
+          </Link>
+
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <div className="mb-5 flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-primary">
+                  <Tag className="h-3.5 w-3.5" />
+                  {post.category || 'CMS Blog'}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <CalendarDays className="h-3.5 w-3.5" />
+                  {formatDate(post.date)}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  <UserRound className="h-3.5 w-3.5" />
+                  {post.writerName || CMS_WEBSITE_NAME}
+                </span>
+              </div>
+              <h1 className="max-w-4xl font-display text-5xl font-extrabold leading-tight md:text-6xl">
+                {post.title}
+              </h1>
+              <p className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+                {post.excerpt}
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact">
+                  <Button className="h-12 rounded-full bg-gradient-brand px-6 text-white shadow-lg hover:shadow-xl">Talk to Us</Button>
+                </Link>
+                <Link href="/services">
+                  <Button variant="outline" className="h-12 rounded-full border-2 border-primary/20 px-6 text-primary hover:border-primary hover:bg-primary hover:text-white">
+                    Explore Services
+                  </Button>
+                </Link>
+              </div>
+
+              {post.tags?.length ? (
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {post.tags.slice(0, 8).map(tag => (
+                    <span key={tag} className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden border border-white/60 bg-white shadow-2xl" style={{ borderRadius: '2rem' }}>
+              {post.coverImage ? (
+                <img src={post.coverImage} alt={post.title} className="h-full w-full object-cover" style={{ minHeight: 360 }} />
+              ) : (
+                <div className="flex items-center justify-center bg-gradient-brand p-10 text-center text-white" style={{ minHeight: 360 }}>
+                  <div>
+                    <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/80">CMS Article</p>
+                    <h2 className="mt-4 font-display text-3xl font-bold">{post.title}</h2>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-start">
+            <div className="space-y-6">
+              {blocks.length > 0 ? (
+                blocks.map((block, index) => (
+                  <ContentBlockView key={block._id || `${block.type}-${index}`} block={block} image={images[index]} index={index} />
+                ))
+              ) : (
+                <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
+                  <p className="text-lg text-muted-foreground">This CMS entry has no content blocks yet.</p>
+                </div>
+              )}
+            </div>
+
+            <aside className="space-y-6 lg:sticky lg:top-28">
+              <div className="rounded-3xl border border-gray-100 bg-secondary/30 p-6 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Article Details</p>
+                <div className="mt-5 space-y-4 text-sm text-muted-foreground">
+                  <div>
+                    <p className="font-semibold text-foreground">Website</p>
+                    <p>{post.websiteName || CMS_WEBSITE_NAME}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">Focus Keyphrase</p>
+                    <p>{post.focusKeyphrase || 'Not provided'}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">SEO Title</p>
+                    <p>{post.seoTitle || 'Not provided'}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">Meta Description</p>
+                    <p>{post.metaDescription || 'Not provided'}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">SEO Keywords</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {(post.seoKeywords || []).slice(0, 12).map(keyword => (
+                    <span key={keyword} className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-foreground">
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-primary/15 bg-[#081526] p-6 text-white shadow-xl">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">Need this on your site?</p>
+                <p className="mt-4 text-lg leading-relaxed text-white/80">
+                  The CMS backend can power article creation, featured content, and future editorial workflows.
+                </p>
+                <Link href="/contact">
+                  <Button className="mt-6 w-full rounded-full bg-gradient-brand text-white shadow-lg hover:shadow-xl">
+                    Request Implementation
+                  </Button>
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </PageTransition>
+  );
+}
