@@ -165,7 +165,7 @@ export default function Navbar() {
                     </div>
                   </div>
                   <div className="bg-secondary/30 px-6 py-4 flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">Not sure what you need?</p>
+                    <p className="text-sm text-muted-foreground">More services</p>
                     <Link href="/contact" onClick={() => setServicesOpen(false)}>
                       <Button size="sm" className="bg-gradient-brand text-white border-0 rounded-full text-xs h-8 px-4">
                         Get Free Consultation
