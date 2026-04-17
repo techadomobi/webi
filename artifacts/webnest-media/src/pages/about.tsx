@@ -33,7 +33,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2014', title: 'Founded in San Francisco', desc: 'Alex Vance and Sarah Jenkins launched WeeoMedia with three clients and a mission to make enterprise-grade digital marketing accessible to ambitious growth brands.' },
+  { year: '2014', title: 'Founded in Gurugram', desc: 'Alex Vance and Sarah Jenkins launched WeeoMedia with three clients and a mission to make enterprise-grade digital marketing accessible to ambitious growth brands.' },
   { year: '2016', title: 'First $1M Revenue Client', desc: 'Delivered $1M in attributed revenue for an e-commerce client through a combined SEO and email marketing program — proving our full-funnel methodology works.' },
   { year: '2018', title: 'Team Grows to 25', desc: 'Opened our London office and expanded into European markets. Added specialized teams for paid media, content, and technical SEO.' },
   { year: '2020', title: 'Served 200+ Brands', desc: 'Crossed the 200-client milestone during a challenging year for businesses everywhere. Our remote-first model proved resilient and our team thrived.' },
@@ -128,7 +128,7 @@ export default function About() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-8 md:p-12 text-white">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Our San Francisco Headquarters</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Our Gurugram Headquarters</h2>
               <p className="text-white/80 text-lg">Where data meets creativity, and strategy becomes reality.</p>
             </div>
           </motion.div>
