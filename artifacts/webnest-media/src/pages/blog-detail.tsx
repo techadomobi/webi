@@ -251,7 +251,7 @@ export default function BlogDetail() {
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden border-b border-border/70 bg-secondary/20 pt-24 pb-16 lg:pt-32 lg:pb-20">
+      <section className="relative overflow-hidden border-b border-primary/20 bg-linear-to-b from-[#f7f5ff] via-white to-[#fff4f8] pt-24 pb-16 lg:pt-32 lg:pb-20">
         <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
         <motion.div style={{ y: heroOrbY }} className="pointer-events-none absolute -left-16 top-16 h-72 w-72 rounded-full bg-primary/20 blur-[90px]" />
@@ -279,7 +279,7 @@ export default function BlogDetail() {
                   {post.writerName || CMS_WEBSITE_NAME}
                 </span>
               </div>
-              <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="max-w-4xl font-display text-5xl font-extrabold leading-tight md:text-6xl">
+              <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="max-w-5xl font-display text-5xl font-black leading-[1.04] md:text-7xl">
                 {post.title}
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
@@ -459,11 +459,11 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      <section className="border-y border-primary/15 bg-secondary/20 py-20 md:py-24">
+      <section className="border-y border-primary/20 bg-linear-to-b from-[#fff8fb] via-white to-[#f7fbff] py-20 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Editorial Operating Model</p>
-            <h2 className="font-display text-4xl font-bold md:text-5xl">How Great Content Gets Built</h2>
+            <h2 className="font-display text-4xl font-black md:text-6xl">How Great Content Gets Built</h2>
             <p className="mt-4 text-muted-foreground">
               This page design now supports a longer storytelling flow, so users can understand strategy, process, and business value in one continuous experience.
             </p>
@@ -479,7 +479,7 @@ export default function BlogDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.08 }}
-                  className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"
+                  className="rounded-3xl border border-primary/15 bg-white p-6 shadow-lg shadow-primary/5"
                 >
                   <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 text-primary">
                     <Icon className="h-5 w-5" />
@@ -499,10 +499,10 @@ export default function BlogDetail() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/8 via-white to-pink-500/8 p-5 md:grid-cols-4"
+            className="mb-10 grid gap-4 rounded-3xl border border-primary/20 bg-linear-to-r from-primary/10 via-white to-pink-500/12 p-5 md:grid-cols-4 shadow-lg shadow-primary/5"
           >
             {blogImpactSignals.map((signal, idx) => (
-              <div key={signal.label} className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+              <div key={signal.label} className="rounded-2xl border border-primary/10 bg-white p-4 shadow-md shadow-primary/5">
                 <p className="font-display text-3xl font-black text-gradient">{signal.metric}</p>
                 <p className="mt-1 text-sm font-semibold text-foreground">{signal.label}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{signal.detail}</p>
@@ -515,12 +515,12 @@ export default function BlogDetail() {
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm"
+              className="rounded-3xl border border-primary/15 bg-white p-7 shadow-lg shadow-primary/5"
             >
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Where This Content Model Wins</p>
               <div className="grid gap-3 md:grid-cols-2">
                 {blogUseCases.map((item, idx) => (
-                  <div key={item} className="rounded-2xl border border-gray-100 bg-secondary/20 p-4">
+                  <div key={item} className="rounded-2xl border border-primary/10 bg-linear-to-br from-white to-primary/5 p-4">
                     <div className="mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/14 text-xs font-bold text-primary">
                       {idx + 1}
                     </div>
@@ -534,7 +534,7 @@ export default function BlogDetail() {
               initial={{ opacity: 0, x: 16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="rounded-3xl border border-primary/18 bg-[#081526] p-7 text-white shadow-xl"
+              className="rounded-3xl border border-primary/30 bg-linear-to-br from-[#071124] via-[#0c1f3a] to-[#102b4d] p-7 text-white shadow-2xl"
             >
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Long-Form Advantage</p>
               <h3 className="mt-3 font-display text-3xl font-bold">Deeper Pages Convert Better</h3>
@@ -560,11 +560,13 @@ export default function BlogDetail() {
       </section>
 
       <section className="relative overflow-hidden border-t border-primary/20 bg-[#081526] py-20 text-white md:py-24">
-        <div className="absolute inset-0 bg-gradient-brand opacity-[0.08]" />
+        <div className="absolute inset-0 bg-gradient-brand opacity-[0.12]" />
+        <div className="pointer-events-none absolute -left-10 top-10 h-64 w-64 rounded-full bg-primary/20 blur-[100px]" />
+        <div className="pointer-events-none absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-pink-400/20 blur-[100px]" />
         <div className="container relative z-10 mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-3xl">
             <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary" />
-            <h2 className="font-display text-4xl font-bold md:text-5xl">Want Blog Pages This Detailed for Your Brand?</h2>
+            <h2 className="font-display text-4xl font-black md:text-6xl">Want Blog Pages This Detailed for Your Brand?</h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-white/80">
               We can build and connect the same long-form, animation-rich CMS page system for your services and blog library.
             </p>
