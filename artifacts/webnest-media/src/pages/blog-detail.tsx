@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, CalendarDays, Clock, Sparkles, Tag, UserRound, Image as ImageIcon, Zap } from 'lucide-react';
+import { ArrowLeft, CalendarDays, CheckCircle2, Clock, LineChart, Megaphone, PenSquare, Sparkles, Tag, UserRound, Image as ImageIcon, Zap } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
@@ -50,6 +50,56 @@ function buildPostAliases(post: { slug: string; title: string }) {
   aliases.add(normalizeSlug(post.title));
   return aliases;
 }
+
+const editorialStages = [
+  {
+    title: 'Research Intent Mapping',
+    detail: 'We map audience questions, search intent, and conversion goals before drafting so every article has a clear job to do.',
+    icon: LineChart,
+  },
+  {
+    title: 'Narrative Structure',
+    detail: 'The article is outlined to keep readers moving from curiosity to clarity, with natural transition points and retention hooks.',
+    icon: PenSquare,
+  },
+  {
+    title: 'Distribution Readiness',
+    detail: 'Each post is packaged with headline options, metadata, and repurposing opportunities for organic and paid channels.',
+    icon: Megaphone,
+  },
+];
+
+const blogImpactSignals = [
+  {
+    metric: '2.8x',
+    label: 'Long-tail visibility growth',
+    detail: 'Structured content hubs create stronger topic authority over time.',
+  },
+  {
+    metric: '41%',
+    label: 'Avg. engaged read depth',
+    detail: 'Clear sections and supporting media improve attention quality.',
+  },
+  {
+    metric: '34%',
+    label: 'Higher assisted conversions',
+    detail: 'Educational content supports decisions across longer buying cycles.',
+  },
+  {
+    metric: 'Weekly',
+    label: 'Publishing iteration rhythm',
+    detail: 'Fast learning loops help teams keep winning topics in motion.',
+  },
+];
+
+const blogUseCases = [
+  'Thought leadership campaigns for founder-led brands',
+  'SEO-led content hubs for service categories',
+  'Sales-enablement article systems for long-cycle deals',
+  'Product education flows tied to onboarding and retention',
+  'Localized content programs for new market expansion',
+  'Evergreen insight libraries with quarterly refresh plans',
+];
 
 function ContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
   if (block.type === 'image') {
@@ -406,6 +456,131 @@ export default function BlogDetail() {
               </div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-primary/15 bg-secondary/20 py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Editorial Operating Model</p>
+            <h2 className="font-display text-4xl font-bold md:text-5xl">How Great Content Gets Built</h2>
+            <p className="mt-4 text-muted-foreground">
+              This page design now supports a longer storytelling flow, so users can understand strategy, process, and business value in one continuous experience.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {editorialStages.map((stage, idx) => {
+              const Icon = stage.icon;
+              return (
+                <motion.div
+                  key={stage.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08 }}
+                  className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"
+                >
+                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <p className="text-lg font-semibold text-foreground">{stage.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{stage.detail}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/8 via-white to-pink-500/8 p-5 md:grid-cols-4"
+          >
+            {blogImpactSignals.map((signal, idx) => (
+              <div key={signal.label} className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
+                <p className="font-display text-3xl font-black text-gradient">{signal.metric}</p>
+                <p className="mt-1 text-sm font-semibold text-foreground">{signal.label}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{signal.detail}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm"
+            >
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Where This Content Model Wins</p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {blogUseCases.map((item, idx) => (
+                  <div key={item} className="rounded-2xl border border-gray-100 bg-secondary/20 p-4">
+                    <div className="mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/14 text-xs font-bold text-primary">
+                      {idx + 1}
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-primary/18 bg-[#081526] p-7 text-white shadow-xl"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Long-Form Advantage</p>
+              <h3 className="mt-3 font-display text-3xl font-bold">Deeper Pages Convert Better</h3>
+              <p className="mt-4 text-sm leading-relaxed text-white/80">
+                Long pages let visitors self-qualify. They answer more objections, demonstrate expertise, and create clearer conversion intent.
+              </p>
+              <ul className="mt-5 space-y-3">
+                {[
+                  'Higher average time on page',
+                  'Better signal quality for search engines',
+                  'Stronger trust before contact actions',
+                  'More reusable content for campaigns',
+                ].map(item => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-white/90">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-primary/20 bg-[#081526] py-20 text-white md:py-24">
+        <div className="absolute inset-0 bg-gradient-brand opacity-[0.08]" />
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-3xl">
+            <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary" />
+            <h2 className="font-display text-4xl font-bold md:text-5xl">Want Blog Pages This Detailed for Your Brand?</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-white/80">
+              We can build and connect the same long-form, animation-rich CMS page system for your services and blog library.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/contact">
+                <Button className="h-12 rounded-full bg-gradient-brand px-7 text-white shadow-lg hover:shadow-xl">
+                  Start a Project
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="outline" className="h-12 rounded-full border-2 border-white/35 px-7 text-white hover:border-white hover:bg-white hover:text-foreground">
+                  Explore Services
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </PageTransition>

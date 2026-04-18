@@ -113,6 +113,30 @@ const engagementTiers = [
   },
 ];
 
+const strategyPillars = [
+  {
+    title: 'Acquisition System',
+    text: 'Channel and campaign architecture focused on reliable lead flow and controlled budget scaling.',
+  },
+  {
+    title: 'Conversion System',
+    text: 'Landing experience, offers, and messaging tuned to increase qualified actions and reduce friction.',
+  },
+  {
+    title: 'Retention System',
+    text: 'Lifecycle automation and customer communication loops that build compounding value after first conversion.',
+  },
+];
+
+const serviceDifferentiators = [
+  'Senior-led strategy and implementation',
+  'Weekly optimization loops with transparent reporting',
+  'Cross-functional execution across content, paid, and lifecycle channels',
+  'Scalable process with documentation and team handoff readiness',
+  'Business KPI alignment instead of vanity metric reporting',
+  'Rapid experimentation with measured risk controls',
+];
+
 const serviceDetails: Record<string, ServiceDetail> = {
   seo: {
     title: 'Search Engine Optimization',
@@ -618,6 +642,110 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
               </div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-primary/15 bg-secondary/20 py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Operating Blueprint</p>
+            <h2 className="font-display text-4xl font-bold md:text-5xl">How This Service Scales Growth</h2>
+            <p className="mt-4 text-muted-foreground">
+              This service page is redesigned as a long-form experience so buyers can understand the full execution model before they book a call.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {strategyPillars.map((pillar, idx) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm"
+              >
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
+                  {idx === 0 ? <Compass className="h-4 w-4" /> : idx === 1 ? <Target className="h-4 w-4" /> : <Clock3 className="h-4 w-4" />}
+                </div>
+                <p className="text-lg font-semibold text-foreground">{pillar.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pillar.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-gray-100 bg-white p-7 shadow-sm"
+            >
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">What Makes It Different</p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {serviceDifferentiators.map((item, idx) => (
+                  <div key={item} className="rounded-2xl border border-gray-100 bg-secondary/20 p-4">
+                    <div className="mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/14 text-xs font-bold text-primary">
+                      {idx + 1}
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/90">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="rounded-3xl border border-primary/18 bg-[#081526] p-7 text-white shadow-xl"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Delivery Rhythm</p>
+              <h3 className="mt-3 font-display text-3xl font-bold">90-Day Momentum Plan</h3>
+              <p className="mt-4 text-sm leading-relaxed text-white/80">
+                The first quarter of work is built to create early proof, remove inefficiencies, and establish a compounding system.
+              </p>
+              <ul className="mt-5 space-y-3">
+                {roadmapPhases.slice(0, 4).map((phase, idx) => (
+                  <li key={phase.phase} className="flex items-start gap-2 text-sm text-white/90">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>
+                      <span className="font-semibold">Phase {idx + 1}:</span> {phase.summary}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-primary/20 bg-[#081526] py-20 text-white md:py-24">
+        <div className="absolute inset-0 bg-gradient-brand opacity-[0.08]" />
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-3xl">
+            <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary" />
+            <h2 className="font-display text-4xl font-bold md:text-5xl">Ready to Launch {service.title}?</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-white/80">
+              If you want this same long-form, high-conversion service experience across your site, we can implement the complete system.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/contact">
+                <GlowButton variant="primary" size="lg">
+                  Start Consultation <ArrowRight className="h-5 w-5" />
+                </GlowButton>
+              </Link>
+              <Link href="/services">
+                <GlowButton variant="outline" size="lg" className="border-white/35 text-white hover:border-white hover:bg-white hover:text-foreground">
+                  Back to Services
+                </GlowButton>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </PageTransition>
