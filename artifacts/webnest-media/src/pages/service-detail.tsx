@@ -492,6 +492,20 @@ function CmsContentBlockView({ block, image, index }: { block: CmsContentBlock; 
 function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<ReturnType<typeof fetchCmsEntry>>>; onBack: string }) {
   const images = service.images?.length ? service.images : service.coverImage ? [service.coverImage] : [];
   const blocks = service.content ?? [];
+  const generatedBlocks = [
+    {
+      title: 'Business Context',
+      text: `${service.excerpt || service.focusKeyphrase || 'This service is designed for practical business growth.'} The objective is to create measurable movement, not just activity.`,
+    },
+    {
+      title: 'Execution Focus',
+      text: 'We combine planning, implementation, and weekly optimization cycles so campaigns improve with each sprint.',
+    },
+    {
+      title: 'Expected Outcomes',
+      text: 'You can expect clearer funnel visibility, stronger conversion quality, and more predictable growth decisions.',
+    },
+  ];
 
   return (
     <PageTransition>
@@ -589,8 +603,21 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
                   <CmsContentBlockView key={block._id || `${block.type}-${index}`} block={block} image={images[index]} index={index} />
                 ))
               ) : (
-                <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
-                  <p className="text-lg text-muted-foreground">This service does not include CMS content blocks yet.</p>
+                <div className="space-y-5">
+                  {generatedBlocks.map((entry, index) => (
+                    <motion.div
+                      key={entry.title}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ delay: Math.min(index * 0.06, 0.2) }}
+                      className="rounded-3xl border border-primary/12 bg-linear-to-br from-white to-primary/5 p-7 shadow-sm"
+                    >
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Service Brief</p>
+                      <h3 className="mt-2 font-display text-3xl font-bold text-foreground">{entry.title}</h3>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{entry.text}</p>
+                    </motion.div>
+                  ))}
                 </div>
               )}
             </div>

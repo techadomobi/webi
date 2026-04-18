@@ -105,6 +105,38 @@ const blogUseCases = [
   'Evergreen insight libraries with quarterly refresh plans',
 ];
 
+function buildGeneratedSections(post: {
+  title: string;
+  excerpt: string;
+  category?: string;
+  focusKeyphrase?: string;
+  tags?: string[];
+}) {
+  const topic = post.focusKeyphrase || post.category || 'digital growth';
+  const topTags = (post.tags || []).slice(0, 3).join(', ');
+
+  return [
+    {
+      title: 'Context and Opportunity',
+      text: `${post.excerpt || 'This article explains a practical growth topic in depth.'} This topic is especially relevant for teams building momentum in ${topic.toLowerCase()}.`,
+    },
+    {
+      title: 'Practical Framework',
+      text: `Use this article as a blueprint: define your objective, map audience intent, choose channels intentionally, and iterate weekly based on measurable outcomes.`,
+    },
+    {
+      title: 'Execution Checklist',
+      text: `Start with baseline metrics, ship one focused experiment, document what changed, and then scale only the tactics that improve conversion quality.`,
+    },
+    {
+      title: 'What to Do Next',
+      text: topTags
+        ? `If this topic aligns with your goals, expand into adjacent areas such as ${topTags} and convert insights into a 90-day execution plan.`
+        : `If this topic aligns with your goals, convert these insights into a 90-day execution plan tied to business KPIs.`,
+    },
+  ];
+}
+
 function ContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
   if (block.type === 'image') {
     const resolvedImage = image;
@@ -194,6 +226,12 @@ export default function BlogDetail() {
 
   const post = directPost ?? canonicalPost ?? fallbackPost ?? null;
   const isLoading = directLoading || (!directPost && (fallbackLoading || (needsCanonicalFetch && canonicalLoading)));
+  const { data: relatedPostsData } = useQuery({
+    queryKey: ['cms', 'blogs', 'related-list'],
+    queryFn: () => fetchCmsList('blogs'),
+    enabled: Boolean(post?.slug),
+    staleTime: 5 * 60 * 1000,
+  });
   const { scrollYProgress } = useScroll();
   const heroOrbY = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const heroImageY = useTransform(scrollYProgress, [0, 1], [0, -45]);
@@ -264,6 +302,10 @@ export default function BlogDetail() {
 
   const images = post.images?.length ? post.images : post.coverImage ? [post.coverImage] : [];
   const blocks = post.content ?? [];
+  const generatedSections = buildGeneratedSections(post);
+  const relatedPosts = (relatedPostsData ?? [])
+    .filter(item => normalizeSlug(item.slug) !== normalizeSlug(post.slug))
+    .slice(0, 3);
 
   return (
     <PageTransition>
@@ -415,8 +457,21 @@ export default function BlogDetail() {
                   </motion.div>
                 ))
               ) : (
-                <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
-                  <p className="text-lg text-muted-foreground">This CMS entry has no content blocks yet.</p>
+                <div className="space-y-5">
+                  {generatedSections.map((section, index) => (
+                    <motion.div
+                      key={section.title}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ delay: Math.min(index * 0.06, 0.2) }}
+                      className="rounded-3xl border border-primary/12 bg-linear-to-br from-white to-primary/5 p-7 shadow-sm"
+                    >
+                      <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Editorial Note</p>
+                      <h3 className="mt-2 font-display text-3xl font-bold text-foreground">{section.title}</h3>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{section.text}</p>
+                    </motion.div>
+                  ))}
                 </div>
               )}
             </div>
@@ -472,6 +527,58 @@ export default function BlogDetail() {
               </div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-primary/15 bg-white py-16 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-10 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Continue Reading</p>
+              <h2 className="mt-2 font-display text-4xl font-bold md:text-5xl">Related Insights</h2>
+            </div>
+            <Link href="/blogs">
+              <Button variant="outline" className="rounded-full border-2 border-primary/20 text-primary hover:border-primary hover:bg-primary hover:text-white">
+                View All Blogs
+              </Button>
+            </Link>
+          </div>
+
+          {relatedPosts.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-3">
+              {relatedPosts.map((item, index) => (
+                <motion.article
+                  key={item._id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.06 }}
+                  className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm"
+                >
+                  <div className="relative h-44 overflow-hidden">
+                    <img src={item.coverImage || '/decor/blog-orbit.svg'} alt={item.title} className="h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/20 to-transparent" />
+                    <p className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground">
+                      {item.category || 'CMS Blog'}
+                    </p>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="line-clamp-2 font-display text-2xl font-bold text-foreground">{item.title}</h3>
+                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                      {item.excerpt || 'Open this article to explore the full CMS-powered content experience.'}
+                    </p>
+                    <Link href={`/blogs/${encodeURIComponent(item.slug)}`}>
+                      <Button className="mt-5 h-10 rounded-full bg-gradient-brand px-5 text-white">Read Article</Button>
+                    </Link>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-3xl border border-dashed border-primary/20 bg-secondary/20 p-8 text-center text-muted-foreground">
+              More related insights will appear here as additional posts are published.
+            </div>
+          )}
         </div>
       </section>
 
