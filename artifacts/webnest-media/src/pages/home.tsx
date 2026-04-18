@@ -261,11 +261,13 @@ export default function Home() {
                 animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.04, 1] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <img
-                src={heroImg}
-                alt="Abstract digital growth"
-                className="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
-              />
+              <div className="relative z-10 overflow-hidden rounded-[1.7rem] bg-linear-to-br from-[#d9d4f2] via-[#dbe2f7] to-[#e3d8f1] p-0.5 shadow-2xl">
+                <img
+                  src={heroImg}
+                  alt="Abstract digital growth"
+                  className="block w-full rounded-2xl object-cover aspect-4/3 ring-1 ring-white/45"
+                />
+              </div>
 
               {/* Floating stat card 1 */}
               <motion.div

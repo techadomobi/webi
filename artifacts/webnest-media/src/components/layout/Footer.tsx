@@ -64,7 +64,7 @@ export default function Footer() {
 className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
 sm:h-30 
 md:h-30 
-lg:h-40 mb-1.5"                />
+lg:h-40"                />
               </Link>
               <p className="text-[18px] font-semibold leading-none text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">

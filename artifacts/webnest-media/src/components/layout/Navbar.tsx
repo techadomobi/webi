@@ -55,8 +55,10 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WeeoMedia"
-            className="block h-10 w-auto max-w-45 object-contain object-center transition-transform duration-300 group-hover:scale-[1.02] sm:h-12 sm:max-w-55 md:h-14 md:max-w-65 lg:h-16 lg:max-w-none"
-          />
+className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
+sm:h-30 
+md:h-30 
+lg:h-40 "          />
         </Link>
 
         {/* Desktop Nav */}
