@@ -46,7 +46,11 @@ function normalizeSlug(value: string) {
 function buildPostAliases(post: { slug: string; title: string }) {
   const aliases = new Set<string>();
   aliases.add(normalizeSlug(post.slug));
-  aliases.add(normalizeSlug(decodeURIComponent(post.slug)));
+  try {
+    aliases.add(normalizeSlug(decodeURIComponent(post.slug)));
+  } catch {
+    aliases.add(normalizeSlug(post.slug));
+  }
   aliases.add(normalizeSlug(post.title));
   return aliases;
 }
@@ -176,8 +180,20 @@ export default function BlogDetail() {
     );
   }, [fallbackPosts, slug]);
 
-  const post = directPost ?? fallbackPost ?? null;
-  const isLoading = directLoading || (!directPost && fallbackLoading);
+  const needsCanonicalFetch =
+    Boolean(fallbackPost?.slug) &&
+    normalizeSlug(fallbackPost?.slug ?? '') !== normalizeSlug(slug) &&
+    !directPost;
+
+  const { data: canonicalPost, isLoading: canonicalLoading } = useQuery({
+    queryKey: ['cms', 'blog', 'canonical', fallbackPost?.slug],
+    queryFn: () => fetchCmsEntry('blogs', fallbackPost?.slug ?? ''),
+    enabled: needsCanonicalFetch,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const post = directPost ?? canonicalPost ?? fallbackPost ?? null;
+  const isLoading = directLoading || (!directPost && (fallbackLoading || (needsCanonicalFetch && canonicalLoading)));
   const { scrollYProgress } = useScroll();
   const heroOrbY = useTransform(scrollYProgress, [0, 1], [0, -90]);
   const heroImageY = useTransform(scrollYProgress, [0, 1], [0, -45]);
