@@ -1,7 +1,20 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, CalendarDays, CheckCircle2, Clock, LineChart, Megaphone, PenSquare, Sparkles, Tag, UserRound, Image as ImageIcon, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  ArrowLeft,
+  CalendarDays,
+  CheckCircle2,
+  Clock,
+  Image as ImageIcon,
+  LineChart,
+  Megaphone,
+  PenSquare,
+  Sparkles,
+  Tag,
+  UserRound,
+  Zap,
+} from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 
 import PageTransition from '@/components/layout/PageTransition';
@@ -43,113 +56,85 @@ function normalizeSlug(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
-function buildPostAliases(post: { slug: string; title: string }) {
+function buildAliases(post: { slug: string; title: string }) {
   const aliases = new Set<string>();
   aliases.add(normalizeSlug(post.slug));
+  aliases.add(normalizeSlug(post.title));
+
   try {
     aliases.add(normalizeSlug(decodeURIComponent(post.slug)));
   } catch {
     aliases.add(normalizeSlug(post.slug));
   }
-  aliases.add(normalizeSlug(post.title));
+
   return aliases;
 }
 
-const editorialStages = [
+const editorialSteps = [
   {
-    title: 'Research Intent Mapping',
-    detail: 'We map audience questions, search intent, and conversion goals before drafting so every article has a clear job to do.',
+    title: 'Research and Intent',
+    detail: 'Map what readers need to know before they trust the page or take action.',
     icon: LineChart,
   },
   {
-    title: 'Narrative Structure',
-    detail: 'The article is outlined to keep readers moving from curiosity to clarity, with natural transition points and retention hooks.',
+    title: 'Structure and Flow',
+    detail: 'Build the narrative with a strong opening, readable sections, and clear transitions.',
     icon: PenSquare,
   },
   {
-    title: 'Distribution Readiness',
-    detail: 'Each post is packaged with headline options, metadata, and repurposing opportunities for organic and paid channels.',
+    title: 'Distribution and Conversion',
+    detail: 'Prepare the post for search, social, and CTA placement so it supports growth goals.',
     icon: Megaphone,
   },
 ];
 
-const blogImpactSignals = [
+const valueSignals = [
+  { metric: '2.8x', label: 'topic authority growth' },
+  { metric: '41%', label: 'better engaged read depth' },
+  { metric: '34%', label: 'higher assisted conversions' },
+  { metric: 'Weekly', label: 'content optimization rhythm' },
+];
+
+const useCases = [
+  'Founder-led thought leadership',
+  'SEO content hubs for services',
+  'Sales enablement articles',
+  'Product education and retention',
+  'Local market expansion content',
+  'Evergreen knowledge libraries',
+];
+
+const generatedSectionTemplates = [
   {
-    metric: '2.8x',
-    label: 'Long-tail visibility growth',
-    detail: 'Structured content hubs create stronger topic authority over time.',
+    title: 'Context and Opportunity',
+    body: 'This article is designed to answer a practical question and turn it into a repeatable marketing asset. The goal is to make the content easy to consume while still deep enough to support real decision-making.',
   },
   {
-    metric: '41%',
-    label: 'Avg. engaged read depth',
-    detail: 'Clear sections and supporting media improve attention quality.',
+    title: 'Practical Framework',
+    body: 'Use this page as a template: define the objective, explain the topic simply, show a step-by-step process, and end with a conversion path that makes the next action obvious.',
   },
   {
-    metric: '34%',
-    label: 'Higher assisted conversions',
-    detail: 'Educational content supports decisions across longer buying cycles.',
+    title: 'Execution Checklist',
+    body: 'Make sure each article includes a strong hero, a readable article body, supporting proof, and a useful call to action. If content blocks are missing, replace them with editorial sections like these.',
   },
   {
-    metric: 'Weekly',
-    label: 'Publishing iteration rhythm',
-    detail: 'Fast learning loops help teams keep winning topics in motion.',
+    title: 'What to Do Next',
+    body: 'If this topic matches your goals, build adjacent content around the same theme and connect it to a service or consultation step so the page does more than just inform.',
   },
 ];
 
-const blogUseCases = [
-  'Thought leadership campaigns for founder-led brands',
-  'SEO-led content hubs for service categories',
-  'Sales-enablement article systems for long-cycle deals',
-  'Product education flows tied to onboarding and retention',
-  'Localized content programs for new market expansion',
-  'Evergreen insight libraries with quarterly refresh plans',
-];
-
-function buildGeneratedSections(post: {
-  title: string;
-  excerpt: string;
-  category?: string;
-  focusKeyphrase?: string;
-  tags?: string[];
-}) {
-  const topic = post.focusKeyphrase || post.category || 'digital growth';
-  const topTags = (post.tags || []).slice(0, 3).join(', ');
-
-  return [
-    {
-      title: 'Context and Opportunity',
-      text: `${post.excerpt || 'This article explains a practical growth topic in depth.'} This topic is especially relevant for teams building momentum in ${topic.toLowerCase()}.`,
-    },
-    {
-      title: 'Practical Framework',
-      text: `Use this article as a blueprint: define your objective, map audience intent, choose channels intentionally, and iterate weekly based on measurable outcomes.`,
-    },
-    {
-      title: 'Execution Checklist',
-      text: `Start with baseline metrics, ship one focused experiment, document what changed, and then scale only the tactics that improve conversion quality.`,
-    },
-    {
-      title: 'What to Do Next',
-      text: topTags
-        ? `If this topic aligns with your goals, expand into adjacent areas such as ${topTags} and convert insights into a 90-day execution plan.`
-        : `If this topic aligns with your goals, convert these insights into a 90-day execution plan tied to business KPIs.`,
-    },
-  ];
-}
-
-function ContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
+function ArticleBlock({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
   if (block.type === 'image') {
-    const resolvedImage = image;
-
     return (
-      <Card className="gradient-border-animated overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
-        {resolvedImage ? (
-          <img src={resolvedImage} alt="CMS content block" className="h-72 w-full object-cover" />
+      <Card className="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-sm">
+        {image ? (
+          <img src={image} alt="CMS content block" className="h-72 w-full object-cover" />
         ) : (
-          <div className="flex h-72 items-center justify-center bg-secondary/40 text-muted-foreground">
+          <div className="flex h-72 items-center justify-center bg-linear-to-br from-[#081526] via-[#10243f] to-[#183a63] text-white">
             <div className="text-center">
-              <ImageIcon className="mx-auto mb-3 h-8 w-8" />
-              <p className="text-sm font-medium">Image block {index + 1}</p>
+              <ImageIcon className="mx-auto mb-3 h-8 w-8 text-primary" />
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Image block {index + 1}</p>
+              <p className="mt-2 text-sm text-white/75">Add a visual to support the story.</p>
             </div>
           </div>
         )}
@@ -158,15 +143,13 @@ function ContentBlockView({ block, image, index }: { block: CmsContentBlock; ima
   }
 
   const html = typeof block.text === 'string' ? block.text : '';
-  const plainText = stripHtml(html);
-
-  if (!plainText) {
+  if (!stripHtml(html)) {
     return null;
   }
 
   return (
     <div
-      className="prose prose-slate max-w-none rounded-3xl border border-gray-100 bg-white p-6 shadow-sm md:p-8 prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
+      className="prose prose-slate max-w-none rounded-3xl border border-primary/10 bg-white p-6 shadow-sm md:p-8 prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -200,22 +183,13 @@ export default function BlogDetail() {
   });
 
   const fallbackPost = useMemo(() => {
-    if (!slug || !fallbackPosts?.length) {
-      return null;
-    }
+    if (!slug || !fallbackPosts?.length) return null;
 
     const normalizedSlug = normalizeSlug(slug);
-
-    return (
-      fallbackPosts.find(item => buildPostAliases(item).has(normalizedSlug)) ??
-      fallbackPosts.find(item => encodeURIComponent(item.slug).toLowerCase() === slug.toLowerCase())
-    );
+    return fallbackPosts.find(item => buildAliases(item).has(normalizedSlug)) ?? null;
   }, [fallbackPosts, slug]);
 
-  const needsCanonicalFetch =
-    Boolean(fallbackPost?.slug) &&
-    normalizeSlug(fallbackPost?.slug ?? '') !== normalizeSlug(slug) &&
-    !directPost;
+  const needsCanonicalFetch = Boolean(fallbackPost?.slug) && !directPost && normalizeSlug(fallbackPost?.slug ?? '') !== normalizeSlug(slug);
 
   const { data: canonicalPost, isLoading: canonicalLoading } = useQuery({
     queryKey: ['cms', 'blog', 'canonical', fallbackPost?.slug],
@@ -226,15 +200,19 @@ export default function BlogDetail() {
 
   const post = directPost ?? canonicalPost ?? fallbackPost ?? null;
   const isLoading = directLoading || (!directPost && (fallbackLoading || (needsCanonicalFetch && canonicalLoading)));
+
   const { data: relatedPostsData } = useQuery({
     queryKey: ['cms', 'blogs', 'related-list'],
     queryFn: () => fetchCmsList('blogs'),
-    enabled: Boolean(post?.slug),
+    enabled: Boolean(post),
     staleTime: 5 * 60 * 1000,
   });
-  const { scrollYProgress } = useScroll();
-  const heroOrbY = useTransform(scrollYProgress, [0, 1], [0, -90]);
-  const heroImageY = useTransform(scrollYProgress, [0, 1], [0, -45]);
+
+  const [heroImageFailed, setHeroImageFailed] = useState(false);
+
+  useEffect(() => {
+    setHeroImageFailed(false);
+  }, [post?.slug]);
 
   if (!slug) {
     return (
@@ -257,7 +235,7 @@ export default function BlogDetail() {
       <PageTransition>
         <section className="pt-28 pb-24">
           <div className="container mx-auto px-4">
-            <div className="animate-pulse overflow-hidden border border-gray-100 bg-white shadow-sm" style={{ borderRadius: '2rem' }}>
+            <div className="animate-pulse overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-sm">
               <div className="grid gap-0 lg:grid-cols-2">
                 <div className="h-80 bg-secondary/50 lg:h-full" />
                 <div className="space-y-4 p-8 md:p-12">
@@ -300,20 +278,21 @@ export default function BlogDetail() {
     );
   }
 
+  const contentBlocks = post.content ?? [];
   const images = post.images?.length ? post.images : post.coverImage ? [post.coverImage] : [];
-  const blocks = post.content ?? [];
-  const generatedSections = buildGeneratedSections(post);
-  const relatedPosts = (relatedPostsData ?? [])
-    .filter(item => normalizeSlug(item.slug) !== normalizeSlug(post.slug))
-    .slice(0, 3);
+  const relatedPosts = (relatedPostsData ?? []).filter(item => normalizeSlug(item.slug) !== normalizeSlug(post.slug)).slice(0, 3);
+  const generatedSections = generatedSectionTemplates.map(section => ({
+    ...section,
+    body: section.body.replace('This article', post.excerpt || 'This article').replace('the same theme', post.focusKeyphrase || post.category || 'this topic'),
+  }));
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden border-b border-primary/20 bg-linear-to-b from-[#f7f5ff] via-white to-[#fff4f8] pt-24 pb-16 lg:pt-32 lg:pb-20">
-        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
-        <motion.div style={{ y: heroOrbY }} className="pointer-events-none absolute -left-16 top-16 h-72 w-72 rounded-full bg-primary/20 blur-[90px]" />
-        <motion.div style={{ y: heroOrbY }} className="pointer-events-none absolute -right-10 bottom-8 h-64 w-64 rounded-full bg-pink-400/20 blur-[90px]" />
+      <section className="relative overflow-hidden border-b border-primary/20 bg-linear-to-b from-[#f7f5ff] via-white to-[#fff4f8] pt-16 pb-12 lg:pt-20 lg:pb-16">
+        <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-secondary/20" />
+        <div className="pointer-events-none absolute left-6 top-6 h-40 w-40 rounded-full bg-primary/12 blur-3xl" />
+        <div className="pointer-events-none absolute right-0 top-24 h-56 w-56 rounded-full bg-pink-400/12 blur-3xl" />
         <div className="container relative z-10 mx-auto px-4">
           <Link href="/blogs" className="mb-6 inline-flex">
             <Button variant="outline" className="rounded-full border-2 border-primary/20 bg-white/90 text-primary hover:border-primary hover:bg-primary hover:text-white">
@@ -321,7 +300,7 @@ export default function BlogDetail() {
             </Button>
           </Link>
 
-          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             <div>
               <div className="mb-5 flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground">
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-primary">
@@ -337,14 +316,16 @@ export default function BlogDetail() {
                   {post.writerName || CMS_WEBSITE_NAME}
                 </span>
               </div>
-              <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="max-w-5xl font-display text-5xl font-black leading-[1.04] md:text-7xl">
+
+              <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="max-w-5xl font-display text-5xl font-black leading-[1.04] md:text-7xl">
                 {post.title}
               </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+
+              <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
                 {post.excerpt}
               </motion.p>
 
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-8 flex flex-wrap gap-3">
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-8 flex flex-wrap gap-3">
                 <Link href="/contact">
                   <Button className="h-12 rounded-full bg-gradient-brand px-6 text-white shadow-lg hover:shadow-xl">Talk to Us</Button>
                 </Link>
@@ -364,20 +345,47 @@ export default function BlogDetail() {
                   ))}
                 </div>
               ) : null}
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {[
+                  { label: 'Read time', value: '7 min' },
+                  { label: 'Focus', value: post.category || 'CMS Blog' },
+                  { label: 'Format', value: 'Long-form guide' },
+                ].map(item => (
+                  <div key={item.label} className="rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary/70">{item.label}</p>
+                    <p className="mt-2 text-lg font-semibold text-foreground">{item.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden border border-white/60 bg-white shadow-2xl" style={{ borderRadius: '2rem', y: heroImageY }}>
-              {post.coverImage ? (
-                <img src={post.coverImage} alt={post.title} className="h-full w-full object-cover" style={{ minHeight: 360 }} />
+            <div className="overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl">
+              {post.coverImage && !heroImageFailed ? (
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="h-full min-h-90 w-full object-cover"
+                  onError={() => setHeroImageFailed(true)}
+                />
               ) : (
-                <div className="flex items-center justify-center bg-gradient-brand p-10 text-center text-white" style={{ minHeight: 360 }}>
-                  <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/80">CMS Article</p>
-                    <h2 className="mt-4 font-display text-3xl font-bold">{post.title}</h2>
+                <div className="min-h-90 bg-linear-to-br from-[#081526] via-[#10243f] to-[#183a63] p-10 text-white">
+                  <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/70">Featured Insight</p>
+                  <h2 className="mt-4 font-display text-3xl font-bold leading-tight">{post.title}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-white/80">
+                    {post.focusKeyphrase || post.excerpt || 'Practical growth guidance from the WebNest editorial team.'}
+                  </p>
+                  <div className="mt-6 space-y-3">
+                    {['Clear strategic context', 'Actionable execution breakdown', 'Conversion-focused recommendations'].map(item => (
+                      <div key={item} className="flex items-center gap-2 text-sm text-white/90">
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        {item}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -393,19 +401,21 @@ export default function BlogDetail() {
                 'Design-led editorial experience',
                 'Stronger conversion pathways',
                 'Share-worthy content architecture',
-              ].concat([
-                'Story-first content structure',
-                'SEO intent and readability aligned',
-                'CMS-driven publishing speed',
-                'Design-led editorial experience',
-                'Stronger conversion pathways',
-                'Share-worthy content architecture',
-              ]).map((item, idx) => (
-                <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
-                  <Zap className="h-3.5 w-3.5 text-primary" />
-                  {item}
-                </div>
-              ))}
+              ]
+                .concat([
+                  'Story-first content structure',
+                  'SEO intent and readability aligned',
+                  'CMS-driven publishing speed',
+                  'Design-led editorial experience',
+                  'Stronger conversion pathways',
+                  'Share-worthy content architecture',
+                ])
+                .map((item, idx) => (
+                  <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
+                    <Zap className="h-3.5 w-3.5 text-primary" />
+                    {item}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -413,72 +423,55 @@ export default function BlogDetail() {
 
       <section className="bg-white py-16 md:py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
-          >
+          <div className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3">
             <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
               <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
                 <Sparkles className="h-4 w-4" />
               </div>
               <p className="text-sm font-semibold text-foreground">Editorial Design Quality</p>
-              <p className="mt-1 text-xs text-muted-foreground">Every block is structured for readability and depth.</p>
+              <p className="mt-1 text-xs text-muted-foreground">Readable, structured, and easy to scan.</p>
             </div>
             <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
               <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
                 <Clock className="h-4 w-4" />
               </div>
               <p className="text-sm font-semibold text-foreground">Fast Publishing Operations</p>
-              <p className="mt-1 text-xs text-muted-foreground">Content updates flow directly from your CMS backend.</p>
+              <p className="mt-1 text-xs text-muted-foreground">New articles can go live without frontend edits.</p>
             </div>
             <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
               <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">
                 <Tag className="h-4 w-4" />
               </div>
               <p className="text-sm font-semibold text-foreground">SEO-Ready Metadata</p>
-              <p className="mt-1 text-xs text-muted-foreground">Category, keyword, and meta data stay visible and useful.</p>
+              <p className="mt-1 text-xs text-muted-foreground">Categories, keywords, and metadata stay visible.</p>
             </div>
-          </motion.div>
+          </div>
 
           <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-start">
             <div className="space-y-6">
-              {blocks.length > 0 ? (
-                blocks.map((block, index) => (
-                  <motion.div
-                    key={block._id || `${block.type}-${index}`}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.25 }}
-                    transition={{ delay: Math.min(index * 0.04, 0.35), duration: 0.4 }}
-                  >
-                    <ContentBlockView block={block} image={images[index]} index={index} />
-                  </motion.div>
+              {contentBlocks.length > 0 ? (
+                contentBlocks.map((block, index) => (
+                  <ArticleBlock key={block._id || `${block.type}-${index}`} block={block} image={images[index]} index={index} />
                 ))
               ) : (
                 <div className="space-y-5">
-                  {generatedSections.map((section, index) => (
-                    <motion.div
-                      key={section.title}
-                      initial={{ opacity: 0, y: 14 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{ delay: Math.min(index * 0.06, 0.2) }}
-                      className="rounded-3xl border border-primary/12 bg-linear-to-br from-white to-primary/5 p-7 shadow-sm"
-                    >
+                  {generatedSectionTemplates.map((section, index) => (
+                    <div key={section.title} className="rounded-3xl border border-primary/10 bg-linear-to-br from-white to-primary/5 p-7 shadow-sm">
                       <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Editorial Note</p>
                       <h3 className="mt-2 font-display text-3xl font-bold text-foreground">{section.title}</h3>
-                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{section.text}</p>
-                    </motion.div>
+                      <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                        {section.title === 'What to Do Next' && post.tags?.length
+                          ? `${section.body} Connect this article to ${post.tags.slice(0, 3).join(', ')} and a clear service CTA.`
+                          : section.body}
+                      </p>
+                    </div>
                   ))}
                 </div>
               )}
             </div>
 
             <aside className="space-y-6 lg:sticky lg:top-28">
-              <Card className="rounded-3xl border border-gray-100 bg-secondary/30 shadow-sm">
-                <CardContent className="p-6">
+              <div className="rounded-3xl border border-primary/10 bg-secondary/30 p-6 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Article Details</p>
                 <div className="mt-5 space-y-4 text-sm text-muted-foreground">
                   <div>
@@ -498,21 +491,18 @@ export default function BlogDetail() {
                     <p>{post.metaDescription || 'Not provided'}</p>
                   </div>
                 </div>
-                </CardContent>
-              </Card>
+              </div>
 
-              <Card className="rounded-3xl border border-gray-100 bg-white shadow-sm">
-                <CardContent className="p-6">
+              <div className="rounded-3xl border border-primary/10 bg-white p-6 shadow-sm">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">SEO Keywords</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {(post.seoKeywords || []).slice(0, 12).map(keyword => (
-                    <Badge key={keyword} variant="secondary" className="rounded-full px-3 py-1 text-xs font-medium text-foreground">
+                    <span key={keyword} className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-foreground">
                       {keyword}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
-                </CardContent>
-              </Card>
+              </div>
 
               <div className="rounded-3xl border border-primary/15 bg-[#081526] p-6 text-white shadow-xl">
                 <p className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">Need this on your site?</p>
@@ -553,7 +543,7 @@ export default function BlogDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.06 }}
-                  className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm"
+                  className="overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-sm"
                 >
                   <div className="relative h-44 overflow-hidden">
                     <img src={item.coverImage || '/decor/blog-orbit.svg'} alt={item.title} className="h-full w-full object-cover" />
@@ -593,23 +583,17 @@ export default function BlogDetail() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {editorialStages.map((stage, idx) => {
-              const Icon = stage.icon;
+            {editorialSteps.map((step, index) => {
+              const Icon = step.icon;
+
               return (
-                <motion.div
-                  key={stage.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.08 }}
-                  className="rounded-3xl border border-primary/15 bg-white p-6 shadow-lg shadow-primary/5"
-                >
+                <div key={step.title} className="rounded-3xl border border-primary/15 bg-white p-6 shadow-lg shadow-primary/5">
                   <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <p className="text-lg font-semibold text-foreground">{stage.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{stage.detail}</p>
-                </motion.div>
+                  <p className="text-lg font-semibold text-foreground">{step.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.detail}</p>
+                </div>
               );
             })}
           </div>
@@ -618,31 +602,20 @@ export default function BlogDetail() {
 
       <section className="bg-white py-20 md:py-24">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10 grid gap-4 rounded-3xl border border-primary/20 bg-linear-to-r from-primary/10 via-white to-pink-500/12 p-5 md:grid-cols-4 shadow-lg shadow-primary/5"
-          >
-            {blogImpactSignals.map((signal, idx) => (
+          <div className="mb-10 grid gap-4 rounded-3xl border border-primary/20 bg-linear-to-r from-primary/10 via-white to-pink-500/12 p-5 md:grid-cols-4 shadow-lg shadow-primary/5">
+            {valueSignals.map(signal => (
               <div key={signal.label} className="rounded-2xl border border-primary/10 bg-white p-4 shadow-md shadow-primary/5">
                 <p className="font-display text-3xl font-black text-gradient">{signal.metric}</p>
                 <p className="mt-1 text-sm font-semibold text-foreground">{signal.label}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{signal.detail}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
 
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="rounded-3xl border border-primary/15 bg-white p-7 shadow-lg shadow-primary/5"
-            >
+            <div className="rounded-3xl border border-primary/15 bg-white p-7 shadow-lg shadow-primary/5">
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Where This Content Model Wins</p>
               <div className="grid gap-3 md:grid-cols-2">
-                {blogUseCases.map((item, idx) => (
+                {useCases.map((item, idx) => (
                   <div key={item} className="rounded-2xl border border-primary/10 bg-linear-to-br from-white to-primary/5 p-4">
                     <div className="mb-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/14 text-xs font-bold text-primary">
                       {idx + 1}
@@ -651,14 +624,9 @@ export default function BlogDetail() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="rounded-3xl border border-primary/30 bg-linear-to-br from-[#071124] via-[#0c1f3a] to-[#102b4d] p-7 text-white shadow-2xl"
-            >
+            <div className="rounded-3xl border border-primary/30 bg-linear-to-br from-[#071124] via-[#0c1f3a] to-[#102b4d] p-7 text-white shadow-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Long-Form Advantage</p>
               <h3 className="mt-3 font-display text-3xl font-bold">Deeper Pages Convert Better</h3>
               <p className="mt-4 text-sm leading-relaxed text-white/80">
@@ -677,7 +645,7 @@ export default function BlogDetail() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -687,7 +655,7 @@ export default function BlogDetail() {
         <div className="pointer-events-none absolute -left-10 top-10 h-64 w-64 rounded-full bg-primary/20 blur-[100px]" />
         <div className="pointer-events-none absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-pink-400/20 blur-[100px]" />
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-3xl">
             <Sparkles className="mx-auto mb-4 h-8 w-8 text-primary" />
             <h2 className="font-display text-4xl font-black md:text-6xl">Want Blog Pages This Detailed for Your Brand?</h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-white/80">
@@ -695,9 +663,7 @@ export default function BlogDetail() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/contact">
-                <Button className="h-12 rounded-full bg-gradient-brand px-7 text-white shadow-lg hover:shadow-xl">
-                  Start a Project
-                </Button>
+                <Button className="h-12 rounded-full bg-gradient-brand px-7 text-white shadow-lg hover:shadow-xl">Start a Project</Button>
               </Link>
               <Link href="/services">
                 <Button variant="outline" className="h-12 rounded-full border-2 border-white/35 px-7 text-white hover:border-white hover:bg-white hover:text-foreground">
@@ -705,7 +671,7 @@ export default function BlogDetail() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </PageTransition>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import {
   ArrowRight,
@@ -19,6 +19,11 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { CMS_WEBSITE_NAME, fetchCmsEntry, type CmsContentBlock } from '@/lib/cms-api';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+};
 
 type ServiceDetail = {
   title: string;
@@ -492,6 +497,7 @@ function CmsContentBlockView({ block, image, index }: { block: CmsContentBlock; 
 function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<ReturnType<typeof fetchCmsEntry>>>; onBack: string }) {
   const images = service.images?.length ? service.images : service.coverImage ? [service.coverImage] : [];
   const blocks = service.content ?? [];
+  const [heroImageFailed, setHeroImageFailed] = useState(false);
   const generatedBlocks = [
     {
       title: 'Business Context',
@@ -507,11 +513,17 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
     },
   ];
 
+  useEffect(() => {
+    setHeroImageFailed(false);
+  }, [service.coverImage]);
+
   return (
     <PageTransition>
       <section className="relative overflow-hidden border-b border-primary/20 bg-linear-to-b from-[#f7f5ff] via-white to-[#fff4f8] pt-24 pb-16 lg:pt-32 lg:pb-20">
         <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
+        <motion.div animate={{ y: [0, -16, 0] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} className="pointer-events-none absolute -left-20 top-20 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
+        <motion.div animate={{ y: [0, 14, 0] }} transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }} className="pointer-events-none absolute right-0 top-32 h-72 w-72 rounded-full bg-pink-400/15 blur-3xl" />
         <div className="container relative z-10 mx-auto px-4">
           <Link href={onBack} className="mb-6 inline-flex">
             <GlowButton variant="outline" size="lg">Back to Services</GlowButton>
@@ -519,17 +531,17 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
 
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+              <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
                 {service.category || 'CMS Service'}
               </motion.p>
-              <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl md:text-7xl font-black mb-4 max-w-5xl leading-[1.04]">
+              <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="font-display text-5xl md:text-7xl font-black mb-4 max-w-5xl leading-[1.04]">
                 {service.title}
               </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-xl text-muted-foreground max-w-3xl">
+              <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.45 }} className="text-xl text-muted-foreground max-w-3xl">
                 {service.excerpt || service.focusKeyphrase || 'CMS-backed service content.'}
               </motion.p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.45 }} className="mt-8 flex flex-wrap gap-3">
                 <Link href="/contact">
                   <GlowButton variant="primary" size="lg">
                     Book Strategy Call <ArrowRight className="h-5 w-5" />
@@ -538,25 +550,38 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
                 <Link href="/services">
                   <GlowButton variant="outline" size="lg">All Services</GlowButton>
                 </Link>
-              </div>
+              </motion.div>
 
-              <div className="mt-8 flex flex-wrap gap-2">
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24, duration: 0.4 }} className="mt-8 flex flex-wrap gap-2">
                 {service.tags?.slice(0, 8).map(tag => (
                   <Badge key={tag} variant="secondary" className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
                     {tag}
                   </Badge>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden rounded-4xl border border-white/60 bg-white shadow-2xl">
-              {service.coverImage ? (
-                <img src={service.coverImage} alt={service.title} className="h-full min-h-90 w-full object-cover" />
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="overflow-hidden rounded-4xl border border-white/60 bg-white shadow-2xl">
+              {service.coverImage && !heroImageFailed ? (
+                <motion.img src={service.coverImage} alt={service.title} className="h-full min-h-90 w-full object-cover" onError={() => setHeroImageFailed(true)} whileHover={{ scale: 1.03 }} transition={{ duration: 0.45 }} />
               ) : (
-                <div className="flex min-h-90 items-center justify-center bg-gradient-brand p-10 text-center text-white">
-                  <div>
-                    <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/80">CMS Service</p>
-                    <h2 className="mt-4 font-display text-3xl font-bold">{service.title}</h2>
+                <div className="min-h-90 bg-linear-to-br from-[#081526] via-[#10243f] to-[#183a63] p-10 text-white">
+                  <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/70">Service Snapshot</p>
+                  <h2 className="mt-4 font-display text-3xl font-bold leading-tight">{service.title}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-white/80">
+                    {service.excerpt || service.focusKeyphrase || 'A strategy-led service page with clear execution structure and measurable outcomes.'}
+                  </p>
+                  <div className="mt-6 space-y-2">
+                    {[
+                      'Structured execution model',
+                      'Weekly optimization rhythm',
+                      'Business KPI alignment',
+                    ].map(item => (
+                      <div key={item} className="flex items-center gap-2 text-sm text-white/90">
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        {item}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
@@ -892,7 +917,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="py-20 bg-white/90 backdrop-blur-sm">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-20 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-7 mb-14">
             {service.outcomes.map((outcome, idx) => (
@@ -904,7 +929,7 @@ export default function ServiceDetail() {
                 transition={{ delay: idx * 0.1 }}
                 className="h-full"
               >
-                <Card className="gradient-border-animated h-full rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg">
+                  <Card className="gradient-border-animated h-full rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg">
                   <CardContent className="p-6">
                     <BarChart3 className="mb-3 h-6 w-6 text-primary" />
                     <p className="font-semibold text-foreground">{outcome}</p>
@@ -939,9 +964,9 @@ export default function ServiceDetail() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-22 bg-secondary/25 border-y">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-22 bg-secondary/25 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Execution Model</p>
@@ -966,9 +991,9 @@ export default function ServiceDetail() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-22 bg-white/90 backdrop-blur-sm">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-22 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">FAQ</p>
@@ -994,9 +1019,9 @@ export default function ServiceDetail() {
             </Accordion>
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-24 bg-secondary/20 border-y">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-24 bg-secondary/20 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">90-Day Plan</p>
@@ -1030,9 +1055,9 @@ export default function ServiceDetail() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-24 bg-white">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
             <motion.div initial={{ opacity: 0, x: -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -1070,9 +1095,9 @@ export default function ServiceDetail() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-24 bg-secondary/20 border-y">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-24 bg-secondary/20 border-y">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Fit Scenarios</p>
@@ -1094,9 +1119,9 @@ export default function ServiceDetail() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-24 bg-white">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Engagement Models</p>
@@ -1132,9 +1157,9 @@ export default function ServiceDetail() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-24 bg-secondary/25 text-foreground relative overflow-hidden border-y border-primary/20">
+      <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-24 bg-secondary/25 text-foreground relative overflow-hidden border-y border-primary/20">
         <div className="absolute inset-0 bg-gradient-brand opacity-[0.06]" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <Sparkles className="h-8 w-8 text-primary mx-auto mb-4" />
@@ -1155,7 +1180,7 @@ export default function ServiceDetail() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
     </PageTransition>
   );
 }

@@ -61,8 +61,10 @@ export default function Footer() {
                 <img
                   src={brandLogo}
                   alt="WebNest Media"
-                  className="block h-16 md:h-20 lg:h-14 w-auto object-contain object-left transition-transform duration-300 hover:scale-105"
-                />
+className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
+sm:h-30 
+md:h-30 
+lg:h-40 mb-1.5"                />
               </Link>
               <p className="text-[18px] font-semibold leading-none text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">
@@ -147,14 +149,14 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
           aria-label="Chat on WhatsApp"
-          className="flex h-13 w-13 items-center justify-center rounded-full bg-primary text-white shadow-[0_10px_20px_rgba(124,58,237,0.35)] transition-transform duration-200 hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-[0_10px_20px_rgba(124,58,237,0.35)] transition-transform duration-200 hover:scale-105"
         >
           <MessageCircle className="h-6 w-6" />
         </a>
         <a
           href="tel:+916366666667"
           aria-label="Call now"
-          className="flex h-13 w-13 items-center justify-center rounded-full bg-[#ec4899] text-white shadow-[0_10px_20px_rgba(236,72,153,0.35)] transition-transform duration-200 hover:scale-105"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ec4899] text-white shadow-[0_10px_20px_rgba(236,72,153,0.35)] transition-transform duration-200 hover:scale-105"
         >
           <PhoneCall className="h-6 w-6" />
         </a>

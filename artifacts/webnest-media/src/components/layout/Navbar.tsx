@@ -55,7 +55,7 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WeeoMedia"
-            className="block h-16 w-75 max-w-none object-cover object-center transition-transform duration-300 group-hover:scale-[1.02] md:h-20 md:w-90"
+            className="block h-10 w-auto max-w-45 object-contain object-center transition-transform duration-300 group-hover:scale-[1.02] sm:h-12 sm:max-w-55 md:h-14 md:max-w-65 lg:h-16 lg:max-w-none"
           />
         </Link>
 
@@ -90,8 +90,8 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-205 rounded-2xl bg-white shadow-2xl border border-gray-100 overflow-hidden"
-                  style={{ left: '-200px', transform: 'none' }}
+                  className="absolute top-full left-1/2 mt-3 w-[min(82rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 rounded-2xl border border-gray-100 overflow-hidden bg-white shadow-2xl"
+                  style={{ transform: 'translateX(-50%)' }}
                 >
                   <div className="grid grid-cols-3 gap-0 divide-x divide-gray-100">
                     {/* Digital Marketing */}
