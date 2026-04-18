@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { Link, useLocation } from 'wouter';
 import {
   ArrowRight,
@@ -353,6 +354,76 @@ const serviceDetails: Record<string, ServiceDetail> = {
   },
 };
 
+const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
+  seo: 'seo',
+  'search-engine-optimization': 'seo',
+  'seo-services': 'seo',
+  'search-optimization': 'seo',
+  sem: 'sem',
+  ppc: 'sem',
+  'search-engine-marketing': 'sem',
+  'paid-search': 'sem',
+  'pay-per-click': 'sem',
+  'google-ads': 'sem',
+  smm: 'smm',
+  'social-media-marketing': 'smm',
+  'social-media-management': 'smm',
+  'social-media': 'smm',
+  web: 'web',
+  'web-development': 'web',
+  'website-development': 'web',
+  'website-design-development': 'web',
+  content: 'content',
+  'content-marketing': 'content',
+  'content-strategy': 'content',
+  'content-writing': 'content',
+  affiliate: 'affiliate',
+  'affiliate-marketing': 'affiliate',
+  mobile: 'mobile',
+  'mobile-marketing': 'mobile',
+  influencer: 'influencer',
+  'influencer-marketing': 'influencer',
+  sms: 'sms',
+  'sms-marketing': 'sms',
+  email: 'email',
+  'email-marketing': 'email',
+  crm: 'crm',
+  'crm-services': 'crm',
+  orm: 'orm',
+  'online-reputation-management': 'orm',
+  'reputation-management': 'orm',
+  brand: 'brand',
+  'brand-strategy': 'brand',
+  leads: 'leads',
+  'lead-generation': 'leads',
+  retention: 'retention',
+  'customer-retention': 'retention',
+  transformation: 'transformation',
+  'digital-transformation': 'transformation',
+  research: 'research',
+  'market-research': 'research',
+  'market-research-insights': 'research',
+};
+
+function normalizeSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function resolveServiceFromSlug(rawSlug: string): ServiceDetail | null {
+  const normalized = normalizeSlug(rawSlug);
+  if (!normalized) return null;
+
+  const byAlias = serviceSlugAliases[normalized];
+  if (byAlias) return serviceDetails[byAlias] ?? null;
+
+  return serviceDetails[normalized] ?? null;
+}
+
 function stripHtml(value: string) {
   return value
     .replace(/<[^>]*>/g, ' ')
@@ -555,8 +626,18 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
 
 export default function ServiceDetail() {
   const [location] = useLocation();
-  const slug = location.split('/')[2] ?? '';
-  const service = serviceDetails[slug];
+  const slug = useMemo(() => {
+    const cleanPath = location.split('?')[0].split('#')[0].replace(/\/+$/, '');
+    const raw = cleanPath.split('/')[2] ?? '';
+
+    try {
+      return decodeURIComponent(raw).trim();
+    } catch {
+      return raw.trim();
+    }
+  }, [location]);
+
+  const service = resolveServiceFromSlug(slug);
   const { data: cmsService, isLoading: cmsLoading } = useQuery({
     queryKey: ['cms', 'service', slug],
     queryFn: () => fetchCmsEntry('services', slug),

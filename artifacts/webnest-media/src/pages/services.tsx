@@ -15,6 +15,52 @@ const cardVariants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 260, damping: 24 } },
 };
 
+function normalizeSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const fallbackServices: CmsEntry[] = [
+  { _id: 'fallback-seo', slug: 'search-engine-optimization', title: 'Search Engine Optimization', excerpt: 'Rank for high-intent keywords and grow sustainable organic demand.', content: [], category: 'Digital Marketing', tags: ['SEO', 'Organic Growth'], writerName: 'WebNest Team' },
+  { _id: 'fallback-sem', slug: 'search-engine-marketing', title: 'Search Engine Marketing', excerpt: 'Capture intent-driven traffic with performance-first paid search campaigns.', content: [], category: 'Digital Marketing', tags: ['SEM', 'PPC'], writerName: 'WebNest Team' },
+  { _id: 'fallback-smm', slug: 'social-media-marketing', title: 'Social Media Marketing', excerpt: 'Build audience, engagement, and conversion with social-first strategy.', content: [], category: 'Digital Marketing', tags: ['SMM', 'Social'], writerName: 'WebNest Team' },
+  { _id: 'fallback-web', slug: 'web-development', title: 'Web Development', excerpt: 'Launch conversion-focused websites with strong UX and performance.', content: [], category: 'Digital Marketing', tags: ['Web', 'Development'], writerName: 'WebNest Team' },
+  { _id: 'fallback-content', slug: 'content-marketing', title: 'Content Marketing', excerpt: 'Create strategic content systems that drive visibility and trust.', content: [], category: 'Digital Marketing', tags: ['Content', 'SEO'], writerName: 'WebNest Team' },
+  { _id: 'fallback-affiliate', slug: 'affiliate-marketing', title: 'Affiliate Marketing', excerpt: 'Scale revenue through vetted partner and publisher channels.', content: [], category: 'Digital Marketing', tags: ['Affiliate', 'Growth'], writerName: 'WebNest Team' },
+  { _id: 'fallback-mobile', slug: 'mobile-marketing', title: 'Mobile Marketing', excerpt: 'Reach and convert mobile users with journey-based campaigns.', content: [], category: 'Promotions', tags: ['Mobile', 'Lifecycle'], writerName: 'WebNest Team' },
+  { _id: 'fallback-influencer', slug: 'influencer-marketing', title: 'Influencer Marketing', excerpt: 'Activate creator-led campaigns with measurable business outcomes.', content: [], category: 'Promotions', tags: ['Influencer', 'Creators'], writerName: 'WebNest Team' },
+  { _id: 'fallback-sms', slug: 'sms-marketing', title: 'SMS Marketing', excerpt: 'Drive immediate responses with compliant and personalized SMS programs.', content: [], category: 'Promotions', tags: ['SMS', 'Automation'], writerName: 'WebNest Team' },
+  { _id: 'fallback-email', slug: 'email-marketing', title: 'Email Marketing', excerpt: 'Build lifecycle email flows that improve retention and LTV.', content: [], category: 'Promotions', tags: ['Email', 'Retention'], writerName: 'WebNest Team' },
+  { _id: 'fallback-crm', slug: 'crm', title: 'CRM', excerpt: 'Connect sales and marketing workflows for cleaner conversion paths.', content: [], category: 'Promotions', tags: ['CRM', 'Automation'], writerName: 'WebNest Team' },
+  { _id: 'fallback-orm', slug: 'online-reputation-management', title: 'Online Reputation Management', excerpt: 'Protect and improve brand trust across search, social, and review channels.', content: [], category: 'Solutions', tags: ['ORM', 'Brand'], writerName: 'WebNest Team' },
+  { _id: 'fallback-brand', slug: 'brand-strategy', title: 'Brand Strategy', excerpt: 'Define clear positioning and messaging that improves conversion clarity.', content: [], category: 'Solutions', tags: ['Brand', 'Positioning'], writerName: 'WebNest Team' },
+  { _id: 'fallback-leads', slug: 'lead-generation', title: 'Lead Generation', excerpt: 'Design high-intent funnels to generate reliable pipeline growth.', content: [], category: 'Solutions', tags: ['Leads', 'Pipeline'], writerName: 'WebNest Team' },
+  { _id: 'fallback-retention', slug: 'customer-retention', title: 'Customer Retention', excerpt: 'Increase repeat behavior and customer lifetime value systematically.', content: [], category: 'Solutions', tags: ['Retention', 'LTV'], writerName: 'WebNest Team' },
+  { _id: 'fallback-transform', slug: 'digital-transformation', title: 'Digital Transformation', excerpt: 'Modernize workflows and remove bottlenecks with better systems.', content: [], category: 'Solutions', tags: ['Transformation', 'Operations'], writerName: 'WebNest Team' },
+  { _id: 'fallback-research', slug: 'market-research-insights', title: 'Market Research & Insights', excerpt: 'Use structured market intelligence to guide faster strategic decisions.', content: [], category: 'Solutions', tags: ['Research', 'Insights'], writerName: 'WebNest Team' },
+];
+
+function mergeServices(cmsItems: CmsEntry[]) {
+  const merged = new Map<string, CmsEntry>();
+
+  fallbackServices.forEach(item => {
+    merged.set(normalizeSlug(item.slug), item);
+  });
+
+  cmsItems.forEach(item => {
+    const normalized = normalizeSlug(item.slug || item.title || item._id);
+    if (normalized) {
+      merged.set(normalized, item);
+    }
+  });
+
+  return Array.from(merged.values());
+}
+
 function getCategories(items: CmsEntry[]) {
   return ['All', ...Array.from(new Set(items.map(item => item.category?.trim()).filter(Boolean) as string[]))];
 }
@@ -36,9 +82,10 @@ function filterItems(items: CmsEntry[], search: string, category: string) {
 
 function ServiceCard({ item }: { item: CmsEntry }) {
   const image = item.coverImage || '/decor/service-wave.svg';
+  const href = `/services/${encodeURIComponent(item.slug)}`;
 
   return (
-    <Link href={`/services/${item.slug}`}>
+    <Link href={href}>
       <motion.article
         variants={cardVariants}
         whileHover={{ y: -6, rotateX: 1.2 }}
@@ -147,7 +194,7 @@ export default function Services() {
     staleTime: 5 * 60 * 1000,
   });
 
-  const items = data ?? [];
+  const items = useMemo(() => mergeServices(data ?? []), [data]);
   const categories = useMemo(() => getCategories(items), [items]);
   const filtered = useMemo(() => filterItems(items, search, activeCategory), [items, search, activeCategory]);
   const featured = filtered[0] ?? items[0];
@@ -269,7 +316,7 @@ export default function Services() {
                     </div>
                     <p className="text-muted-foreground leading-relaxed md:text-lg">{featured.excerpt}</p>
                     <div className="mt-6 flex flex-wrap gap-3">
-                      <Link href={`/services/${featured.slug}`}>
+                      <Link href={`/services/${encodeURIComponent(featured.slug)}`}>
                         <Button className="h-12 rounded-full bg-gradient-brand px-6 text-white shadow-lg hover:shadow-xl">
                           View Service Page <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
@@ -288,7 +335,7 @@ export default function Services() {
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-gradient-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
+                className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3"
               >
                 <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
                   <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/12 text-primary">

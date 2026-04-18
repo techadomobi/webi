@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, CalendarDays, Clock, Sparkles, Tag, UserRound, Image as ImageIcon, Zap } from 'lucide-react';
 import { Link, useLocation } from 'wouter';
 
@@ -32,6 +32,23 @@ function stripHtml(value: string) {
     .replace(/&#39;/g, "'")
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function normalizeSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function buildPostAliases(post: { slug: string; title: string }) {
+  const aliases = new Set<string>();
+  aliases.add(normalizeSlug(post.slug));
+  aliases.add(normalizeSlug(decodeURIComponent(post.slug)));
+  aliases.add(normalizeSlug(post.title));
+  return aliases;
 }
 
 function ContentBlockView({ block, image, index }: { block: CmsContentBlock; image?: string; index: number }) {
@@ -101,16 +118,19 @@ export default function BlogDetail() {
       return null;
     }
 
-    const normalizedSlug = slug.toLowerCase();
+    const normalizedSlug = normalizeSlug(slug);
 
     return (
-      fallbackPosts.find(item => item.slug.toLowerCase() === normalizedSlug) ??
-      fallbackPosts.find(item => encodeURIComponent(item.slug).toLowerCase() === normalizedSlug)
+      fallbackPosts.find(item => buildPostAliases(item).has(normalizedSlug)) ??
+      fallbackPosts.find(item => encodeURIComponent(item.slug).toLowerCase() === slug.toLowerCase())
     );
   }, [fallbackPosts, slug]);
 
   const post = directPost ?? fallbackPost ?? null;
   const isLoading = directLoading || (!directPost && fallbackLoading);
+  const { scrollYProgress } = useScroll();
+  const heroOrbY = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const heroImageY = useTransform(scrollYProgress, [0, 1], [0, -45]);
 
   if (!slug) {
     return (
@@ -184,6 +204,8 @@ export default function BlogDetail() {
       <section className="relative overflow-hidden border-b border-border/70 bg-secondary/20 pt-24 pb-16 lg:pt-32 lg:pb-20">
         <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-linear-to-b from-white/78 via-white/72 to-secondary/18" />
+        <motion.div style={{ y: heroOrbY }} className="pointer-events-none absolute -left-16 top-16 h-72 w-72 rounded-full bg-primary/20 blur-[90px]" />
+        <motion.div style={{ y: heroOrbY }} className="pointer-events-none absolute -right-10 bottom-8 h-64 w-64 rounded-full bg-pink-400/20 blur-[90px]" />
         <div className="container relative z-10 mx-auto px-4">
           <Link href="/blogs" className="mb-6 inline-flex">
             <Button variant="outline" className="rounded-full border-2 border-primary/20 bg-white/90 text-primary hover:border-primary hover:bg-primary hover:text-white">
@@ -207,14 +229,14 @@ export default function BlogDetail() {
                   {post.writerName || CMS_WEBSITE_NAME}
                 </span>
               </div>
-              <h1 className="max-w-4xl font-display text-5xl font-extrabold leading-tight md:text-6xl">
+              <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="max-w-4xl font-display text-5xl font-extrabold leading-tight md:text-6xl">
                 {post.title}
-              </h1>
-              <p className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+              </motion.h1>
+              <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-6 max-w-3xl text-xl leading-relaxed text-muted-foreground">
                 {post.excerpt}
-              </p>
+              </motion.p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-8 flex flex-wrap gap-3">
                 <Link href="/contact">
                   <Button className="h-12 rounded-full bg-gradient-brand px-6 text-white shadow-lg hover:shadow-xl">Talk to Us</Button>
                 </Link>
@@ -223,7 +245,7 @@ export default function BlogDetail() {
                     Explore Services
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
 
               {post.tags?.length ? (
                 <div className="mt-8 flex flex-wrap gap-2">
@@ -236,7 +258,7 @@ export default function BlogDetail() {
               ) : null}
             </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden border border-white/60 bg-white shadow-2xl" style={{ borderRadius: '2rem' }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden border border-white/60 bg-white shadow-2xl" style={{ borderRadius: '2rem', y: heroImageY }}>
               {post.coverImage ? (
                 <img src={post.coverImage} alt={post.title} className="h-full w-full object-cover" style={{ minHeight: 360 }} />
               ) : (
@@ -316,7 +338,15 @@ export default function BlogDetail() {
             <div className="space-y-6">
               {blocks.length > 0 ? (
                 blocks.map((block, index) => (
-                  <ContentBlockView key={block._id || `${block.type}-${index}`} block={block} image={images[index]} index={index} />
+                  <motion.div
+                    key={block._id || `${block.type}-${index}`}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ delay: Math.min(index * 0.04, 0.35), duration: 0.4 }}
+                  >
+                    <ContentBlockView block={block} image={images[index]} index={index} />
+                  </motion.div>
                 ))
               ) : (
                 <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
