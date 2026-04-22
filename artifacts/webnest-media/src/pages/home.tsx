@@ -164,12 +164,26 @@ export default function Home() {
             </motion.div>
 
             <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-foreground sm:text-[4.25rem] lg:text-[6.25rem]">
-              <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="block">
-                We don't just market.
-              </motion.span>
-              <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }} className="mt-3 block">
-                <span className="bg-linear-to-r from-[#4f46e5] via-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">We scale brands.</span>
-              </motion.span>
+              <span className="block overflow-hidden">
+                <motion.span
+                  initial={{ opacity: 0, x: -70 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                  className="block"
+                >
+                  We don't just market.
+                </motion.span>
+              </span>
+              <span className="mt-3 block overflow-hidden">
+                <motion.span
+                  initial={{ opacity: 0, x: 70 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-gradient-animated block"
+                >
+                  We scale brands.
+                </motion.span>
+              </span>
             </h1>
 
             <motion.div
