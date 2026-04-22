@@ -122,7 +122,7 @@ export default function Navbar() {
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
           isHomeRoute
-            ? 'mt-1 rounded-full border border-white/30 bg-white/12 px-6 shadow-[0_10px_28px_rgba(99,102,241,0.05)] backdrop-blur-sm'
+            ? 'mt-1 rounded-full border border-white/30 bg-white/12 px-7 lg:px-10 shadow-[0_10px_28px_rgba(99,102,241,0.05)] backdrop-blur-sm'
             : ''
         }`}
       >
@@ -135,7 +135,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-7">
           <Link href="/about" className="relative py-2 text-sm font-medium transition-colors hover:text-primary">
             About Us
             {location === '/about' && (
