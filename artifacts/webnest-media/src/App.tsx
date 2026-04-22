@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 
 import NotFound from "@/pages/not-found";
 import Navbar from "@/components/layout/Navbar";
@@ -54,12 +55,15 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+  const isHomeRoute = location === '/';
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <CursorGlow />
-          <div className="flex min-h-screen flex-col bg-background font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden">
+          <div className={`flex min-h-screen flex-col font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden ${isHomeRoute ? 'hero-surface-match' : 'bg-background'}`}>
             <Navbar />
             <main className="page-atmosphere flex-1">
               <Router />
