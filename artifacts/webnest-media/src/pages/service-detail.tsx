@@ -171,6 +171,34 @@ const serviceDetails: Record<string, ServiceDetail> = {
       { q: 'Can you work with existing accounts?', a: 'Absolutely. We can optimize current accounts or rebuild from scratch.' },
     ],
   },
+  ctvAdsAgency: {
+    title: 'CTV Ads Agency',
+    category: 'Digital Marketing',
+    tagline: 'Reach premium streaming audiences with precision-targeted TV campaigns.',
+    overview:
+      'Our CTV programs combine audience intelligence, creative sequencing, and conversion attribution so connected-TV spend drives measurable business outcomes, not just impressions.',
+    outcomes: ['Higher incremental reach among high-value audiences', 'Stronger brand recall across devices', 'Trackable lift in assisted conversions'],
+    deliverables: ['CTV audience and publisher strategy', 'Creative rotation and frequency framework', 'Cross-device attribution setup', 'Weekly delivery and lift reporting'],
+    process: ['Audience and inventory planning', 'Creative and placement launch', 'Incrementality measurement', 'Budget and frequency optimization'],
+    faqs: [
+      { q: 'Can CTV work for performance goals?', a: 'Yes. We pair CTV with retargeting and conversion pathways to improve attributable outcomes.' },
+      { q: 'Do you buy on specific streaming platforms?', a: 'Yes. We can execute on curated publisher lists and major CTV inventory sources.' },
+    ],
+  },
+  googleAds: {
+    title: 'Google Ads',
+    category: 'Promotions',
+    tagline: 'Scale profitable demand across Search, Display, YouTube, and Performance Max.',
+    overview:
+      'We build Google Ads systems around intent, conversion quality, and margin control. Campaigns are continuously tuned through search terms, audience signals, creative tests, and landing page performance.',
+    outcomes: ['Lower cost per qualified lead', 'Improved conversion rate from paid traffic', 'More stable month-over-month ROAS'],
+    deliverables: ['Account structure and intent map', 'Ad and asset testing framework', 'Bid strategy and budget guardrails', 'Attribution and search-term governance'],
+    process: ['Audit and opportunity scoring', 'Campaign build and launch', 'Search term and asset optimization', 'Scale high-performing segments'],
+    faqs: [
+      { q: 'Do you run Performance Max with controls?', a: 'Yes. We set exclusions, asset groups, and reporting checks to keep quality high.' },
+      { q: 'Can you improve poor historical accounts?', a: 'Yes. We can restructure legacy accounts and recover performance efficiently.' },
+    ],
+  },
   smm: {
     title: 'Social Media Marketing',
     category: 'Digital Marketing',
@@ -183,6 +211,34 @@ const serviceDetails: Record<string, ServiceDetail> = {
     faqs: [
       { q: 'Do you produce short-form video?', a: 'Yes. We create Reels, Shorts, and social-first creative formats.' },
       { q: 'Can social tie into lead gen?', a: 'Yes. We connect campaigns with lead forms, landing pages, and CRM flows.' },
+    ],
+  },
+  metaAds: {
+    title: 'Meta Ads',
+    category: 'Promotions',
+    tagline: 'Drive full-funnel growth on Facebook and Instagram with creative-led testing.',
+    overview:
+      'Our Meta Ads service blends audience architecture, offer design, and rapid creative iteration to increase conversion efficiency while preserving scale potential.',
+    outcomes: ['Improved paid social CPA', 'Higher CTR through creative testing loops', 'Greater lead and purchase volume at target margins'],
+    deliverables: ['Campaign and audience architecture', 'Creative test matrix and ad variants', 'Pixel, CAPI, and event mapping', 'Weekly optimization and insights summaries'],
+    process: ['Tracking and funnel audit', 'Campaign and creative launch', 'Audience and placement optimization', 'Scale winners with budget controls'],
+    faqs: [
+      { q: 'Do you handle creative direction?', a: 'Yes. We define hooks, angles, and visual test plans for continuous performance gains.' },
+      { q: 'Can you support lead-gen and ecommerce?', a: 'Yes. We run tailored frameworks for both models with separate KPI controls.' },
+    ],
+  },
+  youtubeAdsSeo: {
+    title: 'YouTube Ads & SEO',
+    category: 'Promotions',
+    tagline: 'Combine video discovery and search visibility to compound audience growth.',
+    overview:
+      'We connect YouTube paid campaigns with channel SEO strategy so your video ecosystem drives both immediate demand and long-term discoverability.',
+    outcomes: ['Lower cost per engaged view', 'Higher qualified traffic from YouTube search and recommendations', 'Better assisted conversion impact from video journeys'],
+    deliverables: ['YouTube campaign and channel strategy', 'Video SEO metadata and structure', 'Audience retargeting sequence', 'Performance and watch-time reporting'],
+    process: ['Channel and audience audit', 'Campaign and SEO implementation', 'Retention and engagement optimization', 'Scale content and media mix'],
+    faqs: [
+      { q: 'Do you optimize existing YouTube channels?', a: 'Yes. We optimize structure, metadata, thumbnails, and publishing cadence.' },
+      { q: 'Can paid and organic YouTube run together?', a: 'Yes. We design both tracks to reinforce each other and improve efficiency.' },
     ],
   },
   web: {
@@ -339,6 +395,20 @@ const serviceDetails: Record<string, ServiceDetail> = {
       { q: 'Can this work for high-ticket services?', a: 'Yes. We tailor the funnel depth and qualification path by deal size.' },
     ],
   },
+  leadGenerationMarketing: {
+    title: 'Lead Generation Marketing',
+    category: 'Solutions',
+    tagline: 'Build an always-on engine for qualified pipeline growth.',
+    overview:
+      'This service unifies channel strategy, conversion architecture, and qualification logic so lead generation becomes predictable, scalable, and sales-aligned.',
+    outcomes: ['Consistent SQL pipeline creation', 'Improved lead-to-opportunity conversion', 'Faster feedback loops between marketing and sales'],
+    deliverables: ['Channel and offer mix strategy', 'High-intent funnel architecture', 'Lead scoring and routing model', 'Pipeline quality dashboard and reporting'],
+    process: ['ICP and demand mapping', 'Offer and funnel deployment', 'Qualification optimization', 'Scale by segment and channel'],
+    faqs: [
+      { q: 'Can this include outbound + inbound together?', a: 'Yes. We can orchestrate both to stabilize pipeline and reduce channel dependency.' },
+      { q: 'Do you align with sales teams?', a: 'Yes. We define qualification criteria and reporting loops with your revenue team.' },
+    ],
+  },
   retention: {
     title: 'Customer Retention',
     category: 'Solutions',
@@ -393,7 +463,7 @@ const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
   'search-engine-marketing': 'sem',
   'paid-search': 'sem',
   'pay-per-click': 'sem',
-  'google-ads': 'sem',
+  'google-ads': 'googleAds',
   smm: 'smm',
   'social-media-marketing': 'smm',
   'social-media-management': 'smm',
@@ -402,6 +472,7 @@ const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
   'web-development': 'web',
   'website-development': 'web',
   'website-design-development': 'web',
+  'ctv-ads-agency': 'ctvAdsAgency',
   content: 'content',
   'content-marketing': 'content',
   'content-strategy': 'content',
@@ -416,6 +487,8 @@ const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
   'sms-marketing': 'sms',
   email: 'email',
   'email-marketing': 'email',
+  'meta-ads': 'metaAds',
+  'youtube-ads-seo': 'youtubeAdsSeo',
   crm: 'crm',
   'crm-services': 'crm',
   orm: 'orm',
@@ -425,6 +498,7 @@ const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
   'brand-strategy': 'brand',
   leads: 'leads',
   'lead-generation': 'leads',
+  'lead-generation-marketing': 'leadGenerationMarketing',
   retention: 'retention',
   'customer-retention': 'retention',
   transformation: 'transformation',

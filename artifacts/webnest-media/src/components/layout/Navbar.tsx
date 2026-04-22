@@ -1,34 +1,71 @@
 import React from 'react';
 import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Search, Share2, Globe, PenTool, Users, TrendingUp, Megaphone, MessageSquare, Mail, Database, Shield, Target, Repeat, Cpu, BarChart2, ArrowRight } from 'lucide-react';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Search,
+  LineChart,
+  Users,
+  Globe,
+  FileText,
+  Handshake,
+  Smartphone,
+  Send,
+  Mail,
+  Youtube,
+  Shield,
+  Palette,
+  Target,
+  Repeat,
+  Cpu,
+  Lightbulb,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 const brandLogo = '/logo.png';
 
-const digitalMarketing = [
-  { label: 'Search Engine Optimization', href: '/services/seo', icon: Search, desc: 'Rank higher, get found faster' },
-  { label: 'Search Engine Marketing', href: '/services/sem', icon: TrendingUp, desc: 'Paid search that delivers ROI' },
-  { label: 'Social Media Marketing', href: '/services/smm', icon: Share2, desc: 'Build and engage your audience' },
-  { label: 'Web Development', href: '/services/web', icon: Globe, desc: 'Fast, converting websites' },
-  { label: 'Content Marketing', href: '/services/content', icon: PenTool, desc: 'Stories that build authority' },
-  { label: 'Affiliate Marketing', href: '/services/affiliate', icon: Users, desc: 'Scale through partnerships' },
-];
+type ServiceMenuItem = {
+  label: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  iconClass: string;
+};
 
-const promotions = [
-  { label: 'Mobile Marketing', href: '/services/mobile', icon: Megaphone, desc: 'Reach users on every device' },
-  { label: 'Influencer Marketing', href: '/services/influencer', icon: Users, desc: 'Leverage authentic voices' },
-  { label: 'SMS Marketing', href: '/services/sms', icon: MessageSquare, desc: 'Direct, high-open-rate channel' },
-  { label: 'Email Marketing', href: '/services/email', icon: Mail, desc: 'Nurture leads at every stage' },
-  { label: 'CRM', href: '/services/crm', icon: Database, desc: 'Manage and grow relationships' },
-];
-
-const solutions = [
-  { label: 'Online Reputation Management', href: '/services/orm', icon: Shield, desc: 'Protect your brand image' },
-  { label: 'Brand Strategy', href: '/services/brand', icon: Target, desc: 'Define your market position' },
-  { label: 'Lead Generation', href: '/services/leads', icon: ArrowRight, desc: 'Fill your pipeline constantly' },
-  { label: 'Customer Retention', href: '/services/retention', icon: Repeat, desc: 'Turn buyers into loyalists' },
-  { label: 'Digital Transformation', href: '/services/transformation', icon: Cpu, desc: 'Modernize your business' },
-  { label: 'Market Research & Insights', href: '/services/research', icon: BarChart2, desc: 'Data-driven decisions' },
+const serviceMenuColumns: Array<{ title: string; items: ServiceMenuItem[] }> = [
+  {
+    title: 'Digital Marketing',
+    items: [
+      { label: 'Search Engine Optimization', href: '/services/seo', icon: Search, iconClass: 'text-orange-500' },
+      { label: 'Search Engine Marketing', href: '/services/sem', icon: LineChart, iconClass: 'text-blue-500' },
+      { label: 'Social Media Marketing', href: '/services/smm', icon: Users, iconClass: 'text-sky-500' },
+      { label: 'Web Development', href: '/services/web', icon: Globe, iconClass: 'text-emerald-500' },
+      { label: 'CTV Ads Agency', href: '/services/ctv-ads-agency', icon: FileText, iconClass: 'text-indigo-500' },
+      { label: 'Affiliate Marketing', href: '/services/affiliate', icon: Handshake, iconClass: 'text-pink-500' },
+    ],
+  },
+  {
+    title: 'Promotions',
+    items: [
+      { label: 'Mobile Marketing', href: '/services/mobile', icon: Smartphone, iconClass: 'text-cyan-500' },
+      { label: 'Influencer Marketing', href: '/services/influencer', icon: Send, iconClass: 'text-fuchsia-500' },
+      { label: 'Email Marketing', href: '/services/email', icon: Mail, iconClass: 'text-slate-500' },
+      { label: 'Google Ads', href: '/services/google-ads', icon: Search, iconClass: 'text-blue-500' },
+      { label: 'Meta Ads', href: '/services/meta-ads', icon: Users, iconClass: 'text-sky-500' },
+      { label: 'YouTube Ads & SEO', href: '/services/youtube-ads-seo', icon: Youtube, iconClass: 'text-red-500' },
+    ],
+  },
+  {
+    title: 'Solutions',
+    items: [
+      { label: 'Online Reputation Management', href: '/services/orm', icon: Shield, iconClass: 'text-cyan-500' },
+      { label: 'Brand Strategy', href: '/services/brand', icon: Palette, iconClass: 'text-violet-500' },
+      { label: 'Lead Generation Marketing', href: '/services/lead-generation-marketing', icon: Target, iconClass: 'text-rose-500' },
+      { label: 'Customer Retention', href: '/services/retention', icon: Repeat, iconClass: 'text-lime-500' },
+      { label: 'Digital Transformation', href: '/services/transformation', icon: Cpu, iconClass: 'text-slate-500' },
+      { label: 'Market Research & Insights', href: '/services/research', icon: Lightbulb, iconClass: 'text-amber-500' },
+    ],
+  },
 ];
 
 export default function Navbar() {
@@ -37,6 +74,23 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = React.useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
   const servicesRef = React.useRef<HTMLDivElement>(null);
+  const hoverCloseTimeout = React.useRef<number | null>(null);
+
+  const isServicesRoute = location.startsWith('/services');
+
+  const cancelServicesClose = React.useCallback(() => {
+    if (hoverCloseTimeout.current !== null) {
+      window.clearTimeout(hoverCloseTimeout.current);
+      hoverCloseTimeout.current = null;
+    }
+  }, []);
+
+  const scheduleServicesClose = React.useCallback(() => {
+    cancelServicesClose();
+    hoverCloseTimeout.current = window.setTimeout(() => {
+      setServicesOpen(false);
+    }, 160);
+  }, [cancelServicesClose]);
 
   React.useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -48,6 +102,14 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  React.useEffect(() => {
+    return () => {
+      if (hoverCloseTimeout.current !== null) {
+        window.clearTimeout(hoverCloseTimeout.current);
+      }
+    };
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
@@ -55,10 +117,8 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WeeoMedia"
-className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
-sm:h-30 
-md:h-30 
-lg:h-40 "          />
+            className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-20"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -71,16 +131,29 @@ lg:h-40 "          />
           </Link>
 
           {/* Services Mega Menu */}
-          <div ref={servicesRef} className="relative">
+          <div
+            ref={servicesRef}
+            className="relative"
+            onMouseEnter={() => {
+              cancelServicesClose();
+              setServicesOpen(true);
+            }}
+            onMouseLeave={scheduleServicesClose}
+          >
             <button
+              onMouseEnter={() => {
+                cancelServicesClose();
+                setServicesOpen(true);
+              }}
               onClick={() => setServicesOpen(!servicesOpen)}
-              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors hover:text-primary ${location === '/services' ? 'text-primary' : ''}`}
+              aria-expanded={servicesOpen}
+              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors hover:text-primary ${isServicesRoute ? 'text-primary' : ''}`}
             >
               Services
               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <ChevronDown className="h-4 w-4" />
               </motion.div>
-              {location === '/services' && (
+              {isServicesRoute && (
                 <motion.div layoutId="navbar-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-brand" transition={{ type: 'spring', stiffness: 300, damping: 30 }} />
               )}
             </button>
@@ -92,85 +165,37 @@ lg:h-40 "          />
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 mt-3 w-[min(82rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 rounded-2xl border border-gray-100 overflow-hidden bg-white shadow-2xl"
+                  className="absolute top-full left-1/2 mt-3 w-[min(82rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
                   style={{ transform: 'translateX(-50%)' }}
                 >
                   <div className="grid grid-cols-3 gap-0 divide-x divide-gray-100">
-                    {/* Digital Marketing */}
-                    <div className="p-6">
-                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 px-2">Digital Marketing</p>
-                      <ul className="space-y-1">
-                        {digitalMarketing.map((item) => (
-                          <li key={item.label}>
-                            <Link
-                              href={item.href}
-                              onClick={() => setServicesOpen(false)}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-primary/5 group transition-colors"
-                            >
-                              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
-                                <item.icon className="h-4 w-4" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-foreground leading-tight">{item.label}</p>
-                                <p className="text-xs text-muted-foreground">{item.desc}</p>
-                              </div>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {/* Promotions */}
-                    <div className="p-6">
-                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 px-2">Promotions</p>
-                      <ul className="space-y-1">
-                        {promotions.map((item) => (
-                          <li key={item.label}>
-                            <Link
-                              href={item.href}
-                              onClick={() => setServicesOpen(false)}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-primary/5 group transition-colors"
-                            >
-                              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
-                                <item.icon className="h-4 w-4" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-foreground leading-tight">{item.label}</p>
-                                <p className="text-xs text-muted-foreground">{item.desc}</p>
-                              </div>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {/* Solutions */}
-                    <div className="p-6">
-                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 px-2">Solutions</p>
-                      <ul className="space-y-1">
-                        {solutions.map((item) => (
-                          <li key={item.label}>
-                            <Link
-                              href={item.href}
-                              onClick={() => setServicesOpen(false)}
-                              className="flex items-center gap-3 rounded-lg px-2 py-2 hover:bg-primary/5 group transition-colors"
-                            >
-                              <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
-                                <item.icon className="h-4 w-4" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium text-foreground leading-tight">{item.label}</p>
-                                <p className="text-xs text-muted-foreground">{item.desc}</p>
-                              </div>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {serviceMenuColumns.map(column => (
+                      <div key={column.title} className="p-7">
+                        <p className="mb-4 border-b border-orange-200 pb-3 text-[1.75rem] font-bold leading-none tracking-tight text-foreground">
+                          {column.title}
+                        </p>
+                        <ul className="space-y-1">
+                          {column.items.map(item => (
+                            <li key={item.label}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setServicesOpen(false)}
+                                className="group flex items-center gap-3 rounded-lg px-3 py-2 text-lg text-slate-600 transition-colors hover:bg-primary/6 hover:text-foreground"
+                              >
+                                <item.icon className={`h-4 w-4 shrink-0 ${item.iconClass}`} />
+                                <span>{item.label}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
-                  <div className="bg-secondary/30 px-6 py-4 flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">More services</p>
-                    <Link href="/contact" onClick={() => setServicesOpen(false)}>
-                      <Button size="sm" className="bg-gradient-brand text-white border-0 rounded-full text-xs h-8 px-4">
-                        Get Free Consultation
+                  <div className="flex items-center justify-between bg-linear-to-r from-primary/8 via-white to-pink-500/8 px-6 py-4">
+                    <p className="text-sm text-muted-foreground">Browse all growth services</p>
+                    <Link href="/services" onClick={() => setServicesOpen(false)}>
+                      <Button size="sm" className="h-9 rounded-full border-0 bg-gradient-brand px-5 text-xs text-white shadow-md">
+                        View Services
                       </Button>
                     </Link>
                   </div>
@@ -226,23 +251,16 @@ lg:h-40 "          />
                 </button>
                 {mobileServicesOpen && (
                   <div className="pl-4 py-2 space-y-1">
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-3 py-1">Digital Marketing</p>
-                    {digitalMarketing.map(item => (
-                      <Link key={item.label} href={item.href} className="block text-sm text-muted-foreground p-2 hover:text-primary" onClick={() => setIsOpen(false)}>
-                        {item.label}
-                      </Link>
-                    ))}
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-3 py-1 mt-2">Promotions</p>
-                    {promotions.map(item => (
-                      <Link key={item.label} href={item.href} className="block text-sm text-muted-foreground p-2 hover:text-primary" onClick={() => setIsOpen(false)}>
-                        {item.label}
-                      </Link>
-                    ))}
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-3 py-1 mt-2">Solutions</p>
-                    {solutions.map(item => (
-                      <Link key={item.label} href={item.href} className="block text-sm text-muted-foreground p-2 hover:text-primary" onClick={() => setIsOpen(false)}>
-                        {item.label}
-                      </Link>
+                    {serviceMenuColumns.map(column => (
+                      <div key={column.title} className="space-y-1">
+                        <p className="mt-2 px-3 py-1 text-xs font-bold uppercase tracking-widest text-muted-foreground">{column.title}</p>
+                        {column.items.map(item => (
+                          <Link key={item.label} href={item.href} className="flex items-center gap-2 p-2 text-sm text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+                            <item.icon className={`h-3.5 w-3.5 ${item.iconClass}`} />
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
                     ))}
                   </div>
                 )}

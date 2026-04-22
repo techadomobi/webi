@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Link } from 'wouter';
 import {
   ArrowRight, BarChart3, Globe, PenTool, Rocket, Target, Users, Star,
@@ -15,8 +15,6 @@ import GlowButton from '@/components/ui/GlowButton';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { Button } from '@/components/ui/button';
 import { useRef, useEffect, useState } from 'react';
-
-import heroImg from '@/assets/images/hero.png';
 
 const services = [
   { icon: Search, title: 'Search Engine Optimization', desc: 'Dominate search rankings with precision keyword strategy, technical excellence, and high-authority link building.' },
@@ -141,208 +139,112 @@ function TestimonialsCarousel() {
 }
 
 export default function Home() {
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-
   return (
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section ref={heroRef} className="relative overflow-hidden pt-24 pb-36 lg:pt-36 lg:pb-52 min-h-screen flex items-center">
+      <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-24 pb-20 lg:pt-32">
         <FloatingOrbs />
         {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
-
-        {/* Animated mesh grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(99,102,241,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.04)_1px,transparent_1px)] bg-size-[60px_60px]" />
-
-        {/* Animated morphing blob */}
-        <motion.div
-          className="absolute right-[5%] top-[10%] w-80 h-80 bg-gradient-brand opacity-15 animate-morphing blur-[60px]"
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(79,70,229,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(79,70,229,0.045)_1px,transparent_1px)] bg-size-[70px_70px]" />
+        <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
+        <div className="absolute right-[-8%] top-[18%] h-80 w-80 rounded-full bg-pink-500/12 blur-[85px]" />
+        <div className="absolute right-[14%] bottom-[5%] h-64 w-64 rounded-full bg-indigo-500/10 blur-[70px]" />
 
         <div className="container relative z-10 mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
-            <motion.div style={{ y: heroY, opacity: heroOpacity }}>
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
-                className="inline-flex items-center rounded-full border border-primary/30 bg-primary/8 px-4 py-1.5 text-sm font-semibold text-primary mb-8 gap-2"
-              >
-                <motion.span
-                  className="h-2 w-2 rounded-full bg-primary"
-                  animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                A 360° Digital Marketing Agency
-                <Sparkles className="h-3.5 w-3.5" />
-              </motion.div>
-
-              {/* Animated word-by-word headline */}
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6 max-w-4xl">
-                <span className="block">
-                  <AnimatedWords text="We don’t just market." className="text-foreground" delay={0.2} />
-                </span>
-                <span className="text-gradient-animated block mt-2">
-                  <AnimatedWords text="We scale brands." delay={0.55} />
-                </span>
-              </h1>
-
-              <RevealSection variant="fadeUp" delay={0.7}>
-                <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl">
-                  We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.                </p>
-              </RevealSection>
-
-              <RevealSection variant="fadeUp" delay={0.85}>
-                <div className="flex flex-wrap items-center gap-4 mb-10">
-                  <Link href="/contact">
-                    <GlowButton variant="primary" size="lg">
-                      Start Your Project <ArrowRight className="h-5 w-5" />
-                    </GlowButton>
-                  </Link>
-                  <Link href="/services">
-                    <GlowButton variant="outline" size="lg">
-                      Explore Services
-                    </GlowButton>
-                  </Link>
-                </div>
-              </RevealSection>
-
-              <RevealSection variant="fadeUp" delay={1}>
-                <div className="flex items-center gap-6">
-                  <div className="flex -space-x-3">
-                    {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1 + idx * 0.1 }}
-                        className="h-11 w-11 rounded-full bg-gradient-brand flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow"
-                      >
-                        {init}
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="flex gap-0.5">
-                      {[1, 2, 3, 4, 5].map(s => (
-                        <motion.div
-                          key={s}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 1.1 + s * 0.06, type: 'spring', stiffness: 400 }}
-                        >
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        </motion.div>
-                      ))}
-                    </div>
-                    <p className="text-sm text-muted-foreground mt-0.5">Trusted by 500+ brands worldwide</p>
-                  </div>
-                </div>
-              </RevealSection>
+          <div className="mx-auto max-w-5xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+              className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-foreground shadow-sm"
+            >
+              <Sparkles className="h-4 w-4 text-primary" />
+              Powered by AI Intelligence
             </motion.div>
 
-            {/* Right — hero image */}
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-foreground sm:text-[4.25rem] lg:text-[6.25rem]">
+              <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="block">
+                Advertising is
+                <span className="ml-4 bg-linear-to-r from-[#4f46e5] via-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">Agency.</span>
+              </motion.span>
+              <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }} className="mt-3 block">
+                So are
+                <span className="ml-4 bg-linear-to-r from-[#4f46e5] via-[#7c3aed] to-[#ec4899] bg-clip-text text-transparent">we.</span>
+              </motion.span>
+            </h1>
+
             <motion.div
-              style={{ scale: heroScale }}
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.36 }}
+              className="mx-auto mt-10"
             >
-              {/* Glow aura */}
-              <motion.div
-                className="absolute -inset-6 rounded-4xl bg-gradient-brand opacity-25 blur-3xl"
-                animate={{ opacity: [0.2, 0.35, 0.2], scale: [1, 1.04, 1] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <div className="relative z-10 overflow-hidden rounded-[1.7rem] bg-linear-to-br from-[#d9d4f2] via-[#dbe2f7] to-[#e3d8f1] p-0.5 shadow-2xl">
-                <img
-                  src={heroImg}
-                  alt="Abstract digital growth"
-                  className="block w-full rounded-2xl object-cover aspect-4/3 ring-1 ring-white/45"
-                />
+              <Link href="/services">
+                <Button className="h-16 rounded-full border-0 bg-gradient-brand px-11 text-xl font-bold text-white shadow-[0_16px_38px_rgba(79,70,229,0.32)] hover:scale-[1.02] hover:shadow-[0_22px_46px_rgba(236,72,153,0.28)]">
+                  Data for the AI Era
+                  <ArrowRight className="ml-3 h-5 w-5" />
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.48 }}
+              className="mt-8 flex flex-wrap items-center justify-center gap-4"
+            >
+              <Link href="/services">
+                <Button variant="outline" className="h-14 rounded-2xl border border-primary/15 bg-white px-9 text-2xl font-bold text-foreground shadow-sm hover:border-primary/30 hover:bg-primary/5">
+                  Start Advertising
+                  <ArrowRight className="ml-3 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" className="h-14 rounded-2xl border border-pink-400/25 bg-white px-9 text-2xl font-bold text-foreground shadow-sm hover:border-pink-500/40 hover:bg-pink-500/5">
+                  Start Monetizing
+                  <ArrowRight className="ml-3 h-4 w-4" />
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.58 }}
+              className="mx-auto mt-12 max-w-3xl text-2xl text-muted-foreground"
+            >
+              Experience the future of digital advertising with our AI-powered platform.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.72 }}
+              className="mt-9 flex items-center justify-center gap-6"
+            >
+              <div className="flex -space-x-3">
+                {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.72 + idx * 0.06 }}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-gradient-brand text-xs font-bold text-white shadow"
+                  >
+                    {init}
+                  </motion.div>
+                ))}
               </div>
-
-              {/* Floating stat card 1 */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9, type: 'spring', stiffness: 200 }}
-                className="absolute -bottom-6 -left-6 md:-left-14 bg-white p-5 rounded-2xl shadow-2xl border border-gray-100 flex items-center gap-4 z-20 animate-float"
-              >
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                  <BarChart3 className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground font-medium">Avg. ROI Increase</p>
-                  <p className="font-display text-2xl font-bold text-foreground">+245%</p>
-                </div>
-              </motion.div>
-
-              {/* Floating stat card 2 */}
-              <motion.div
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, type: 'spring', stiffness: 200 }}
-                className="absolute -top-6 -right-6 md:-right-12 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 flex items-center gap-3 z-20"
-                style={{ animation: 'float 7s ease-in-out 1s infinite' }}
-              >
-                <div className="h-10 w-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
-                  <TrendingUp className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">Active Campaigns</p>
-                  <p className="font-display text-xl font-bold">1,247+</p>
-                </div>
-              </motion.div>
-
-              {/* Floating stat card 3 */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.3, type: 'spring', stiffness: 300 }}
-                className="absolute top-1/2 -right-4 md:-right-10 bg-white p-4 rounded-2xl shadow-2xl border border-gray-100 z-20"
-                style={{ animation: 'float-slow 6s ease-in-out 2.5s infinite' }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <Zap className="h-4 w-4 text-yellow-500" />
-                  <p className="text-xs font-bold text-foreground">Client Score</p>
-                </div>
+              <div className="text-left">
                 <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
                 </div>
-                <p className="text-lg font-display font-black mt-0.5">4.9 / 5.0</p>
-              </motion.div>
+                <p className="text-sm text-muted-foreground">Trusted by 500+ brands worldwide</p>
+              </div>
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5 }}
-        >
-          <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
-          <motion.div
-            className="w-5 h-8 rounded-full border-2 border-primary/30 flex items-start justify-center p-1"
-            animate={{ borderColor: ['rgba(99,102,241,0.3)', 'rgba(99,102,241,0.8)', 'rgba(99,102,241,0.3)'] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className="w-1.5 h-1.5 rounded-full bg-primary"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* ── MARQUEE LOGOS ── */}
