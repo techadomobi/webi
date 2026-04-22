@@ -15,7 +15,6 @@ import BlogDetail from "@/pages/blog-detail";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Blogs from "@/pages/blogs";
-import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +59,6 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <CursorGlow />
-          <ScrollProgress />
           <div className="flex min-h-screen flex-col bg-background font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden">
             <Navbar />
             <main className="page-atmosphere flex-1">

@@ -165,12 +165,12 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 mt-3 w-[min(82rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
+                  className="absolute top-full left-1/2 mt-3 w-[min(72rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
                   style={{ transform: 'translateX(-50%)' }}
                 >
-                  <div className="grid grid-cols-3 gap-0 divide-x divide-gray-100">
+                  <div className="grid grid-cols-1 gap-0 divide-y divide-gray-100 xl:grid-cols-3 xl:divide-x xl:divide-y-0">
                     {serviceMenuColumns.map(column => (
-                      <div key={column.title} className="p-7">
+                      <div key={column.title} className="p-6 xl:p-7">
                         <p className="mb-4 border-b border-orange-200 pb-3 text-[1.75rem] font-bold leading-none tracking-tight text-foreground">
                           {column.title}
                         </p>
