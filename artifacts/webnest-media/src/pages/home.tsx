@@ -160,17 +160,15 @@ export default function Home() {
               className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-foreground shadow-sm"
             >
               <Sparkles className="h-4 w-4 text-primary" />
-              Powered by AI Intelligence
+              A 360° Digital Marketing Agency
             </motion.div>
 
             <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-foreground sm:text-[4.25rem] lg:text-[6.25rem]">
               <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="block">
-                Advertising is
-                <span className="ml-4 bg-linear-to-r from-[#4f46e5] via-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">Agency.</span>
+                We don't just market.
               </motion.span>
               <motion.span initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }} className="mt-3 block">
-                So are
-                <span className="ml-4 bg-linear-to-r from-[#4f46e5] via-[#7c3aed] to-[#ec4899] bg-clip-text text-transparent">we.</span>
+                <span className="bg-linear-to-r from-[#4f46e5] via-[#8b5cf6] to-[#ec4899] bg-clip-text text-transparent">We scale brands.</span>
               </motion.span>
             </h1>
 
@@ -214,7 +212,7 @@ export default function Home() {
               transition={{ delay: 0.58 }}
               className="mx-auto mt-12 max-w-3xl text-2xl text-muted-foreground"
             >
-              Experience the future of digital advertising with our AI-powered platform.
+              We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.
             </motion.p>
 
             <motion.div
