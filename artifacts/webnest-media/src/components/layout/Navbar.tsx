@@ -115,10 +115,17 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isHomeRoute
-          ? 'min-h-screen flex items-center pt-[44px]'
+          ? 'absolute inset-x-0 top-0 bg-transparent pt-4'
           : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
       }`}
     >
+      <div
+        className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
+          isHomeRoute
+            ? 'px-6 lg:px-8'
+            : ''
+        }`}
+      >
         <Link href="/" className="flex items-center gap-2 group shrink-0 overflow-hidden">
           <img
             src={brandLogo}
