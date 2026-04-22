@@ -143,7 +143,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="hero-surface relative flex min-h-[92vh] items-center overflow-hidden pt-24 pb-20 lg:pt-32">
+      <section className="hero-surface relative flex min-h-[92vh] items-center overflow-hidden pt-32 pb-20 lg:pt-40">
         <FloatingOrbs />
         {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
         <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
