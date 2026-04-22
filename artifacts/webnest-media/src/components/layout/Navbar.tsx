@@ -115,14 +115,14 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isHomeRoute
-          ? 'border-b border-transparent bg-transparent backdrop-blur-0 supports-backdrop-filter:bg-transparent'
+          ? 'border-b border-transparent bg-transparent pt-1 backdrop-blur-0 supports-backdrop-filter:bg-transparent'
           : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
       }`}
     >
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
           isHomeRoute
-            ? 'mt-3 rounded-full border border-white/45 bg-white/55 px-6 shadow-[0_14px_40px_rgba(99,102,241,0.08)] backdrop-blur-xl'
+            ? 'mt-1 rounded-full border border-white/50 bg-[linear-gradient(135deg,rgba(255,255,255,0.72),rgba(243,244,255,0.62)_52%,rgba(248,240,255,0.58))] px-6 shadow-[0_10px_28px_rgba(99,102,241,0.08)] backdrop-blur-xl'
             : ''
         }`}
       >
