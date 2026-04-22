@@ -36,6 +36,15 @@ type ServiceDetail = {
   faqs: Array<{ q: string; a: string }>;
 };
 
+type ServiceVisualVariant = {
+  heroBackground: string;
+  heroOverlay: string;
+  marquee: string[];
+  highlights: Array<{ title: string; copy: string }>;
+  kpis: Array<{ pillar: string; metric: string; whyItMatters: string }>;
+  ctaLabel: string;
+};
+
 const roadmapPhases = [
   {
     phase: 'Days 1-15: Foundation',
@@ -453,6 +462,129 @@ const serviceDetails: Record<string, ServiceDetail> = {
   },
 };
 
+const serviceVisualVariants: Partial<Record<keyof typeof serviceDetails, ServiceVisualVariant>> = {
+  ctvAdsAgency: {
+    heroBackground: 'linear-gradient(to bottom, #edf6ff, #ffffff, #f4f8ff)',
+    heroOverlay: 'linear-gradient(to bottom, rgba(255,255,255,0.76), rgba(255,255,255,0.7), rgba(235,245,255,0.35))',
+    marquee: [
+      'Premium streaming inventory',
+      'Cross-device attribution',
+      'Audience-first TV planning',
+      'Incrementality measurement',
+      'Frequency and reach controls',
+      'Brand + performance alignment',
+    ],
+    highlights: [
+      { title: 'Household-Level Precision', copy: 'Target high-value audience clusters with geo, interest, and behavioral signals.' },
+      { title: 'Screen-First Creative', copy: 'Deliver creative sequences designed for connected-TV attention and recall.' },
+      { title: 'Measured Lift', copy: 'Track view-through and assisted conversion impact across the full funnel.' },
+    ],
+    kpis: [
+      { pillar: 'Reach Quality', metric: 'Qualified CTV reach and frequency balance', whyItMatters: 'Ensures media spend expands awareness in the right audience segments.' },
+      { pillar: 'Attention', metric: 'Completion and watch-depth by creative variation', whyItMatters: 'Validates whether creative sequencing sustains attention long enough to influence action.' },
+      { pillar: 'Incremental Lift', metric: 'Branded search and site-lift in exposed cohorts', whyItMatters: 'Confirms CTV contributes measurable downstream business impact.' },
+      { pillar: 'Efficiency', metric: 'Blended cost per qualified session', whyItMatters: 'Keeps CTV contribution tied to overall acquisition economics.' },
+    ],
+    ctaLabel: 'Launch CTV Strategy',
+  },
+  googleAds: {
+    heroBackground: 'linear-gradient(to bottom, #f4f7ff, #ffffff, #f7f4ff)',
+    heroOverlay: 'linear-gradient(to bottom, rgba(255,255,255,0.78), rgba(255,255,255,0.68), rgba(245,242,255,0.36))',
+    marquee: [
+      'Intent-led search structure',
+      'Performance Max governance',
+      'Search-term hygiene',
+      'Auction-aware bidding',
+      'Landing page alignment',
+      'ROAS and pipeline clarity',
+    ],
+    highlights: [
+      { title: 'Intent Mapping', copy: 'Separate high-intent queries from exploratory traffic for cleaner conversion economics.' },
+      { title: 'Asset Testing Engine', copy: 'Run systematic ad variant testing across copy, offers, and extensions.' },
+      { title: 'Budget Intelligence', copy: 'Reallocate spend weekly to winning campaigns without volatility spikes.' },
+    ],
+    kpis: [
+      { pillar: 'Intent Coverage', metric: 'Impression share on high-value query clusters', whyItMatters: 'Protects market share where buyers show strongest purchase intent.' },
+      { pillar: 'Traffic Quality', metric: 'Qualified click and engagement depth', whyItMatters: 'Filters low-value visits and improves landing experience relevance.' },
+      { pillar: 'Conversion Yield', metric: 'Cost per qualified lead and lead-to-opportunity rate', whyItMatters: 'Optimizes for revenue contribution, not superficial lead volume.' },
+      { pillar: 'Profitability', metric: 'ROAS stability and marginal return by segment', whyItMatters: 'Keeps scaling decisions tied to sustainable business return.' },
+    ],
+    ctaLabel: 'Scale Google Ads',
+  },
+  metaAds: {
+    heroBackground: 'linear-gradient(to bottom, #fff3fa, #ffffff, #f6f6ff)',
+    heroOverlay: 'linear-gradient(to bottom, rgba(255,255,255,0.72), rgba(255,255,255,0.64), rgba(246,241,255,0.34))',
+    marquee: [
+      'Creative testing velocity',
+      'Audience architecture',
+      'Offer-angle experiments',
+      'Funnel stage sequencing',
+      'Pixel and CAPI quality',
+      'CPA stability at scale',
+    ],
+    highlights: [
+      { title: 'Creative Flywheel', copy: 'Run high-frequency hook, angle, and format tests to sustain ad performance.' },
+      { title: 'Audience Laddering', copy: 'Move from broad discovery to high-intent retargeting with controlled overlap.' },
+      { title: 'Offer Match', copy: 'Align message and landing experience by funnel stage for stronger conversion rates.' },
+    ],
+    kpis: [
+      { pillar: 'Creative Signal', metric: 'Thumb-stop rate and CTR by concept family', whyItMatters: 'Shows which angles capture attention before spend scales.' },
+      { pillar: 'Audience Health', metric: 'Frequency, overlap, and segment saturation', whyItMatters: 'Prevents fatigue and protects efficiency over time.' },
+      { pillar: 'Acquisition', metric: 'CPA and qualified lead volume by campaign objective', whyItMatters: 'Keeps tactical optimization tied to conversion quality.' },
+      { pillar: 'Revenue Impact', metric: 'Attributed and assisted conversion contribution', whyItMatters: 'Connects paid social outcomes to real business growth.' },
+    ],
+    ctaLabel: 'Activate Meta Ads',
+  },
+  youtubeAdsSeo: {
+    heroBackground: 'linear-gradient(to bottom, #fff5f5, #ffffff, #f7f8ff)',
+    heroOverlay: 'linear-gradient(to bottom, rgba(255,255,255,0.72), rgba(255,255,255,0.65), rgba(245,247,255,0.34))',
+    marquee: [
+      'Video-first discovery loops',
+      'YouTube SEO architecture',
+      'Watch-time optimization',
+      'Audience retargeting paths',
+      'Paid + organic synergy',
+      'Evergreen content systems',
+    ],
+    highlights: [
+      { title: 'Discoverability Stack', copy: 'Align titles, metadata, and structure to maximize recommendation visibility.' },
+      { title: 'View-to-Visit Journeys', copy: 'Design clear pathways from video engagement to qualified website actions.' },
+      { title: 'Retention Engineering', copy: 'Improve watch-depth signals that feed both paid and organic distribution.' },
+    ],
+    kpis: [
+      { pillar: 'Visibility', metric: 'Search and recommendation surface share', whyItMatters: 'Measures how often content is discovered by relevant audiences.' },
+      { pillar: 'Engagement', metric: 'Watch-time, completion, and interaction depth', whyItMatters: 'Validates message resonance and algorithmic momentum.' },
+      { pillar: 'Conversion Flow', metric: 'Click-through to site and on-site action rate', whyItMatters: 'Connects video activity to demand generation impact.' },
+      { pillar: 'Compounding Value', metric: 'Evergreen traffic and lead contribution over time', whyItMatters: 'Shows whether the content library creates durable growth.' },
+    ],
+    ctaLabel: 'Grow YouTube Engine',
+  },
+  leadGenerationMarketing: {
+    heroBackground: 'linear-gradient(to bottom, #f2f9ff, #ffffff, #f7f4ff)',
+    heroOverlay: 'linear-gradient(to bottom, rgba(255,255,255,0.74), rgba(255,255,255,0.68), rgba(245,242,255,0.36))',
+    marquee: [
+      'Pipeline-focused demand model',
+      'Offer and funnel design',
+      'Lead quality governance',
+      'Sales feedback loops',
+      'Qualification automation',
+      'Forecastable growth systems',
+    ],
+    highlights: [
+      { title: 'Pipeline Architecture', copy: 'Design demand pathways from first touch to sales-qualified handoff.' },
+      { title: 'Quality-First Scoring', copy: 'Prioritize high-fit accounts through intent and qualification signals.' },
+      { title: 'Revenue Alignment', copy: 'Unify marketing and sales metrics around opportunity creation quality.' },
+    ],
+    kpis: [
+      { pillar: 'Demand Capture', metric: 'High-intent lead inflow by channel and segment', whyItMatters: 'Shows whether strategy is attracting the right prospect profile.' },
+      { pillar: 'Qualification', metric: 'MQL-to-SQL conversion velocity', whyItMatters: 'Measures handoff quality and operational fit with sales.' },
+      { pillar: 'Pipeline Value', metric: 'Opportunity volume and weighted pipeline', whyItMatters: 'Connects campaign activity directly to revenue potential.' },
+      { pillar: 'Predictability', metric: 'Weekly variance across lead and opportunity targets', whyItMatters: 'Enables confident planning and budget allocation decisions.' },
+    ],
+    ctaLabel: 'Build Lead Engine',
+  },
+};
+
 const serviceSlugAliases: Record<string, keyof typeof serviceDetails> = {
   seo: 'seo',
   'search-engine-optimization': 'seo',
@@ -517,14 +649,23 @@ function normalizeSlug(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
-function resolveServiceFromSlug(rawSlug: string): ServiceDetail | null {
+function resolveServiceKeyFromSlug(rawSlug: string): keyof typeof serviceDetails | null {
   const normalized = normalizeSlug(rawSlug);
   if (!normalized) return null;
 
   const byAlias = serviceSlugAliases[normalized];
-  if (byAlias) return serviceDetails[byAlias] ?? null;
+  if (byAlias) return byAlias;
 
-  return serviceDetails[normalized] ?? null;
+  if (normalized in serviceDetails) {
+    return normalized as keyof typeof serviceDetails;
+  }
+
+  return null;
+}
+
+function resolveServiceFromSlug(rawSlug: string): ServiceDetail | null {
+  const key = resolveServiceKeyFromSlug(rawSlug);
+  return key ? serviceDetails[key] ?? null : null;
 }
 
 function stripHtml(value: string) {
@@ -893,7 +1034,19 @@ export default function ServiceDetail() {
     }
   }, [location]);
 
+  const serviceKey = resolveServiceKeyFromSlug(slug);
   const service = resolveServiceFromSlug(slug);
+  const visualVariant = serviceKey ? serviceVisualVariants[serviceKey] : undefined;
+  const marqueeItems = visualVariant?.marquee ?? [
+    'Strategy-led execution',
+    'Transparent delivery cadence',
+    'Channel and conversion optimization',
+    'Measurable business outcomes',
+    'High-velocity iteration loops',
+    'Cross-channel growth systems',
+  ];
+  const kpiCards = visualVariant?.kpis ?? kpiFramework;
+
   const { data: cmsService, isLoading: cmsLoading } = useQuery({
     queryKey: ['cms', 'service', slug],
     queryFn: () => fetchCmsEntry('services', slug),
@@ -936,9 +1089,12 @@ export default function ServiceDetail() {
 
   return (
     <PageTransition>
-      <section className="pt-24 pb-18 lg:pt-32 lg:pb-24 bg-linear-to-b from-[#f7f5ff] via-white to-[#fff4f8] text-foreground relative overflow-hidden">
+      <section
+        className="pt-24 pb-18 lg:pt-32 lg:pb-24 text-foreground relative overflow-hidden"
+        style={{ background: visualVariant?.heroBackground ?? 'linear-gradient(to bottom, #f7f5ff, #ffffff, #fff4f8)' }}
+      >
         <img src="/decor/service-wave.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-42" />
-        <div className="absolute inset-0 bg-linear-to-b from-white/72 via-white/62 to-secondary/22" />
+        <div className="absolute inset-0" style={{ background: visualVariant?.heroOverlay ?? 'linear-gradient(to bottom, rgba(255,255,255,0.72), rgba(255,255,255,0.62), rgba(238,242,255,0.22))' }} />
         <div className="container relative z-10 mx-auto px-4">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
             {service.category}
@@ -966,21 +1122,7 @@ export default function ServiceDetail() {
         <div className="container mx-auto px-4">
           <div className="overflow-hidden">
             <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
-              {[
-                'Strategy-led execution',
-                'Transparent delivery cadence',
-                'Channel and conversion optimization',
-                'Measurable business outcomes',
-                'High-velocity iteration loops',
-                'Cross-channel growth systems',
-              ].concat([
-                'Strategy-led execution',
-                'Transparent delivery cadence',
-                'Channel and conversion optimization',
-                'Measurable business outcomes',
-                'High-velocity iteration loops',
-                'Cross-channel growth systems',
-              ]).map((item, idx) => (
+              {marqueeItems.concat(marqueeItems).map((item, idx) => (
                 <div key={`${item}-${idx}`} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80">
                   <Zap className="h-3.5 w-3.5 text-primary" />
                   {item}
@@ -990,6 +1132,29 @@ export default function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {visualVariant ? (
+        <section className="py-14 bg-white/90 border-b border-primary/10">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-5">
+              {visualVariant.highlights.map((highlight, idx) => (
+                <motion.div
+                  key={highlight.title}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.07 }}
+                  className="rounded-2xl border border-primary/15 bg-linear-to-br from-white to-primary/5 p-6 shadow-sm"
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Highlight</p>
+                  <h3 className="font-display text-2xl font-bold text-foreground">{highlight.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{highlight.copy}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <motion.section variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="py-20 bg-white/90 backdrop-blur-sm">
         <div className="container mx-auto px-4">
@@ -1150,7 +1315,7 @@ export default function ServiceDetail() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5">
-            {kpiFramework.map((kpi, idx) => (
+            {kpiCards.map((kpi, idx) => (
               <motion.div
                 key={kpi.pillar}
                 initial={{ opacity: 0, y: 16 }}
@@ -1237,7 +1402,7 @@ export default function ServiceDetail() {
         <div className="absolute inset-0 bg-gradient-brand opacity-[0.06]" />
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <Sparkles className="h-8 w-8 text-primary mx-auto mb-4" />
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-5">Ready to Launch This Service?</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-5">{visualVariant?.ctaLabel ?? 'Ready to Launch This Service?'}</h2>
           <p className="text-muted-foreground text-lg mb-9">
             Tell us your business goals and we will prepare a focused execution roadmap tailored to your market and growth stage.
           </p>
