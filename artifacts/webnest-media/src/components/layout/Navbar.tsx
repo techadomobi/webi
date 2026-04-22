@@ -248,7 +248,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className={`lg:hidden overflow-hidden border-b shadow-xl ${
               isHomeRoute
-                ? 'bg-orange-50/90 backdrop-blur-2xl'
+                ? 'bg-white/88 backdrop-blur-2xl'
                 : 'bg-background'
             }`}
           >

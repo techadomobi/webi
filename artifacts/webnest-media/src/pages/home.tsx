@@ -86,7 +86,7 @@ const PARTICLES = Array.from({ length: 20 }, (_, i) => ({
   x: Math.random() * 100,
   y: Math.random() * 100,
   size: Math.random() * 6 + 2,
-  color: ['rgba(251,146,60,0.34)', 'rgba(251,191,36,0.3)', 'rgba(244,114,182,0.2)'][i % 3],
+  color: ['rgba(99,102,241,0.4)', 'rgba(168,85,247,0.4)', 'rgba(236,72,153,0.3)'][i % 3],
   delay: Math.random() * 4,
   dur: Math.random() * 4 + 4,
 }));
@@ -146,9 +146,9 @@ export default function Home() {
       <section className="hero-surface relative flex min-h-[92vh] items-center overflow-hidden pt-32 pb-20 lg:pt-40">
         <FloatingOrbs />
         {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
-        <div className="absolute left-[-12%] top-[10%] h-96 w-96 rounded-full bg-amber-300/28 blur-[95px]" />
-        <div className="absolute right-[-8%] top-[18%] h-96 w-96 rounded-full bg-orange-300/22 blur-[100px]" />
-        <div className="absolute right-[14%] bottom-[6%] h-72 w-72 rounded-full bg-rose-300/16 blur-[88px]" />
+        <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
+        <div className="absolute right-[-8%] top-[18%] h-80 w-80 rounded-full bg-pink-500/12 blur-[85px]" />
+        <div className="absolute right-[14%] bottom-[5%] h-64 w-64 rounded-full bg-indigo-500/10 blur-[70px]" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
