@@ -34,7 +34,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   return (
     <motion.div
       variants={pageVariants}
-      initial="initial"
+      initial={false}
       animate="animate"
       exit="exit"
       className="w-full min-h-[calc(100vh-5rem)] flex flex-col"
