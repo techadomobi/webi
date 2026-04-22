@@ -122,7 +122,7 @@ export default function Navbar() {
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
           isHomeRoute
-            ? 'mt-1 rounded-full border border-white/30 bg-white/12 px-7 lg:px-10 shadow-[0_10px_28px_rgba(99,102,241,0.05)] backdrop-blur-sm'
+            ? 'mt-1 px-7 lg:px-10'
             : ''
         }`}
       >
