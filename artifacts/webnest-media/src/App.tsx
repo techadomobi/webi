@@ -65,7 +65,7 @@ function App() {
           <CursorGlow />
           <div className={`flex min-h-screen flex-col font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden ${isHomeRoute ? 'hero-surface-match' : 'bg-background'}`}>
             <Navbar />
-            <main className="page-atmosphere flex-1">
+            <main className={isHomeRoute ? 'flex-1' : 'page-atmosphere flex-1'}>
               <Router />
             </main>
             <Footer />
