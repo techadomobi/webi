@@ -77,6 +77,7 @@ export default function Navbar() {
   const hoverCloseTimeout = React.useRef<number | null>(null);
 
   const isServicesRoute = location.startsWith('/services');
+  const isHomeRoute = location === '/';
 
   const cancelServicesClose = React.useCallback(() => {
     if (hoverCloseTimeout.current !== null) {
@@ -111,16 +112,21 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70">
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        isHomeRoute
+          ? 'border-b border-white/35 bg-transparent backdrop-blur-[14px] supports-backdrop-filter:bg-transparent'
+          : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
+      }`}
+    >
+      {isHomeRoute && <div className="hero-navbar-blend pointer-events-none absolute inset-0" aria-hidden="true" />}
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 group shrink-0 overflow-hidden">
           <img
             src={brandLogo}
             alt="WeeoMedia"
-className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
-sm:h-30 
-md:h-30 
-lg:h-40"                />
+            className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-30 md:h-30 lg:h-40"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -235,7 +241,11 @@ lg:h-40"                />
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-b bg-background shadow-xl overflow-hidden"
+            className={`lg:hidden overflow-hidden border-b shadow-xl ${
+              isHomeRoute
+                ? 'bg-white/80 backdrop-blur-2xl'
+                : 'bg-background'
+            }`}
           >
             <div className="flex flex-col p-4 space-y-2">
               <Link href="/about" className={`text-base font-medium p-3 rounded-md ${location === '/about' ? 'text-primary bg-primary/10' : 'text-foreground'}`} onClick={() => setIsOpen(false)}>
