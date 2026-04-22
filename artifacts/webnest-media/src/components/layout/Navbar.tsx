@@ -115,12 +115,17 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isHomeRoute
-          ? 'border-b border-white/35 bg-transparent backdrop-blur-[14px] supports-backdrop-filter:bg-transparent'
+          ? 'border-b border-transparent bg-transparent backdrop-blur-0 supports-backdrop-filter:bg-transparent'
           : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
       }`}
     >
-      {isHomeRoute && <div className="hero-navbar-blend pointer-events-none absolute inset-0" aria-hidden="true" />}
-      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+      <div
+        className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
+          isHomeRoute
+            ? 'mt-3 rounded-full border border-white/45 bg-white/55 px-6 shadow-[0_14px_40px_rgba(99,102,241,0.08)] backdrop-blur-xl'
+            : ''
+        }`}
+      >
         <Link href="/" className="flex items-center gap-2 group shrink-0 overflow-hidden">
           <img
             src={brandLogo}
@@ -243,7 +248,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className={`lg:hidden overflow-hidden border-b shadow-xl ${
               isHomeRoute
-                ? 'bg-white/80 backdrop-blur-2xl'
+                ? 'bg-white/88 backdrop-blur-2xl'
                 : 'bg-background'
             }`}
           >
