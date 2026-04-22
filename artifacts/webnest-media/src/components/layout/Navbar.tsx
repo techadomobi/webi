@@ -115,7 +115,7 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isHomeRoute
-          ? 'hero-surface border-b border-white/10 pt-1'
+          ? 'hero-surface-match bg-transparent pt-1'
           : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
       }`}
     >
