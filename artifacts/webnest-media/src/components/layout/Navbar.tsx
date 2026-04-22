@@ -115,14 +115,14 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isHomeRoute
-          ? 'absolute inset-x-0 top-0 border-b border-transparent bg-transparent pt-3'
+          ? 'hero-surface border-b border-white/10 pt-1'
           : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
       }`}
     >
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
           isHomeRoute
-            ? 'px-7 lg:px-10'
+            ? 'mt-1 px-7 lg:px-10'
             : ''
         }`}
       >
