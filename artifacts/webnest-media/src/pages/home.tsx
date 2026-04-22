@@ -361,11 +361,11 @@ export default function Home() {
               <RevealSection variant="fadeLeft">
                 <p className="text-sm font-bold uppercase tracking-widest text-primary mb-4">Why WeeoMedia</p>
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                  We don't just run campaigns.<br />
-                  <span className="text-gradient">We engineer growth.</span>
+                  Advertising is agency.<br />
+                  <span className="text-gradient">So are we.</span>
                 </h2>
                 <p className="text-gray-400 text-lg leading-relaxed mb-10">
-                  Our model is built on a simple premise: every hour we work for you should generate measurable returns. Senior strategists, transparent reporting, and a relentless focus on your revenue.
+                  We blend strategy, creative, and performance execution to build measurable growth systems. Every sprint is designed to improve traffic quality, conversion strength, and long-term revenue outcomes.
                 </p>
                 <ul className="space-y-4 mb-10">
                   {['No junior account handoffs', 'Weekly performance reporting', 'Cancel any time — no lock-in', 'First-page ranking guarantees for SEO'].map((pt, i) => (
