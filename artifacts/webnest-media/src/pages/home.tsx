@@ -143,10 +143,9 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-24 pb-20 lg:pt-32">
+      <section className="hero-surface relative flex min-h-[92vh] items-center overflow-hidden pt-24 pb-20 lg:pt-32">
         <FloatingOrbs />
         {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(79,70,229,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(79,70,229,0.045)_1px,transparent_1px)] bg-size-[70px_70px]" />
         <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
         <div className="absolute right-[-8%] top-[18%] h-80 w-80 rounded-full bg-pink-500/12 blur-[85px]" />
         <div className="absolute right-[14%] bottom-[5%] h-64 w-64 rounded-full bg-indigo-500/10 blur-[70px]" />
