@@ -117,8 +117,10 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WeeoMedia"
-            className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-20"
-          />
+className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
+sm:h-30 
+md:h-30 
+lg:h-40"                />
         </Link>
 
         {/* Desktop Nav */}
@@ -165,8 +167,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full left-1/2 mt-3 w-[min(72rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
-                  style={{ transform: 'translateX(-50%)' }}
+                  className="absolute top-full right-0 mt-3 w-[min(72rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] origin-top-right overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
                 >
                   <div className="grid grid-cols-1 gap-0 divide-y divide-gray-100 xl:grid-cols-3 xl:divide-x xl:divide-y-0">
                     {serviceMenuColumns.map(column => (
