@@ -130,6 +130,9 @@ export default function Navbar() {
           <img
             src={brandLogo}
             alt="WeeoMedia"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-30 md:h-30 lg:h-40"
           />
         </Link>

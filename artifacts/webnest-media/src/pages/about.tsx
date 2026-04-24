@@ -124,6 +124,9 @@ export default function About() {
             <img
               src={teamImg}
               alt="WeeoMedia Team Workspace"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
               className="w-full h-full object-cover aspect-[21/9]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-transparent" />
