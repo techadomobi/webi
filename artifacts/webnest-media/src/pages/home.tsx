@@ -14,7 +14,7 @@ import RevealSection from '@/components/ui/RevealSection';
 import GlowButton from '@/components/ui/GlowButton';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { Button } from '@/components/ui/button';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const services = [
   { icon: Search, title: 'Search Engine Optimization', desc: 'Dominate search rankings with precision keyword strategy, technical excellence, and high-authority link building.' },
@@ -65,31 +65,6 @@ const blogPreviews = [
   { title: 'The Rise of Zero-Click Searches', category: 'Digital Marketing', date: 'Apr 2, 2025', read: '4 min', excerpt: 'More than 65% of searches end without a click. Learn how to capture attention even when users never visit your site.' },
   { title: 'Building a $1M Email List', category: 'Email Marketing', date: 'Mar 24, 2025', read: '7 min', excerpt: 'A step-by-step breakdown of the email growth strategy we used to generate $1M in attributed revenue.' },
 ];
-
-function Particle({ x, y, size, color, delay, dur }: { x: number, y: number, size: number, color: string, delay: number, dur: number }) {
-  return (
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
-      style={{ left: `${x}%`, top: `${y}%`, width: size, height: size, background: color }}
-      animate={{
-        x: [0, Math.random() * 30 - 15, 0],
-        y: [0, Math.random() * 30 - 15, 0],
-        opacity: [0.4, 0.9, 0.4],
-        scale: [1, 1.4, 1],
-      }}
-      transition={{ duration: dur, delay, repeat: Infinity, ease: 'easeInOut' }}
-    />
-  );
-}
-
-const PARTICLES = Array.from({ length: 20 }, (_, i) => ({
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  size: Math.random() * 6 + 2,
-  color: ['rgba(99,102,241,0.4)', 'rgba(168,85,247,0.4)', 'rgba(236,72,153,0.3)'][i % 3],
-  delay: Math.random() * 4,
-  dur: Math.random() * 4 + 4,
-}));
 
 function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
@@ -145,66 +120,40 @@ export default function Home() {
       {/* ── HERO ── */}
       <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24">
         <FloatingOrbs />
-        {PARTICLES.map((p, i) => <Particle key={i} {...p} />)}
         <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
         <div className="absolute right-[-8%] top-[18%] h-80 w-80 rounded-full bg-pink-500/12 blur-[85px]" />
         <div className="absolute right-[14%] bottom-[5%] h-64 w-64 rounded-full bg-indigo-500/10 blur-[70px]" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: -16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-foreground shadow-sm"
-            >
+            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-foreground shadow-sm">
               <Sparkles className="h-4 w-4 text-primary" />
               A 360° Digital Marketing Agency
-            </motion.div>
+            </div>
 
             <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-foreground sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
-                <motion.span
-                  initial={{ opacity: 0, x: -70 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                  className="block"
-                >
+                <span className="block">
                   We don't just market.
-                </motion.span>
+                </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <motion.span
-                  initial={{ opacity: 0, x: 70 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-gradient-animated block"
-                >
+                <span className="block bg-linear-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">
                   We scale brands.
-                </motion.span>
+                </span>
               </span>
             </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.36 }}
-              className="mx-auto mt-10"
-            >
+            <div className="mx-auto mt-10">
               <Link href="/services">
                 <Button className="h-16 rounded-full border-0 bg-gradient-brand px-11 text-xl font-bold text-white shadow-[0_16px_38px_rgba(79,70,229,0.32)] hover:scale-[1.02] hover:shadow-[0_22px_46px_rgba(236,72,153,0.28)]">
                   Data for the AI Era
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.48 }}
-              className="mt-8 flex flex-wrap items-center justify-center gap-4"
-            >
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href="/services">
                 <Button variant="outline" className="h-14 rounded-2xl border border-primary/15 bg-white px-9 text-2xl font-bold text-foreground shadow-sm hover:border-primary/30 hover:bg-primary/5">
                   Start Advertising
@@ -217,34 +166,21 @@ export default function Home() {
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.58 }}
-              className="mx-auto mt-12 max-w-3xl text-2xl text-muted-foreground"
-            >
+            <p className="mx-auto mt-12 max-w-3xl text-2xl text-muted-foreground">
               We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.72 }}
-              className="mt-9 flex items-center justify-center gap-6"
-            >
+            <div className="mt-9 flex items-center justify-center gap-6">
               <div className="flex -space-x-3">
                 {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
-                  <motion.div
+                  <div
                     key={idx}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.72 + idx * 0.06 }}
                     className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-gradient-brand text-xs font-bold text-white shadow"
                   >
                     {init}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               <div className="text-left">
@@ -253,7 +189,7 @@ export default function Home() {
                 </div>
                 <p className="text-sm text-muted-foreground">Trusted by 500+ brands worldwide</p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
