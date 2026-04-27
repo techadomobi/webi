@@ -113,7 +113,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent backdrop-blur-[2px]"
+      className="sticky top-0 z-50 w-full transition-all duration-300 bg-gradient-brand"
       style={{boxShadow: '0 2px 16px 0 rgba(44, 62, 80, 0.04)'}}
     >
       <div
