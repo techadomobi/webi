@@ -118,8 +118,22 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand">
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand overflow-hidden">
         {/* Subtle blue-magenta gradient background for vibrancy */}
+
+        {/* Grid overlay to match logo background style */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* Floating dots for extra branding */}
+        <FloatingOrbs className="absolute inset-0 z-0 opacity-40" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
