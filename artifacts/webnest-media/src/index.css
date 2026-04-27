@@ -57,13 +57,14 @@
 
 
   /* Vibrant mix: blue, magenta, purple */
-  --primary: 262 83% 60%; /* Purple */
+  /* Logo-matched palette: blue, purple, magenta, pink */
+  --primary: 255 90% 60%; /* Logo blue */
   --primary-foreground: 0 0% 100%;
-  --secondary: 276 83% 60%; /* Magenta */
+  --secondary: 292 84% 60%; /* Logo magenta/purple */
   --secondary-foreground: 0 0% 100%;
-  --muted: 225 38% 96%; /* Blue-tinted */
+  --muted: 320 80% 96%; /* Logo pink */
   --muted-foreground: 224 46% 11%;
-  --accent: 222 89% 60%; /* Blue accent */
+  --accent: 220 100% 60%; /* Logo accent blue */
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
@@ -136,15 +137,17 @@
 
 
 /* Modern vibrant gradients */
+
+/* Logo-matched gradients */
 .text-gradient {
-  background: linear-gradient(115deg, #2563eb, #8b5cf6, #ec4899, #2563eb);
+  background: linear-gradient(115deg, #2563eb, #8b5cf6, #ec4899, #f472b6, #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(120deg, #2563eb 0%, #8b5cf6 40%, #ec4899 80%, #2563eb 100%);
+  background: linear-gradient(120deg, #2563eb 0%, #8b5cf6 30%, #ec4899 65%, #f472b6 90%, #2563eb 100%);
 }
 
 .glow-hover {
