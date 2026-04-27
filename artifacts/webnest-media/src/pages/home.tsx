@@ -118,22 +118,10 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand overflow-hidden">
-        {/* Subtle blue-magenta gradient background for vibrancy */}
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand bg-dot-grid overflow-hidden">
+        {/* Dot grid overlay is now a utility class for consistency */}
 
-        {/* Grid overlay to match logo background style */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-            backgroundPosition: 'center',
-          }}
-        />
-        {/* Floating dots for extra branding */}
-        <FloatingOrbs className="absolute inset-0 z-0 opacity-40" />
+        <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
@@ -142,22 +130,22 @@ export default function Home() {
               A 360° Digital Marketing Agency
             </div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-white drop-shadow sm:text-[4.25rem] lg:text-[6.25rem]">
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight heading-navy sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
                 <span className="block">
-                  Advertising is Agency.
+                  We don't just market.
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block text-gradient">
-                  So are we.
+                <span className="block accent-purple">
+                  We scale brands.
                 </span>
               </span>
             </h1>
 
             <div className="mx-auto mt-10">
               <Link href="/services">
-                <Button className="h-16 rounded-full border-0 bg-gradient-brand px-11 text-xl font-bold text-white shadow hover:opacity-90">
+                <Button className="h-16 px-11 text-xl font-bold btn-gradient-pill shadow hover:opacity-90">
                   Data for the AI Era
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
@@ -166,13 +154,13 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href="/services">
-                <Button variant="outline" className="h-14 rounded-2xl border border-primary/30 bg-white/90 px-9 text-2xl font-bold text-primary shadow-sm hover:border-primary hover:bg-primary/10">
+                <Button className="h-14 px-9 text-2xl font-bold btn-frosted">
                   Start Advertising
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="h-14 rounded-2xl border border-primary/30 bg-white/90 px-9 text-2xl font-bold text-primary shadow-sm hover:border-primary hover:bg-primary/10">
+                <Button className="h-14 px-9 text-2xl font-bold btn-frosted">
                   Start Monetizing
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
