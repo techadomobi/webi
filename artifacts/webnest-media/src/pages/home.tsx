@@ -118,24 +118,24 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-white">
-        {/* No overlays, gradients, or orbs for a perfectly solid white background matching the navbar */}
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand">
+        {/* Subtle blue-magenta gradient background for vibrancy */}
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-5 py-2 text-sm font-semibold text-gray-700 shadow-sm">
-              <Sparkles className="h-4 w-4 text-blue-600" />
+            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-primary shadow-sm">
+              <Sparkles className="h-4 w-4 text-primary" />
               A 360° Digital Marketing Agency
             </div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-gray-900 sm:text-[4.25rem] lg:text-[6.25rem]">
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-white drop-shadow sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
                 <span className="block">
                   Advertising is Agency.
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block text-blue-600">
+                <span className="block text-gradient">
                   So are we.
                 </span>
               </span>
@@ -143,7 +143,7 @@ export default function Home() {
 
             <div className="mx-auto mt-10">
               <Link href="/services">
-                <Button className="h-16 rounded-full border-0 bg-blue-600 px-11 text-xl font-bold text-white shadow hover:bg-blue-700">
+                <Button className="h-16 rounded-full border-0 bg-gradient-brand px-11 text-xl font-bold text-white shadow hover:opacity-90">
                   Data for the AI Era
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
@@ -152,20 +152,20 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href="/services">
-                <Button variant="outline" className="h-14 rounded-2xl border border-blue-200 bg-white px-9 text-2xl font-bold text-blue-700 shadow-sm hover:border-blue-400 hover:bg-blue-50">
+                <Button variant="outline" className="h-14 rounded-2xl border border-primary/30 bg-white/90 px-9 text-2xl font-bold text-primary shadow-sm hover:border-primary hover:bg-primary/10">
                   Start Advertising
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="h-14 rounded-2xl border border-blue-200 bg-white px-9 text-2xl font-bold text-blue-700 shadow-sm hover:border-blue-400 hover:bg-blue-50">
+                <Button variant="outline" className="h-14 rounded-2xl border border-primary/30 bg-white/90 px-9 text-2xl font-bold text-primary shadow-sm hover:border-primary hover:bg-primary/10">
                   Start Monetizing
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
             </div>
 
-            <p className="mx-auto mt-12 max-w-3xl text-2xl text-gray-600">
+            <p className="mx-auto mt-12 max-w-3xl text-2xl text-white/90 drop-shadow">
               We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.
             </p>
 
@@ -174,7 +174,7 @@ export default function Home() {
                 {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
                   <div
                     key={idx}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-xs font-bold text-white shadow"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-gradient-brand text-xs font-bold text-white shadow"
                   >
                     {init}
                   </div>
@@ -184,7 +184,7 @@ export default function Home() {
                 <div className="flex gap-0.5">
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
                 </div>
-                <p className="text-sm text-muted-foreground">Trusted by 500+ brands worldwide</p>
+                <p className="text-sm text-white/80">Trusted by 500+ brands worldwide</p>
               </div>
             </div>
           </div>
