@@ -55,17 +55,16 @@
   --popover-foreground: 222 47% 11%;
   --popover-border: 214 32% 91%;
 
-  --primary: 262 83% 60%;
+
+  /* Vibrant mix: blue, magenta, purple */
+  --primary: 262 83% 60%; /* Purple */
   --primary-foreground: 0 0% 100%;
-
-  --secondary: 225 38% 96%;
-  --secondary-foreground: 224 46% 11%;
-
-  --muted: 225 28% 95%;
-  --muted-foreground: 226 14% 43%;
-
-  --accent: 225 38% 96%;
-  --accent-foreground: 224 46% 11%;
+  --secondary: 276 83% 60%; /* Magenta */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 225 38% 96%; /* Blue-tinted */
+  --muted-foreground: 224 46% 11%;
+  --accent: 222 89% 60%; /* Blue accent */
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
@@ -135,15 +134,17 @@
 /* ───── GLOBAL BRAND UTILITIES ───── */
 .font-display { font-family: 'Sora', sans-serif; }
 
+
+/* Modern vibrant gradients */
 .text-gradient {
-  background: linear-gradient(115deg, #4f46e5, #8b5cf6, #ec4899);
+  background: linear-gradient(115deg, #2563eb, #8b5cf6, #ec4899, #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(120deg, #4f46e5 0%, #8b5cf6 48%, #ec4899 100%);
+  background: linear-gradient(120deg, #2563eb 0%, #8b5cf6 40%, #ec4899 80%, #2563eb 100%);
 }
 
 .glow-hover {
