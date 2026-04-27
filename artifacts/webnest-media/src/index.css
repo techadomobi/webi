@@ -141,14 +141,14 @@
 /* Logo-matched gradients */
 
 .text-gradient {
-  background: linear-gradient(180deg, #6F5CFF 0%, #9B7BFF 100%);
+  background: linear-gradient(135deg, #D946EF 0%, #8B5CF6 35%, #6366F1 65%, #22D3EE 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(180deg, #6F5CFF 0%, #9B7BFF 100%);
+  background: linear-gradient(135deg, #D946EF 0%, #8B5CF6 35%, #6366F1 65%, #22D3EE 100%);
 }
 
 .glow-hover {
