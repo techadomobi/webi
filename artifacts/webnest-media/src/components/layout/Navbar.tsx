@@ -113,7 +113,8 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b border-gray-100"
+      className="sticky top-0 z-50 w-full transition-all duration-300 bg-gradient-brand border-b border-transparent"
+      style={{boxShadow: '0 2px 16px 0 rgba(44, 62, 80, 0.04)'}}
     >
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
@@ -134,8 +135,8 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-8">
-          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors hover:text-primary">
+        <nav className="hidden lg:flex items-center gap-8 text-white drop-shadow">
+          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors hover:text-cyan-200">
             About Us
             {location === '/about' && (
               {/* Removed gradient indicator for pure white background */}
@@ -159,7 +160,7 @@ export default function Navbar() {
               }}
               onClick={() => setServicesOpen(!servicesOpen)}
               aria-expanded={servicesOpen}
-              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors hover:text-primary ${isServicesRoute ? 'text-primary' : ''}`}
+              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors hover:text-cyan-200 ${isServicesRoute ? 'text-cyan-100' : ''}`}
             >
               Services
               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -177,12 +178,12 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.97 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full right-0 mt-3 w-[min(72rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] origin-top-right overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl"
+                  className="absolute top-full right-0 mt-3 w-[min(72rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1rem)] origin-top-right overflow-hidden rounded-2xl border border-transparent bg-gradient-brand shadow-2xl text-white"
                 >
                   <div className="grid grid-cols-1 gap-0 divide-y divide-gray-100 xl:grid-cols-3 xl:divide-x xl:divide-y-0">
                     {serviceMenuColumns.map(column => (
                       <div key={column.title} className="p-6 xl:p-7">
-                        <p className="mb-4 border-b border-orange-200 pb-3 text-[1.75rem] font-bold leading-none tracking-tight text-foreground">
+                        <p className="mb-4 border-b border-cyan-200 pb-3 text-[1.75rem] font-bold leading-none tracking-tight text-white">
                           {column.title}
                         </p>
                         <ul className="space-y-1">
@@ -191,7 +192,7 @@ export default function Navbar() {
                               <Link
                                 href={item.href}
                                 onClick={() => setServicesOpen(false)}
-                                className="group flex items-center gap-3 rounded-lg px-3 py-2 text-lg text-slate-600 transition-colors hover:bg-primary/6 hover:text-foreground"
+                                className="group flex items-center gap-3 rounded-lg px-3 py-2 text-lg text-white transition-colors hover:bg-cyan-600/20 hover:text-cyan-100"
                               >
                                 <item.icon className={`h-4 w-4 shrink-0 ${item.iconClass}`} />
                                 <span>{item.label}</span>
@@ -202,10 +203,10 @@ export default function Navbar() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center justify-between bg-white px-6 py-4">
-                    <p className="text-sm text-muted-foreground">Browse all growth services</p>
+                  <div className="flex items-center justify-between bg-gradient-to-r from-cyan-400/60 to-purple-400/60 px-6 py-4">
+                    <p className="text-sm text-white/90">Browse all growth services</p>
                     <Link href="/services" onClick={() => setServicesOpen(false)}>
-                      <Button size="sm" className="h-9 rounded-full border-0 bg-primary px-5 text-xs text-white shadow-md">
+                      <Button size="sm" className="h-9 rounded-full border-0 bg-white/90 text-xs text-cyan-700 shadow-md hover:bg-cyan-100">
                         View Services
                       </Button>
                     </Link>
@@ -215,7 +216,7 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors hover:text-primary">
+          <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors hover:text-cyan-200">
             Blogs
             {location === '/blogs' && (
               {/* Removed gradient indicator for pure white background */}
@@ -223,7 +224,7 @@ export default function Navbar() {
           </Link>
 
           <Link href="/contact">
-            <Button className="bg-primary text-white border-0 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium px-6 rounded-full">
+            <Button className="bg-white/90 text-cyan-700 border-0 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium px-6 rounded-full">
               Contact Us
             </Button>
           </Link>
