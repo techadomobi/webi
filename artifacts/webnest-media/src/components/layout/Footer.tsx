@@ -51,8 +51,8 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative overflow-hidden border-t border-primary/30 bg-[#f3f2ff] text-foreground">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_0%,rgba(79,70,229,0.2),transparent_34%),radial-gradient(circle_at_92%_18%,rgba(236,72,153,0.18),transparent_38%)]" />
+      <footer className="relative overflow-hidden border-t border-primary/30 bg-white text-foreground">
+        {/* Removed all background overlays for pure white background */}
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
           <div className="grid items-start gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(280px,1.25fr)_minmax(240px,0.95fr)_minmax(240px,0.9fr)_minmax(220px,0.9fr)]">
@@ -97,7 +97,7 @@ lg:h-40"                />
               </p>
             </div>
 
-            <div className="self-start rounded-md border border-primary/25 bg-white/70 p-4 shadow-sm">
+            <div className="self-start rounded-md border border-primary/25 bg-white p-4 shadow-sm">
               <p className="text-xs font-semibold tracking-[0.25em] text-muted-foreground">UDYAM REGISTRATION</p>
               <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground">MSME</p>
               <p className="mt-1 text-xs font-medium text-muted-foreground">Ministry of MSME, Govt. of India</p>

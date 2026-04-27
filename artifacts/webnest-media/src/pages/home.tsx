@@ -118,35 +118,32 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24">
-        <FloatingOrbs />
-        <div className="absolute left-[-12%] top-[12%] h-80 w-80 rounded-full bg-primary/14 blur-[80px]" />
-        <div className="absolute right-[-8%] top-[18%] h-80 w-80 rounded-full bg-pink-500/12 blur-[85px]" />
-        <div className="absolute right-[14%] bottom-[5%] h-64 w-64 rounded-full bg-indigo-500/10 blur-[70px]" />
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-white">
+        {/* No overlays, gradients, or orbs for a perfectly solid white background matching the navbar */}
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-foreground shadow-sm">
-              <Sparkles className="h-4 w-4 text-primary" />
+            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-5 py-2 text-sm font-semibold text-gray-700 shadow-sm">
+              <Sparkles className="h-4 w-4 text-blue-600" />
               A 360° Digital Marketing Agency
             </div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-foreground sm:text-[4.25rem] lg:text-[6.25rem]">
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-gray-900 sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
                 <span className="block">
-                  We don't just market.
+                  Advertising is Agency.
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block bg-linear-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">
-                  We scale brands.
+                <span className="block text-blue-600">
+                  So are we.
                 </span>
               </span>
             </h1>
 
             <div className="mx-auto mt-10">
               <Link href="/services">
-                <Button className="h-16 rounded-full border-0 bg-gradient-brand px-11 text-xl font-bold text-white shadow-[0_16px_38px_rgba(79,70,229,0.32)] hover:scale-[1.02] hover:shadow-[0_22px_46px_rgba(236,72,153,0.28)]">
+                <Button className="h-16 rounded-full border-0 bg-blue-600 px-11 text-xl font-bold text-white shadow hover:bg-blue-700">
                   Data for the AI Era
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
@@ -155,20 +152,20 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link href="/services">
-                <Button variant="outline" className="h-14 rounded-2xl border border-primary/15 bg-white px-9 text-2xl font-bold text-foreground shadow-sm hover:border-primary/30 hover:bg-primary/5">
+                <Button variant="outline" className="h-14 rounded-2xl border border-blue-200 bg-white px-9 text-2xl font-bold text-blue-700 shadow-sm hover:border-blue-400 hover:bg-blue-50">
                   Start Advertising
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="h-14 rounded-2xl border border-pink-400/25 bg-white px-9 text-2xl font-bold text-foreground shadow-sm hover:border-pink-500/40 hover:bg-pink-500/5">
+                <Button variant="outline" className="h-14 rounded-2xl border border-blue-200 bg-white px-9 text-2xl font-bold text-blue-700 shadow-sm hover:border-blue-400 hover:bg-blue-50">
                   Start Monetizing
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
             </div>
 
-            <p className="mx-auto mt-12 max-w-3xl text-2xl text-muted-foreground">
+            <p className="mx-auto mt-12 max-w-3xl text-2xl text-gray-600">
               We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.
             </p>
 
@@ -177,7 +174,7 @@ export default function Home() {
                 {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
                   <div
                     key={idx}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-gradient-brand text-xs font-bold text-white shadow"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-xs font-bold text-white shadow"
                   >
                     {init}
                   </div>
@@ -195,7 +192,7 @@ export default function Home() {
       </section>
 
       {/* ── MARQUEE LOGOS ── */}
-      <section className="py-10 bg-white border-y overflow-hidden">
+      <section className="py-10 bg-white border-y border-gray-100 overflow-hidden">
         <div className="mb-3 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Trusted by industry leaders</p>
         </div>
@@ -212,7 +209,7 @@ export default function Home() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="py-20 bg-secondary/20">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -299,9 +296,9 @@ export default function Home() {
       </section>
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="py-28 bg-foreground text-background relative overflow-hidden">
-        <FloatingOrbs className="opacity-30" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[60px_60px]" />
+      <section className="py-28 bg-white text-gray-900 relative overflow-hidden">
+        {/* <FloatingOrbs className="opacity-30" /> */}
+        {/* Remove background gradients for a cleaner look */}
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -370,7 +367,7 @@ export default function Home() {
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="py-28 bg-secondary/20">
+      <section className="py-28 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <RevealSection variant="scale">
@@ -418,7 +415,7 @@ export default function Home() {
       </section>
 
       {/* ── INDUSTRIES ── */}
-      <section className="py-24 bg-white border-y">
+      <section className="py-24 bg-white border-y border-gray-100">
         <div className="container mx-auto px-4">
           <RevealSection variant="fadeUp" className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">Industries</p>
@@ -450,7 +447,7 @@ export default function Home() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-28 bg-secondary/20">
+      <section className="py-28 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <RevealSection variant="fadeLeft">
@@ -481,7 +478,7 @@ export default function Home() {
       </section>
 
       {/* ── BLOG PREVIEWS ── */}
-      <section className="py-24 bg-white border-t">
+      <section className="py-24 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <RevealSection variant="fadeLeft">
@@ -541,22 +538,7 @@ export default function Home() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-foreground">
-          <FloatingOrbs className="opacity-30" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[60px_60px]" />
-          {/* Animated gradient rings */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-primary/20"
-            animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0, 0.3] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full border border-pink-500/20"
-            animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
-            transition={{ duration: 3.5, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
+      <section className="py-32 relative overflow-hidden bg-white text-gray-900">
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <RevealSection variant="scale">
             <motion.p
@@ -574,12 +556,12 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact">
-                <GlowButton variant="white" size="lg">
+                <GlowButton variant="white" size="lg" className="text-blue-600">
                   Book Free Consultation <ArrowRight className="h-5 w-5" />
                 </GlowButton>
               </Link>
               <Link href="/services">
-                <GlowButton variant="outline" size="lg" className="border-white/30 text-white hover:border-white">
+                <GlowButton variant="outline" size="lg" className="border-blue-600 text-blue-600 hover:border-blue-700 hover:text-blue-700">
                   View Services
                 </GlowButton>
               </Link>

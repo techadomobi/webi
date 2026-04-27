@@ -93,9 +93,9 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <CursorGlow />
-          <div className={`flex min-h-screen flex-col font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden ${isHomeRoute ? 'hero-surface-match' : 'bg-background'}`}>
+          <div className="flex min-h-screen flex-col font-sans text-foreground selection:bg-primary/20 relative overflow-x-hidden bg-white">
             <Navbar />
-            <main className={isHomeRoute ? 'flex-1' : 'page-atmosphere flex-1'}>
+            <main className="flex-1">
               <Suspense fallback={<RouteFallback />}>
                 <Router />
               </Suspense>

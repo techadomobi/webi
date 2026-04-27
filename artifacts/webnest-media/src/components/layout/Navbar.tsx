@@ -113,11 +113,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isHomeRoute
-          ? 'absolute inset-x-0 top-0 bg-transparent pt-4'
-          : 'border-b border-white/20 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/70'
-      }`}
+      className="sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b border-gray-100"
     >
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
@@ -142,7 +138,7 @@ export default function Navbar() {
           <Link href="/about" className="relative py-2 text-sm font-medium transition-colors hover:text-primary">
             About Us
             {location === '/about' && (
-              <motion.div layoutId="navbar-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-brand" transition={{ type: 'spring', stiffness: 300, damping: 30 }} />
+              {/* Removed gradient indicator for pure white background */}
             )}
           </Link>
 
@@ -170,7 +166,7 @@ export default function Navbar() {
                 <ChevronDown className="h-4 w-4" />
               </motion.div>
               {isServicesRoute && (
-                <motion.div layoutId="navbar-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-brand" transition={{ type: 'spring', stiffness: 300, damping: 30 }} />
+                {/* Removed gradient indicator for pure white background */}
               )}
             </button>
 
@@ -206,10 +202,10 @@ export default function Navbar() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center justify-between bg-linear-to-r from-primary/8 via-white to-pink-500/8 px-6 py-4">
+                  <div className="flex items-center justify-between bg-white px-6 py-4">
                     <p className="text-sm text-muted-foreground">Browse all growth services</p>
                     <Link href="/services" onClick={() => setServicesOpen(false)}>
-                      <Button size="sm" className="h-9 rounded-full border-0 bg-gradient-brand px-5 text-xs text-white shadow-md">
+                      <Button size="sm" className="h-9 rounded-full border-0 bg-primary px-5 text-xs text-white shadow-md">
                         View Services
                       </Button>
                     </Link>
@@ -222,12 +218,12 @@ export default function Navbar() {
           <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors hover:text-primary">
             Blogs
             {location === '/blogs' && (
-              <motion.div layoutId="navbar-indicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-brand" transition={{ type: 'spring', stiffness: 300, damping: 30 }} />
+              {/* Removed gradient indicator for pure white background */}
             )}
           </Link>
 
           <Link href="/contact">
-            <Button className="bg-gradient-brand text-white border-0 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium px-6 rounded-full">
+            <Button className="bg-primary text-white border-0 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 font-medium px-6 rounded-full">
               Contact Us
             </Button>
           </Link>
@@ -252,7 +248,7 @@ export default function Navbar() {
             className={`lg:hidden overflow-hidden border-b shadow-xl ${
               isHomeRoute
                 ? 'bg-white/88 backdrop-blur-2xl'
-                : 'bg-background'
+                : 'bg-white'
             }`}
           >
             <div className="flex flex-col p-4 space-y-2">
@@ -290,7 +286,7 @@ export default function Navbar() {
               </Link>
 
               <Link href="/contact" onClick={() => setIsOpen(false)}>
-                <Button className="w-full bg-gradient-brand text-white border-0 rounded-full">
+                <Button className="w-full bg-primary text-white border-0 rounded-full">
                   Contact Us
                 </Button>
               </Link>
