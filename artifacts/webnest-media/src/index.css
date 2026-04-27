@@ -139,15 +139,16 @@
 /* Modern vibrant gradients */
 
 /* Logo-matched gradients */
+
 .text-gradient {
-  background: linear-gradient(115deg, #2563eb, #8b5cf6, #ec4899, #f472b6, #2563eb);
+  background: linear-gradient(115deg, #b3baff, #c7bfff, #f3b6e8, #b3baff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(120deg, #2563eb 0%, #8b5cf6 30%, #ec4899 65%, #f472b6 90%, #2563eb 100%);
+  background: linear-gradient(120deg, #e3e8ff 0%, #b3baff 30%, #c7bfff 60%, #f3b6e8 90%, #e3e8ff 100%);
 }
 
 .glow-hover {
