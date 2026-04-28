@@ -125,7 +125,14 @@ export default function Navbar() {
       style={{
         background: scrolled
           ? 'rgba(255,255,255,0.98)'
-          : 'linear-gradient(135deg, #ff6aa6 0%, #b192f7 40%, #8b95f8 80%, #6ea4ff 100%)',
+          : [
+              'radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.08), transparent 24%)',
+              'radial-gradient(circle at 86% 18%, rgba(236, 72, 153, 0.07), transparent 24%)',
+              'radial-gradient(circle at 78% 74%, rgba(79, 70, 229, 0.06), transparent 20%)',
+              'linear-gradient(to right, rgba(79, 70, 229, 0.02) 1px, transparent 1px)',
+              'linear-gradient(to bottom, rgba(79, 70, 229, 0.02) 1px, transparent 1px)',
+              'linear-gradient(180deg, rgba(249, 249, 252, 0.98), rgba(244, 244, 251, 0.96))'
+            ].join(','),
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: scrolled ? '1px solid rgba(30,41,59,0.08)' : '1px solid rgba(30,41,59,0.04)',
