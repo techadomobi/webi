@@ -138,9 +138,7 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center gap-8">
           <Link href="/about" className="relative py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500">
             About Us
-            {location === '/about' && (
               {/* Removed gradient indicator for pure white background */}
-            )}
           </Link>
 
           {/* Services Mega Menu */}
@@ -166,9 +164,7 @@ export default function Navbar() {
               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <ChevronDown className="h-4 w-4" />
               </motion.div>
-              {isServicesRoute && (
                 {/* Removed gradient indicator for pure white background */}
-              )}
             </button>
 
             <AnimatePresence>
@@ -218,9 +214,7 @@ export default function Navbar() {
 
           <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500">
             Blogs
-            {location === '/blogs' && (
               {/* Removed gradient indicator for pure white background */}
-            )}
           </Link>
 
           <Link href="/contact">
