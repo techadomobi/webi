@@ -66,7 +66,7 @@ export default function About() {
       </div>
 
       {/* Hero */}
-      <section className="pt-24 pb-20 lg:pt-32 lg:pb-28 relative">
+        <section className="pt-24 pb-20 lg:pt-32 lg:pb-28 relative bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <motion.p
@@ -113,7 +113,7 @@ export default function About() {
       </section>
 
       {/* Office/Team Image */}
-      <section className="py-12">
+        <section className="py-12 bg-soft-section">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -139,7 +139,7 @@ export default function About() {
       </section>
 
       {/* Quick Stats */}
-      <section className="py-16 bg-white border-y">
+        <section className="py-16 bg-soft-section border-y">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-border">
             {[
@@ -167,7 +167,7 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section className="py-28 bg-secondary/20">
+        <section className="py-28 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -212,7 +212,7 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="py-28 bg-white">
+        <section className="py-28 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="text-sm font-bold uppercase tracking-widest text-primary mb-3">What We Stand For</p>

@@ -6,7 +6,7 @@ import GlowButton from '@/components/ui/GlowButton';
 export default function NotFound() {
   return (
     <PageTransition>
-      <section className="relative min-h-[70vh] overflow-hidden bg-secondary/30 pt-32 pb-20 text-foreground">
+      <section className="relative min-h-[70vh] overflow-hidden bg-soft-section pt-32 pb-20 text-foreground">
         <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-white/65" />
         <div className="container relative z-10 mx-auto px-4 text-center">

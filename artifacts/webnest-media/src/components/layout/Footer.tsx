@@ -51,7 +51,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative overflow-hidden border-t border-primary/30 bg-white text-foreground">
+      <footer className="relative overflow-hidden border-t border-primary/30 bg-soft-section text-foreground">
         {/* Removed all background overlays for pure white background */}
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">

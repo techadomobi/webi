@@ -100,7 +100,7 @@ export default function Contact() {
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32 bg-secondary/30 text-foreground">
+      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-32 bg-soft-section text-foreground">
         <img src="/decor/contact-grid.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.7),rgba(255,255,255,0.62),rgba(243,248,243,0.9))]" />
         <div className="container mx-auto px-4">
@@ -269,7 +269,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="pb-20 lg:pb-28 pt-2 bg-background">
+      <section className="pb-20 lg:pb-28 pt-2 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-6 mb-16">
             {processSteps.map((step, idx) => (

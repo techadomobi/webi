@@ -151,7 +151,7 @@ function HighlightsStrip() {
   ];
 
   return (
-    <section className="border-y border-primary/15 bg-white/80 py-4 backdrop-blur">
+    <section className="border-y border-primary/15 bg-soft-section py-4 backdrop-blur">
       <div className="container mx-auto px-4">
         <div className="overflow-hidden">
           <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
@@ -217,7 +217,7 @@ export default function Services() {
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28 bg-secondary/20">
+      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28 bg-soft-section">
         <div className="absolute inset-0">
           <div className="absolute right-10 top-10 h-80 w-80 rounded-full bg-primary/15 blur-[120px]" />
           <div className="absolute bottom-10 left-10 h-80 w-80 rounded-full bg-pink-500/15 blur-[120px]" />
@@ -261,7 +261,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-y border-border/70 bg-white/85 py-8 backdrop-blur-sm">
+      <section className="border-y border-border/70 bg-soft-section py-8 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
             <Filter className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -282,7 +282,7 @@ export default function Services() {
 
       <HighlightsStrip />
 
-      <section className="bg-white py-12">
+      <section className="bg-soft-section py-12">
         <div className="container mx-auto px-4">
           {isLoading ? (
             <LoadingState />
@@ -377,7 +377,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-secondary/15 py-24">
+      <section className="bg-soft-section py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-primary">Why this matters</p>

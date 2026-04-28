@@ -390,7 +390,7 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      <section className="border-b border-primary/15 bg-white/85 py-4 backdrop-blur">
+      <section className="border-b border-primary/15 bg-soft-section py-4 backdrop-blur">
         <div className="container mx-auto px-4">
           <div className="overflow-hidden">
             <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
@@ -421,7 +421,7 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-soft-section py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="mb-10 grid gap-4 rounded-3xl border border-primary/10 bg-linear-to-r from-primary/6 via-white to-pink-500/6 p-5 md:grid-cols-3">
             <div className="rounded-2xl border border-white bg-white/90 p-4 shadow-sm">
@@ -520,7 +520,7 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      <section className="border-y border-primary/15 bg-white py-16 md:py-20">
+      <section className="border-y border-primary/15 bg-soft-section py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
@@ -600,7 +600,7 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-24">
+      <section className="bg-soft-section py-20 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-10 grid gap-4 rounded-3xl border border-primary/20 bg-linear-to-r from-primary/10 via-white to-pink-500/12 p-5 md:grid-cols-4 shadow-lg shadow-primary/5">
             {valueSignals.map(signal => (

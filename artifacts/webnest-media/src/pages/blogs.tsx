@@ -136,7 +136,7 @@ function BlogHighlightsStrip() {
   ];
 
   return (
-    <section className="border-b border-primary/15 bg-white/80 py-4 backdrop-blur">
+    <section className="border-b border-primary/15 bg-soft-section py-4 backdrop-blur">
       <div className="container mx-auto px-4">
         <div className="overflow-hidden">
           <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
@@ -192,7 +192,7 @@ export default function Blogs() {
 
   return (
     <PageTransition>
-      <section className="relative overflow-hidden border-b border-border/70 pt-24 pb-16 lg:pt-32 lg:pb-24 bg-secondary/25 text-foreground">
+      <section className="relative overflow-hidden border-b border-border/70 pt-24 pb-16 lg:pt-32 lg:pb-24 bg-soft-section text-foreground">
         <img src="/decor/blog-orbit.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-secondary/20" />
         <div className="container relative z-10 mx-auto px-4 text-center">
@@ -221,7 +221,7 @@ export default function Blogs() {
         </div>
       </section>
 
-      <section className="border-b border-border/70 bg-white/85 py-8 backdrop-blur-sm">
+      <section className="border-b border-border/70 bg-soft-section py-8 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
             <Tag className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -242,7 +242,7 @@ export default function Blogs() {
 
       <BlogHighlightsStrip />
 
-      <section className="bg-secondary/15 py-16">
+      <section className="bg-soft-section py-16">
         <div className="container mx-auto px-4">
           {isLoading ? (
             <LoadingState />
@@ -313,7 +313,7 @@ export default function Blogs() {
         </div>
       </section>
 
-      <section className="border-t bg-white py-24">
+      <section className="border-t bg-soft-section py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-2xl text-center">
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-primary">Need more content?</p>

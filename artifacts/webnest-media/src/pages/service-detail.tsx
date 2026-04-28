@@ -805,7 +805,7 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
         </div>
       </section>
 
-      <section className="border-b border-primary/15 bg-white/85 py-4 backdrop-blur">
+      <section className="border-b border-primary/15 bg-soft-section py-4 backdrop-blur">
         <div className="container mx-auto px-4">
           <div className="overflow-hidden">
             <div className="animate-marquee flex min-w-max items-center gap-8 whitespace-nowrap">
@@ -834,7 +834,7 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-soft-section py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.9fr)] lg:items-start">
             <div className="space-y-6">
@@ -943,7 +943,7 @@ function CmsServiceView({ service, onBack }: { service: NonNullable<Awaited<Retu
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-24">
+      <section className="bg-soft-section py-20 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
             <motion.div

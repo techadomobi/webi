@@ -92,7 +92,7 @@ function TestimonialsCarousel() {
             </div>
             <div>
               <p className="font-bold">{t.name}</p>
-              <p className="text-sm text-muted-foreground">{t.role}, {t.company}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-200">{t.role}, {t.company}</p>
             </div>
             <div className="ml-auto flex gap-0.5">
               {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
@@ -194,9 +194,9 @@ export default function Home() {
       </section>
 
       {/* ── MARQUEE LOGOS ── */}
-      <section className="py-10 bg-white border-y border-gray-100 overflow-hidden">
+        <section className="py-10 bg-soft-section border-y border-gray-100 overflow-hidden">
         <div className="mb-3 text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Trusted by industry leaders</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-gray-700 dark:text-gray-200">Trusted by industry leaders</p>
         </div>
         <div className="relative">
           <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-linear-to-r from-white to-transparent pointer-events-none" />
@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="py-20 bg-white">
+        <section className="py-20 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -235,7 +235,7 @@ export default function Home() {
                 <p className="font-display text-5xl md:text-6xl font-black text-gradient mb-1">
                   <AnimatedCounter end={s.end} suffix={s.suffix} prefix={s.prefix || ''} />
                 </p>
-                <p className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">{s.label}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200 font-semibold uppercase tracking-wider">{s.label}</p>
               </motion.div>
             ))}
           </div>
@@ -243,7 +243,7 @@ export default function Home() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="py-28 bg-white">
+      <section className="py-28 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <RevealSection variant="fadeUp">
@@ -251,7 +251,7 @@ export default function Home() {
               <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
                 <AnimatedWords text="Services Built to Scale Your Business" />
               </h2>
-              <p className="text-muted-foreground text-lg">17 specialized disciplines, one integrated growth engine — engineered for your unique market.</p>
+              <p className="text-gray-700 dark:text-gray-200 text-lg">17 specialized disciplines, one integrated growth engine — engineered for your unique market.</p>
             </RevealSection>
           </div>
 
@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="py-28 bg-white text-gray-900 relative overflow-hidden">
+      <section className="py-28 bg-soft-section text-gray-900 relative overflow-hidden">
         {/* <FloatingOrbs className="opacity-30" /> */}
         {/* Remove background gradients for a cleaner look */}
         <div className="container relative z-10 mx-auto px-4">
@@ -369,7 +369,7 @@ export default function Home() {
       </section>
 
       {/* ── PROCESS ── */}
-      <section className="py-28 bg-white">
+      <section className="py-28 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <RevealSection variant="scale">
@@ -417,7 +417,7 @@ export default function Home() {
       </section>
 
       {/* ── INDUSTRIES ── */}
-      <section className="py-24 bg-white border-y border-gray-100">
+      <section className="py-24 bg-soft-section border-y border-gray-100">
         <div className="container mx-auto px-4">
           <RevealSection variant="fadeUp" className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">Industries</p>
@@ -449,7 +449,7 @@ export default function Home() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-28 bg-white">
+      <section className="py-28 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <RevealSection variant="fadeLeft">
@@ -480,7 +480,7 @@ export default function Home() {
       </section>
 
       {/* ── BLOG PREVIEWS ── */}
-      <section className="py-24 bg-white border-t border-gray-100">
+      <section className="py-24 bg-soft-section border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
             <RevealSection variant="fadeLeft">
@@ -540,7 +540,7 @@ export default function Home() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="py-32 relative overflow-hidden bg-white text-gray-900">
+      <section className="py-32 relative overflow-hidden bg-soft-section text-gray-900">
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <RevealSection variant="scale">
             <motion.p
