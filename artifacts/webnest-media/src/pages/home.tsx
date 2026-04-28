@@ -176,14 +176,14 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 1.0 }}
             >
               <Link href="/services">
-                <Button className="h-14 px-9 text-2xl font-bold btn-frosted">
-                  Start Advertising
+                <Button className="h-14 px-9 text-2xl font-bold bg-gradient-brand text-gradient-animated border-0 shadow-lg animate-glow">
+                  <span className="text-gradient-animated">Start Advertising</span>
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button className="h-14 px-9 text-2xl font-bold btn-frosted">
-                  Start Monetizing
+                <Button className="h-14 px-9 text-2xl font-bold bg-gradient-brand text-gradient-animated border-0 shadow-lg animate-glow">
+                  <span className="text-gradient-animated">Start Monetizing</span>
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
