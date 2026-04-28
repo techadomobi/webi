@@ -123,20 +123,20 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
       style={{
-        background: scrolled
-          ? 'rgba(255,255,255,0.98)'
-          : [
-              'radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.08), transparent 24%)',
-              'radial-gradient(circle at 86% 18%, rgba(236, 72, 153, 0.07), transparent 24%)',
-              'radial-gradient(circle at 78% 74%, rgba(79, 70, 229, 0.06), transparent 20%)',
-              'linear-gradient(to right, rgba(79, 70, 229, 0.02) 1px, transparent 1px)',
-              'linear-gradient(to bottom, rgba(79, 70, 229, 0.02) 1px, transparent 1px)',
-              'linear-gradient(180deg, rgba(249, 249, 252, 0.98), rgba(244, 244, 251, 0.96))'
-            ].join(','),
+        background: [
+          'radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.18) 0%, transparent 50%)',
+          'radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.14) 0%, transparent 50%)',
+          'radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12) 0%, transparent 55%)',
+          'radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.10) 0%, transparent 35%)',
+          'radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.12) 0%, transparent 35%)',
+          'linear-gradient(135deg, rgba(255,106,166,0.18) 0%, rgba(177,146,247,0.12) 45%, rgba(139,149,248,0.10) 100%)'
+        ].join(','),
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: scrolled ? '1px solid rgba(30,41,59,0.08)' : '1px solid rgba(30,41,59,0.04)',
-        boxShadow: scrolled ? '0 4px 30px rgba(30,41,59,0.10)' : 'none',
+        borderBottom: '1px solid rgba(30,41,59,0.04)',
+        boxShadow: 'none',
         transition: 'all 0.35s cubic-bezier(.4,0,.2,1)',
       }}
     >
