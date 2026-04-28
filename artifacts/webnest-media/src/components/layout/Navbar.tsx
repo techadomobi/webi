@@ -113,15 +113,14 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full transition-all duration-300 bg-gradient-brand bg-soft-section"
-      style={{boxShadow: '0 2px 16px 0 rgba(44, 62, 80, 0.04)'}}
+      className="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent backdrop-blur-md"
+      style={{ background: 'linear-gradient(180deg, rgba(247,46,142,0.18) 0%, rgba(168,85,247,0.10) 100%)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}
     >
       <div
-        className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${
-          isHomeRoute
-            ? 'px-6 lg:px-8'
-            : ''
-        }`}
+        className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${isHomeRoute
+          ? 'px-6 lg:px-8'
+          : ''
+          }`}
       >
         <Link href="/" className="flex items-center gap-2 group shrink-0 overflow-hidden">
           <img
@@ -136,9 +135,10 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500">
+          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors text-white/90 hover:text-white drop-shadow"
+          >
             About Us
-              {/* Removed gradient indicator for pure white background */}
+            {/* Removed gradient indicator for pure white background */}
           </Link>
 
           {/* Services Mega Menu */}
@@ -158,13 +158,13 @@ export default function Navbar() {
               }}
               onClick={() => setServicesOpen(!servicesOpen)}
               aria-expanded={servicesOpen}
-              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500 ${isServicesRoute ? 'text-purple-700' : ''}`}
+              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors text-white/90 hover:text-white drop-shadow ${isServicesRoute ? 'text-white' : ''}`}
             >
               Services
               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <ChevronDown className="h-4 w-4" />
               </motion.div>
-                {/* Removed gradient indicator for pure white background */}
+              {/* Removed gradient indicator for pure white background */}
             </button>
 
             <AnimatePresence>
@@ -214,11 +214,11 @@ export default function Navbar() {
 
           <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500">
             Blogs
-              {/* Removed gradient indicator for pure white background */}
+            {/* Removed gradient indicator for pure white background */}
           </Link>
 
           <Link href="/contact">
-            <Button className="btn-gradient-pill font-medium px-6">
+            <Button className="font-medium px-6 rounded-full text-white border border-white/40 bg-white/15 backdrop-blur hover:bg-white/25 transition-all" style={{ backdropFilter: 'blur(12px)' }}>
               Contact Us
             </Button>
           </Link>
@@ -240,11 +240,10 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`lg:hidden overflow-hidden border-b shadow-xl ${
-              isHomeRoute
-                ? 'bg-white/88 backdrop-blur-2xl'
-                : 'bg-white'
-            }`}
+            className={`lg:hidden overflow-hidden border-b shadow-xl ${isHomeRoute
+              ? 'bg-white/88 backdrop-blur-2xl'
+              : 'bg-white'
+              }`}
           >
             <div className="flex flex-col p-4 space-y-2">
               <Link href="/about" className={`text-base font-medium p-3 rounded-md ${location === '/about' ? 'text-primary bg-primary/10' : 'text-foreground'}`} onClick={() => setIsOpen(false)}>

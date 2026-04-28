@@ -148,14 +148,22 @@
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(120deg, #ede9fe 0%, #fbcfe8 100%);
+  background: linear-gradient(135deg, #f72e8e 0%, #a855f7 40%, #6366f1 80%, #3b82f6 100%);
 }
 
 .bg-dot-grid {
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(124,58,237,0.08) 2px, transparent 0),
-    radial-gradient(circle at 25px 25px, rgba(236,72,153,0.07) 2px, transparent 0);
-  background-size: 48px 48px;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.95) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.9) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.85) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.6) 0%, transparent 35%),
+    radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.7) 0%, transparent 35%),
+    linear-gradient(135deg, #f72e8e 0%, #a855f7 45%, #6366f1 100%);
+  background-size: cover;
+}
+
+.bg-soft-section {
+  background: linear-gradient(180deg, #f5f3ff 0%, #fdf2f8 50%, #f0f4ff 100%);
 }
 
 .heading-navy {
@@ -174,13 +182,16 @@
 }
 
 .btn-frosted {
-  background: rgba(255,255,255,0.7);
-  border: 1.5px solid #a78bfa;
-  backdrop-filter: blur(8px);
-  color: #7c3aed;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.5);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 2px 8px 0 rgba(124,58,237,0.04);
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.1);
 }
+.btn-frosted:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.7);
 }
 
 .glow-hover {

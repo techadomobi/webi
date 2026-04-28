@@ -118,26 +118,26 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-[#f7f8fc] bg-dot-grid overflow-hidden">
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-dot-grid overflow-hidden">
         {/* Dot grid overlay is now a utility class for consistency */}
 
         <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-white/90 px-5 py-2 text-sm font-semibold text-primary shadow-sm">
+            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 backdrop-blur-md px-5 py-2 text-sm font-semibold text-white shadow-lg">
               <Sparkles className="h-4 w-4 text-primary" />
               A 360° Digital Marketing Agency
             </div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight heading-navy sm:text-[4.25rem] lg:text-[6.25rem]">
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-white sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
                 <span className="block">
                   We don't just market.
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block accent-purple">
+                <span className="block" style={{ background: 'linear-gradient(90deg,#fff 0%,#e0c3fc 60%,#c4b5fd 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   We scale brands.
                 </span>
               </span>
@@ -194,7 +194,7 @@ export default function Home() {
       </section>
 
       {/* ── MARQUEE LOGOS ── */}
-        <section className="py-10 bg-soft-section border-y border-gray-100 overflow-hidden">
+      <section className="py-10 bg-soft-section border-y border-gray-100 overflow-hidden">
         <div className="mb-3 text-center">
           <p className="text-xs font-bold uppercase tracking-widest text-gray-700 dark:text-gray-200">Trusted by industry leaders</p>
         </div>
@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* ── STATS ── */}
-        <section className="py-20 bg-soft-section">
+      <section className="py-20 bg-soft-section">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
