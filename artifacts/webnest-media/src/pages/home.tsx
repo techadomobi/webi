@@ -118,7 +118,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-screen items-center pt-32 pb-20 lg:pt-40 bg-white overflow-hidden">
+      <section className="relative w-full flex min-h-screen items-center pt-32 pb-20 lg:pt-40 bg-dot-grid overflow-hidden">
         {/* Dot grid overlay is now a utility class for consistency */}
 
         <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
@@ -130,14 +130,14 @@ export default function Home() {
               A 360° Digital Marketing Agency
             </div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-white sm:text-[4.25rem] lg:text-[6.25rem]">
+            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-navy sm:text-[4.25rem] lg:text-[6.25rem]">
               <span className="block overflow-hidden">
                 <span className="block">
                   We don't just market.
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block" style={{ background: 'linear-gradient(90deg,#fff 0%,#e0c3fc 60%,#c4b5fd 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span className="block" style={{ background: 'linear-gradient(90deg,#a78bfa 0%,#6366f1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   We scale brands.
                 </span>
               </span>
