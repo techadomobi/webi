@@ -93,6 +93,14 @@ export default function Navbar() {
     }, 160);
   }, [cancelServicesClose]);
 
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   React.useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
@@ -112,9 +120,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className="sticky top-0 z-50 w-full transition-all duration-300 bg-transparent backdrop-blur-md"
-      style={{ background: 'linear-gradient(180deg, rgba(247,46,142,0.18) 0%, rgba(168,85,247,0.10) 100%)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}
+    <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
+      style={{
+        background: scrolled
+          ? 'linear-gradient(135deg, rgba(180,20,100,0.85) 0%, rgba(120,40,200,0.82) 50%, rgba(70,60,200,0.85) 100%)'
+          : 'linear-gradient(135deg, rgba(247,46,142,0.55) 0%, rgba(168,85,247,0.45) 50%, rgba(99,102,241,0.50) 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.18)' : '1px solid rgba(255,255,255,0.12)',
+        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.18)' : 'none',
+        transition: 'all 0.35s ease',
+      }}
     >
       <div
         className={`container mx-auto flex h-20 items-center justify-between px-4 transition-all duration-300 ${isHomeRoute

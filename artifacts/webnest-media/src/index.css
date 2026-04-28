@@ -149,6 +149,7 @@
 
 .bg-gradient-brand {
   background: linear-gradient(135deg, #f72e8e 0%, #a855f7 40%, #6366f1 80%, #3b82f6 100%);
+  background-size: 200% 200%;
 }
 
 .bg-dot-grid {
@@ -160,6 +161,7 @@
     radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.7) 0%, transparent 35%),
     linear-gradient(135deg, #f72e8e 0%, #a855f7 45%, #6366f1 100%);
   background-size: cover;
+  background-attachement: fixed;
 }
 
 .bg-soft-section {
