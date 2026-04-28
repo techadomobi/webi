@@ -128,7 +128,7 @@ export default function Home() {
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
             <motion.div
-              className="mb-9 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 backdrop-blur-md px-5 py-2 text-sm font-semibold text-white shadow-lg"
+              className="mb-9 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 backdrop-blur-md px-5 py-2 text-sm font-semibold text-navy shadow"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
@@ -138,7 +138,7 @@ export default function Home() {
             </motion.div>
 
             <motion.h1
-              className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-navy sm:text-[4.25rem] lg:text-[6.25rem]"
+              className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-navy sm:text-[4.25rem] lg:text-[6.25rem] text-navy drop-shadow"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -149,7 +149,7 @@ export default function Home() {
                 </span>
               </span>
               <span className="mt-3 block overflow-hidden">
-                <span className="block" style={{ background: 'linear-gradient(90deg,#a78bfa 0%,#6366f1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span className="block text-gradient-animated">
                   We scale brands.
                 </span>
               </span>
@@ -190,7 +190,7 @@ export default function Home() {
             </motion.div>
 
             <motion.p
-              className="mx-auto mt-12 max-w-3xl text-2xl text-white/90 drop-shadow"
+              className="mx-auto mt-12 max-w-3xl text-2xl text-slate-700 drop-shadow"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1.3 }}
@@ -218,7 +218,7 @@ export default function Home() {
                 <div className="flex gap-0.5">
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
                 </div>
-                <p className="text-sm text-white/80">Trusted by 500+ brands worldwide</p>
+                <p className="text-sm text-slate-600">Trusted by 500+ brands worldwide</p>
               </div>
             </motion.div>
           </div>
