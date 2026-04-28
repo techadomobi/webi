@@ -118,7 +118,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-screen items-center pt-32 pb-20 lg:pt-40 bg-dot-grid overflow-hidden">
+      <section className="relative w-full flex min-h-screen items-center pt-32 pb-20 lg:pt-40 bg-white overflow-hidden">
         {/* Dot grid overlay is now a utility class for consistency */}
 
         <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
@@ -540,7 +540,7 @@ export default function Home() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="py-32 relative overflow-hidden bg-navy text-white">
+      <section className="py-32 relative overflow-hidden bg-white text-navy">
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <RevealSection variant="scale">
             <motion.p
