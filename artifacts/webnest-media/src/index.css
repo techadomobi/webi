@@ -1,3 +1,8 @@
+/* ───── DARK NAVY SECTION ───── */
+.bg-navy {
+  background: #0a1124;
+  color: #fff;
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";

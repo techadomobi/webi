@@ -298,7 +298,7 @@ export default function Home() {
       </section>
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="py-28 bg-soft-section text-gray-900 relative overflow-hidden">
+      <section className="py-28 bg-navy relative overflow-hidden">
         {/* <FloatingOrbs className="opacity-30" /> */}
         {/* Remove background gradients for a cleaner look */}
         <div className="container relative z-10 mx-auto px-4">
@@ -540,7 +540,7 @@ export default function Home() {
       </section>
 
       {/* ── BOTTOM CTA ── */}
-      <section className="py-32 relative overflow-hidden bg-soft-section text-gray-900">
+      <section className="py-32 relative overflow-hidden bg-navy text-white">
         <div className="container relative z-10 mx-auto px-4 text-center max-w-3xl">
           <RevealSection variant="scale">
             <motion.p
