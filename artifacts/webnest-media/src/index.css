@@ -50,10 +50,10 @@
 
 :root {
   --background: 225 35% 98%;
-  --foreground: 224 46% 11%;
+  --foreground: 224 46% 18%;
 
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 222 47% 18%;
   --card-border: 214 32% 91%;
 
   --popover: 0 0% 100%;
@@ -63,13 +63,13 @@
 
   /* Vibrant mix: blue, magenta, purple */
   /* Logo-matched palette: blue, purple, magenta, pink */
-  --primary: 255 90% 60%; /* Logo blue */
+  --primary: 255 75% 66%; /* softened blue */
   --primary-foreground: 0 0% 100%;
-  --secondary: 292 84% 60%; /* Logo magenta/purple */
+  --secondary: 262 68% 66%; /* softened purple */
   --secondary-foreground: 0 0% 100%;
-  --muted: 320 80% 96%; /* Logo pink */
-  --muted-foreground: 224 46% 11%;
-  --accent: 220 100% 60%; /* Logo accent blue */
+  --muted: 320 70% 96%; /* pastel pink */
+  --muted-foreground: 224 46% 18%;
+  --accent: 220 85% 66%; /* softened accent */
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
@@ -153,18 +153,18 @@
 }
 
 .bg-gradient-brand {
-  background: linear-gradient(135deg, #f72e8e 0%, #a855f7 40%, #6366f1 80%, #3b82f6 100%);
+  background: linear-gradient(135deg, #ff6aa6 0%, #b192f7 40%, #8b95f8 80%, #6ea4ff 100%);
   background-size: 200% 200%;
 }
 
 .bg-dot-grid {
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.95) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.9) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.85) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.6) 0%, transparent 35%),
-    radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.7) 0%, transparent 35%),
-    linear-gradient(135deg, #f72e8e 0%, #a855f7 45%, #6366f1 100%);
+    radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.10) 0%, transparent 35%),
+    radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.12) 0%, transparent 35%),
+    linear-gradient(135deg, rgba(255,106,166,0.18) 0%, rgba(177,146,247,0.12) 45%, rgba(139,149,248,0.10) 100%);
   background-size: cover;
   background-attachement: fixed;
 }
@@ -316,14 +316,14 @@
 }
 
 .hero-surface {
-  background-color: rgb(243, 244, 255);
+  background-color: rgb(248, 247, 252);
   background-image:
-    radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.14), transparent 24%),
-    radial-gradient(circle at 86% 18%, rgba(236, 72, 153, 0.12), transparent 24%),
-    radial-gradient(circle at 78% 74%, rgba(79, 70, 229, 0.1), transparent 20%),
-    linear-gradient(to right, rgba(79, 70, 229, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(79, 70, 229, 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(245, 246, 255, 0.98), rgba(237, 239, 255, 0.94));
+    radial-gradient(circle at 14% 22%, rgba(99, 102, 241, 0.08), transparent 24%),
+    radial-gradient(circle at 86% 18%, rgba(236, 72, 153, 0.07), transparent 24%),
+    radial-gradient(circle at 78% 74%, rgba(79, 70, 229, 0.06), transparent 20%),
+    linear-gradient(to right, rgba(79, 70, 229, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(79, 70, 229, 0.02) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(249, 249, 252, 0.98), rgba(244, 244, 251, 0.96));
   background-size: auto, auto, auto, 70px 70px, 70px 70px, auto;
   background-position: center;
 }
