@@ -8,6 +8,7 @@ import {
 import PageTransition from '@/components/layout/PageTransition';
 import AnimatedWords from '@/components/ui/AnimatedWords';
 import FloatingOrbs from '@/components/ui/FloatingOrbs';
+import Bubbles from '@/components/ui/Bubbles';
 import InfiniteMarquee from '@/components/ui/InfiniteMarquee';
 import TiltCard from '@/components/ui/TiltCard';
 import RevealSection from '@/components/ui/RevealSection';
@@ -114,23 +115,34 @@ function TestimonialsCarousel() {
 }
 
 export default function Home() {
+
   return (
     <PageTransition>
 
       {/* ── HERO ── */}
       <section className="relative w-full flex min-h-screen items-center pt-32 pb-20 lg:pt-40 bg-dot-grid overflow-hidden">
-        {/* Dot grid overlay is now a utility class for consistency */}
-
+        {/* Animated orbs and bubbles */}
         <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
+        <Bubbles count={32} className="z-0" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-9 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 backdrop-blur-md px-5 py-2 text-sm font-semibold text-white shadow-lg">
+            <motion.div
+              className="mb-9 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 backdrop-blur-md px-5 py-2 text-sm font-semibold text-white shadow-lg"
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
               <Sparkles className="h-4 w-4 text-primary" />
               A 360° Digital Marketing Agency
-            </div>
+            </motion.div>
 
-            <h1 className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-navy sm:text-[4.25rem] lg:text-[6.25rem]">
+            <motion.h1
+              className="font-display text-[3rem] font-black leading-[0.98] tracking-tight text-navy sm:text-[4.25rem] lg:text-[6.25rem]"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
               <span className="block overflow-hidden">
                 <span className="block">
                   We don't just market.
@@ -141,18 +153,28 @@ export default function Home() {
                   We scale brands.
                 </span>
               </span>
-            </h1>
+            </motion.h1>
 
-            <div className="mx-auto mt-10">
+            <motion.div
+              className="mx-auto mt-10"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+            >
               <Link href="/services">
                 <Button className="h-16 px-11 text-xl font-bold btn-gradient-pill shadow hover:opacity-90">
                   Data for the AI Era
                   <ArrowRight className="ml-3 h-5 w-5" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <motion.div
+              className="mt-8 flex flex-wrap items-center justify-center gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.0 }}
+            >
               <Link href="/services">
                 <Button className="h-14 px-9 text-2xl font-bold btn-frosted">
                   Start Advertising
@@ -165,13 +187,23 @@ export default function Home() {
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
-            <p className="mx-auto mt-12 max-w-3xl text-2xl text-white/90 drop-shadow">
+            <motion.p
+              className="mx-auto mt-12 max-w-3xl text-2xl text-white/90 drop-shadow"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.3 }}
+            >
               We drive real growth using Google Ads, Meta Ads, and SEO to increase traffic, leads, and revenue for your brand.
-            </p>
+            </motion.p>
 
-            <div className="mt-9 flex items-center justify-center gap-6">
+            <motion.div
+              className="mt-9 flex items-center justify-center gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.5 }}
+            >
               <div className="flex -space-x-3">
                 {['AV', 'SJ', 'MC', 'ER'].map((init, idx) => (
                   <div
@@ -188,7 +220,7 @@ export default function Home() {
                 </div>
                 <p className="text-sm text-white/80">Trusted by 500+ brands worldwide</p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

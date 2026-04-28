@@ -120,16 +120,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
+    <header
+      className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
       style={{
         background: scrolled
-          ? 'linear-gradient(135deg, rgba(180,20,100,0.85) 0%, rgba(120,40,200,0.82) 50%, rgba(70,60,200,0.85) 100%)'
-          : 'linear-gradient(135deg, rgba(247,46,142,0.55) 0%, rgba(168,85,247,0.45) 50%, rgba(99,102,241,0.50) 100%)',
+          ? 'rgba(255,255,255,0.98)'
+          : 'rgba(255,255,255,0.92)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.18)' : '1px solid rgba(255,255,255,0.12)',
-        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.18)' : 'none',
-        transition: 'all 0.35s ease',
+        borderBottom: scrolled ? '1px solid rgba(30,41,59,0.08)' : '1px solid rgba(30,41,59,0.04)',
+        boxShadow: scrolled ? '0 4px 30px rgba(30,41,59,0.10)' : 'none',
+        transition: 'all 0.35s cubic-bezier(.4,0,.2,1)',
       }}
     >
       <div
@@ -151,10 +152,9 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors text-white/90 hover:text-white drop-shadow"
+          <Link href="/about" className="relative py-2 text-sm font-medium transition-colors text-slate-800 hover:text-primary"
           >
             About Us
-            {/* Removed gradient indicator for pure white background */}
           </Link>
 
           {/* Services Mega Menu */}
@@ -174,7 +174,7 @@ export default function Navbar() {
               }}
               onClick={() => setServicesOpen(!servicesOpen)}
               aria-expanded={servicesOpen}
-              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors text-white/90 hover:text-white drop-shadow ${isServicesRoute ? 'text-white' : ''}`}
+              className={`relative flex items-center gap-1 py-2 text-sm font-medium transition-colors text-slate-800 hover:text-primary ${isServicesRoute ? 'text-primary' : ''}`}
             >
               Services
               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -228,13 +228,12 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors heading-navy hover:text-purple-500">
+          <Link href="/blogs" className="relative py-2 text-sm font-medium transition-colors text-slate-800 hover:text-primary">
             Blogs
-            {/* Removed gradient indicator for pure white background */}
           </Link>
 
           <Link href="/contact">
-            <Button className="font-medium px-6 rounded-full text-white border border-white/40 bg-white/15 backdrop-blur hover:bg-white/25 transition-all" style={{ backdropFilter: 'blur(12px)' }}>
+            <Button className="font-medium px-6 rounded-full text-white border border-primary bg-primary hover:bg-primary/90 transition-all">
               Contact Us
             </Button>
           </Link>
