@@ -124,12 +124,12 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
       style={{
         background: [
-          'radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.18) 0%, transparent 50%)',
-          'radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.14) 0%, transparent 50%)',
-          'radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12) 0%, transparent 55%)',
-          'radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.10) 0%, transparent 35%)',
-          'radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.12) 0%, transparent 35%)',
-          'linear-gradient(135deg, rgba(255,106,166,0.18) 0%, rgba(177,146,247,0.12) 45%, rgba(139,149,248,0.10) 100%)'
+          'radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.28) 0%, transparent 50%)',
+          'radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.22) 0%, transparent 50%)',
+          'radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.19) 0%, transparent 55%)',
+          'radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.16) 0%, transparent 35%)',
+          'radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.18) 0%, transparent 35%)',
+          'linear-gradient(135deg, rgba(255,106,166,0.22) 0%, rgba(177,146,247,0.18) 45%, rgba(139,149,248,0.15) 100%)'
         ].join(','),
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',
