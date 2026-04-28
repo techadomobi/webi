@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { Twitter, Linkedin, Instagram, Facebook, MessageCircle, PhoneCall } from 'lucide-react';
-const brandLogo = '/logo.png';
+const brandLogo = '/logo_white.png';
 
 export default function Footer() {
   const serviceColumns = [
@@ -51,7 +51,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative overflow-hidden border-t border-primary/30 bg-soft-section text-foreground">
+      <footer className="relative overflow-hidden border-t border-primary/30 bg-[#0a1124] text-white">
         {/* Removed all background overlays for pure white background */}
 
         <div className="relative mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
@@ -63,10 +63,8 @@ export default function Footer() {
                   alt="WebNest Media"
                   loading="lazy"
                   decoding="async"
-className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 
-sm:h-30 
-md:h-30 
-lg:h-40"                />
+                  className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-30 md:h-30 lg:h-40 drop-shadow-lg"
+                />
               </Link>
               <p className="text-[18px] font-semibold leading-none text-foreground">Connect on Social Media</p>
               <div className="flex items-center gap-4 text-muted-foreground">

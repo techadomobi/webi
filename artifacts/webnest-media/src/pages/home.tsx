@@ -118,7 +118,7 @@ export default function Home() {
     <PageTransition>
 
       {/* ── HERO ── */}
-      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-gradient-brand bg-dot-grid overflow-hidden">
+      <section className="relative w-full flex min-h-[92vh] items-center pt-16 pb-20 lg:pt-24 bg-[#f7f8fc] bg-dot-grid overflow-hidden">
         {/* Dot grid overlay is now a utility class for consistency */}
 
         <FloatingOrbs className="absolute inset-0 z-0 opacity-30" />
