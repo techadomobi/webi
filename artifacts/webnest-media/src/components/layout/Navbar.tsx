@@ -125,7 +125,7 @@ export default function Navbar() {
       style={{
         background: scrolled
           ? 'rgba(255,255,255,0.98)'
-          : 'rgba(255,255,255,0.92)',
+          : 'linear-gradient(135deg, #ff6aa6 0%, #b192f7 40%, #8b95f8 80%, #6ea4ff 100%)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: scrolled ? '1px solid rgba(30,41,59,0.08)' : '1px solid rgba(30,41,59,0.04)',
