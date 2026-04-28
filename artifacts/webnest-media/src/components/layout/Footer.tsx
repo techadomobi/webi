@@ -66,8 +66,8 @@ export default function Footer() {
                   className="block h-16 w-auto object-contain object-left transition-transform duration-300 hover:scale-105 sm:h-30 md:h-30 lg:h-40 drop-shadow-lg"
                 />
               </Link>
-              <p className="text-[18px] font-semibold leading-none text-foreground">Connect on Social Media</p>
-              <div className="flex items-center gap-4 text-muted-foreground">
+              <p className="text-[18px] font-semibold leading-none text-white/90">Connect on Social Media</p>
+              <div className="flex items-center gap-4 text-white/70">
                 {[
                   { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/share/18KaT7U8mu/' },
                   { icon: Twitter, label: 'X', href: 'https://x.com/weeomedia' },
@@ -89,27 +89,27 @@ export default function Footer() {
             </div>
 
             <div className="self-start pt-1">
-              <h3 className="mb-4 text-3xl font-semibold leading-none text-foreground">Our Address</h3>
-              <p className="max-w-xs text-base leading-7 text-muted-foreground">
+              <h3 className="mb-4 text-3xl font-semibold leading-none text-white/90">Our Address</h3>
+              <p className="max-w-xs text-base leading-7 text-white/70">
                 5th Floor, DLF Two Horizon Centre, DLF Phase 5, Gurugram, 122002
               </p>
             </div>
 
-            <div className="self-start rounded-md border border-primary/25 bg-white p-4 shadow-sm">
-              <p className="text-xs font-semibold tracking-[0.25em] text-muted-foreground">UDYAM REGISTRATION</p>
-              <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground">MSME</p>
-              <p className="mt-1 text-xs font-medium text-muted-foreground">Ministry of MSME, Govt. of India</p>
+            <div className="self-start rounded-md border border-primary/25 bg-white/90 p-4 shadow-sm">
+              <p className="text-xs font-semibold tracking-[0.25em] text-slate-700">UDYAM REGISTRATION</p>
+              <p className="mt-2 text-3xl font-extrabold tracking-tight text-navy">MSME</p>
+              <p className="mt-1 text-xs font-medium text-slate-700">Ministry of MSME, Govt. of India</p>
             </div>
 
             <div className="self-start pt-1">
-              <h3 className="mb-4 text-3xl font-semibold leading-none text-foreground">Contact US</h3>
-              <a href="mailto:info@webnestmedia.in" className="block text-lg text-primary hover:text-foreground">
+              <h3 className="mb-4 text-3xl font-semibold leading-none text-white/90">Contact US</h3>
+              <a href="mailto:info@webnestmedia.in" className="block text-lg text-primary hover:text-white">
                 support@weeomedia.com
               </a>
-              <a href="tel:+916366666667" className="mt-1 block text-lg text-primary hover:text-foreground">
+              <a href="tel:+916366666667" className="mt-1 block text-lg text-primary hover:text-white">
                 +91-636666666760
               </a>
-              <Link href="/" className="mt-6 inline-block text-base text-muted-foreground hover:text-primary">
+              <Link href="/" className="mt-6 inline-block text-base text-white/70 hover:text-primary">
                 Privacy Policy
               </Link>
             </div>
@@ -121,7 +121,7 @@ export default function Footer() {
             {serviceColumns.map((column) => (
               <div key={column.title}>
                 <h4 className="mb-4 text-2xl font-semibold leading-[1.05] text-primary md:text-3xl">{column.title}</h4>
-                <ul className="space-y-3 text-foreground/80">
+                <ul className="space-y-3 text-white/80">
                   {column.links.map((label) => (
                     <li key={label}>
                       <Link
@@ -137,7 +137,7 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="mt-12 border-t border-primary/25 pt-6 text-sm text-muted-foreground">
+          <div className="mt-12 border-t border-primary/25 pt-6 text-sm text-white/60">
             © {new Date().getFullYear()} WebNest Media. All rights reserved.
           </div>
         </div>
