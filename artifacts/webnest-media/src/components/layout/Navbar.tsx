@@ -124,12 +124,12 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
       style={{
         background: [
-          'radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.85) 0%, transparent 50%)', // almost white
-          'radial-gradient(ellipse at 100% 0%, rgba(245, 245, 255, 0.12) 0%, transparent 50%)', // very light blue
-          'radial-gradient(ellipse at 50% 100%, rgba(240, 248, 255, 0.10) 0%, transparent 55%)', // very light purple
-          'radial-gradient(ellipse at 20% 60%, rgba(255, 250, 250, 0.08) 0%, transparent 35%)', // very light blush
-          'radial-gradient(ellipse at 80% 40%, rgba(240, 255, 255, 0.09) 0%, transparent 35%)', // very light cyan
-          'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 255, 0.10) 100%)'
+          'radial-gradient(ellipse at 0% 0%, rgba(255, 182, 193, 0.18) 0%, transparent 50%)', // lighter pink
+          'radial-gradient(ellipse at 100% 0%, rgba(173, 216, 230, 0.13) 0%, transparent 50%)', // lighter blue
+          'radial-gradient(ellipse at 50% 100%, rgba(221, 214, 254, 0.12) 0%, transparent 55%)', // lighter purple
+          'radial-gradient(ellipse at 20% 60%, rgba(255, 240, 245, 0.10) 0%, transparent 35%)', // lighter blush
+          'radial-gradient(ellipse at 80% 40%, rgba(224, 242, 254, 0.12) 0%, transparent 35%)', // lighter cyan
+          'linear-gradient(135deg, rgba(255, 245, 248, 0.18) 0%, rgba(221, 214, 254, 0.12) 45%, rgba(230, 245, 255, 0.10) 100%)'
         ].join(','),
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',
