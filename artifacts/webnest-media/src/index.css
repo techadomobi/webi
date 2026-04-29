@@ -185,18 +185,18 @@
 
 .bg-dot-grid {
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(247, 46, 142, 0.18) 0%, transparent 50%),
-    radial-gradient(ellipse at 100% 0%, rgba(99, 102, 241, 0.14) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 60%, rgba(236, 72, 153, 0.10) 0%, transparent 35%),
-    radial-gradient(ellipse at 80% 40%, rgba(79, 70, 229, 0.12) 0%, transparent 35%),
-    linear-gradient(135deg, rgba(255,106,166,0.18) 0%, rgba(177,146,247,0.12) 45%, rgba(139,149,248,0.10) 100%);
+    radial-gradient(ellipse at 0% 0%, rgba(255, 182, 193, 0.13) 0%, transparent 50%), /* lighter pink */
+    radial-gradient(ellipse at 100% 0%, rgba(173, 216, 230, 0.10) 0%, transparent 50%), /* lighter blue */
+    radial-gradient(ellipse at 50% 100%, rgba(221, 214, 254, 0.10) 0%, transparent 55%), /* lighter purple */
+    radial-gradient(ellipse at 20% 60%, rgba(255, 240, 245, 0.08) 0%, transparent 35%), /* lighter blush */
+    radial-gradient(ellipse at 80% 40%, rgba(224, 242, 254, 0.10) 0%, transparent 35%), /* lighter cyan */
+    linear-gradient(135deg, rgba(255, 245, 248, 0.13) 0%, rgba(221, 214, 254, 0.09) 45%, rgba(230, 245, 255, 0.08) 100%);
   background-size: cover;
-  background-attachement: fixed;
+  background-attachment: fixed;
 }
 
 .bg-soft-section {
-  background: linear-gradient(180deg, #f5f3ff 0%, #fdf2f8 50%, #f0f4ff 100%);
+  background: linear-gradient(180deg, #f8f7ff 0%, #fef6fa 50%, #f6f8ff 100%);
 }
 
 .heading-navy {
